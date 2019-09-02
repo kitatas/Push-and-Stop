@@ -2,8 +2,8 @@
 
 public class Block : MonoBehaviour, IHittable
 {
-    public void Hit()
+    public void Hit(Vector3 moveDirection)
     {
-        
+
     }
 }

@@ -3,55 +3,46 @@ using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-public class PlayerMover : MonoBehaviour
+public class MoveBlock : MonoBehaviour, IHittable
 {
     [Inject] private readonly PlayerController _playerController = default;
-
+    
     private Rigidbody2D _rigidbody;
 
     private bool _isMove;
-    private bool _isHit;
-    [SerializeField] private float moveSpeed = 300f;
-    public Button moveButton = null;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _isMove = false;
+    }
 
-        // ボタンによる移動
-        moveButton
-            .OnClickAsObservable()
-            .Subscribe(_ => StartCoroutine(Move()));
-
-        //　stageのオブジェクトに当たったら...
+    private void Start()
+    {
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
-            .Subscribe(hittable =>
+            .Where(hittable => hittable != null)
+            .Subscribe(_ =>
             {
                 _isMove = false;
                 CorrectPosition();
-                
-                if (hittable != null)
-                {
-                    hittable.Hit(transform.up);
-                    _isHit = true;
-                }
             });
     }
 
-    private IEnumerator Move()
+    public void Hit(Vector3 moveDirection)
     {
-        // Button Off
-        _playerController.DeactivatePlayerButton();
+        StartCoroutine(Move(moveDirection));
+    }
+
+    private IEnumerator Move(Vector3 moveDirection)
+    {
         _isMove = true;
 
         while (_isMove)
         {
-            _rigidbody.velocity = moveSpeed * Time.deltaTime * transform.up;
+            _rigidbody.velocity = 300f * Time.deltaTime * moveDirection;
 
             yield return null;
         }
@@ -69,14 +60,8 @@ public class PlayerMover : MonoBehaviour
             {
                 _rigidbody.velocity = Vector3.zero;
 
-                //if  goal position => game clear
-
-                // else  one more
                 // Button ON
-                if (_isHit == false)
-                {
-                    _playerController.ActivatePlayerButton();
-                }
+                _playerController.ActivatePlayerButton();
             });
     }
 }

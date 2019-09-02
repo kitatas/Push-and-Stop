@@ -1,4 +1,6 @@
-﻿public interface IHittable
+﻿using UnityEngine;
+
+public interface IHittable
 {
-    void Hit();
+    void Hit(Vector3 moveDirection);
 }
