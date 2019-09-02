@@ -1,99 +1,42 @@
-﻿using System.Collections;
-using DG.Tweening;
-using UniRx;
-using UniRx.Triggers;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : IInitializable
 {
-    private Rigidbody2D _rigidbody;
+    [Inject] private readonly PlayerMover _playerMover = default;
+    [Inject] private readonly PlayerRotate _playerRotate = default;
 
-    private bool _canInput;
-    private bool _canRotate;
-    private bool _isMove;
+    private Image _moveButtonImage;
+    private Image _rotateButtonImage;
 
-    private Vector3 _rotateVector;
-    private Vector3 _addRotateVector;
-
-    [SerializeField] private float moveSpeed = 300f;
-
-    private void Awake()
+    public void Initialize()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _canInput = true;
-        _canRotate = true;
-        _isMove = false;
-
-        _rotateVector = Vector3.zero;
-        _addRotateVector = new Vector3(0f, 0f, 90f);
+        _moveButtonImage = _playerMover.moveButton.GetComponent<Image>();
+        _rotateButtonImage = _playerRotate.rotateButton.GetComponent<Image>();
     }
 
-    private void Start()
+    public void ActivatePlayerButton()
     {
-        // 入力（移動）
-        this.UpdateAsObservable()
-            .Where(_ => _canInput)
-            .Where(_ => Input.GetKeyDown(KeyCode.Space))
-            .Subscribe(_ => StartCoroutine(Move()));
-
-        // 入力（回転）
-        this.UpdateAsObservable()
-            .Where(_ => _canRotate)
-            .Where(_ => Input.GetKeyDown(KeyCode.Return))
-            .Subscribe(_ => Rotate());
-
-        // stage内のオブジェクトにぶつかる
-        this.OnCollisionEnter2DAsObservable()
-            .Select(other => other.gameObject.GetComponent<IHittable>())
-            .Where(hittable => hittable != null)
-            .Subscribe(hittable =>
-            {
-                _isMove = false;
-                hittable.Hit();
-                CorrectPosition();
-            });
+        ActivateMoveButton(true);
+        ActivateRotateButton(true);
     }
 
-    private IEnumerator Move()
+    public void DeactivatePlayerButton()
     {
-        _canInput = false;
-        _canRotate = false;
-        _isMove = true;
-
-        while (_isMove)
-        {
-            _rigidbody.velocity = moveSpeed * Time.deltaTime * transform.up;
-
-            yield return null;
-        }
+        ActivateMoveButton(false);
+        ActivateRotateButton(false);
     }
 
-    private void Rotate()
+    private void ActivateMoveButton(bool value)
     {
-        _canRotate = false;
-
-        _rotateVector += _addRotateVector;
-
-        transform
-            .DORotate(_rotateVector, 0.3f)
-            .OnComplete(() => _canRotate = true);
+        _playerMover.moveButton.enabled = value;
+        _moveButtonImage.color = value ? Color.white : Color.gray;
     }
 
-    private void CorrectPosition()
+    private void ActivateRotateButton(bool value)
     {
-        var x = (int) transform.position.x;
-        var y = (int) transform.position.y;
-        // Debug.Log($"x : {x}, y : {y}");
-        var nextPosition = new Vector2(x, y);
-
-        transform
-            .DOMove(nextPosition, 0.3f)
-            .OnComplete(() =>
-            {
-                // nextPosition is goal position -> game clear
-
-                _canInput = true;
-                _canRotate = true;
-            });
+        _playerRotate.rotateButton.enabled = value;
+        _rotateButtonImage.color = value ? Color.white : Color.gray;
     }
 }
