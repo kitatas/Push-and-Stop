@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
@@ -15,14 +16,21 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float moveSpeed = 300f;
     public Button moveButton = null;
 
+    private readonly Subject<Unit> _subject = new Subject<Unit>();
+    public IObservable<Unit> OnPushed() => _subject;
+
     private void Start()
     {
         _isMove = false;
 
-        // ボタンによる移動
+        // ボタンによる移動・移動回数カウント
         moveButton
             .OnClickAsObservable()
-            .Subscribe(_ => StartCoroutine(Move()));
+            .Subscribe(_ =>
+            {
+                _subject.OnNext(Unit.Default);
+                Move();
+            });
 
         //　stageのオブジェクトに当たったら...
         this.OnCollisionEnter2DAsObservable()
