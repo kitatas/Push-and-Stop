@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
@@ -23,7 +22,6 @@ public class MoveBlock : MonoBehaviour, IHittable
             .Subscribe(_ =>
             {
                 _isMove = false;
-                _rigidbody.velocity = Vector3.zero;
                 CorrectPosition();
             });
     }
@@ -50,6 +48,8 @@ public class MoveBlock : MonoBehaviour, IHittable
             .DOMove(nextPosition, 0.3f)
             .OnComplete(() =>
             {
+                _rigidbody.velocity = Vector3.zero;
+
                 // Button ON
                 _playerController.ActivatePlayerButton();
             });
