@@ -9,17 +9,14 @@ using Zenject;
 public class PlayerMover : MonoBehaviour
 {
     [Inject] private readonly PlayerController _playerController = default;
-
-    private Rigidbody2D _rigidbody;
+    [Inject] private readonly Rigidbody2D _rigidbody = default;
 
     private bool _isMove;
-    private bool _isHit;
     [SerializeField] private float moveSpeed = 300f;
     public Button moveButton = null;
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         _isMove = false;
 
         // ボタンによる移動
@@ -33,17 +30,14 @@ public class PlayerMover : MonoBehaviour
             .Subscribe(hittable =>
             {
                 _isMove = false;
+
+                hittable?.Hit(transform.up);
+
                 CorrectPosition();
-                
-                if (hittable != null)
-                {
-                    hittable.Hit(transform.up);
-                    _isHit = true;
-                }
             });
     }
 
-    private IEnumerator Move()
+    private async void Move()
     {
         // Button Off
         _playerController.DeactivatePlayerButton();
@@ -53,14 +47,14 @@ public class PlayerMover : MonoBehaviour
         {
             _rigidbody.velocity = moveSpeed * Time.deltaTime * transform.up;
 
-            yield return null;
+            await Task.Yield();
         }
     }
 
     private void CorrectPosition()
     {
-        var x = (int) transform.position.x;
-        var y = (int) transform.position.y;
+        var x = Mathf.RoundToInt(transform.position.x);
+        var y = Mathf.RoundToInt(transform.position.y);
         var nextPosition = new Vector2(x, y);
 
         transform
@@ -68,15 +62,7 @@ public class PlayerMover : MonoBehaviour
             .OnComplete(() =>
             {
                 _rigidbody.velocity = Vector3.zero;
-
                 //if  goal position => game clear
-
-                // else  one more
-                // Button ON
-                if (_isHit == false)
-                {
-                    _playerController.ActivatePlayerButton();
-                }
             });
     }
 }
