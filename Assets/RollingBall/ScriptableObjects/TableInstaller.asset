@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db908f3444f5624a8e584f59d280465, type: 3}
+  m_Name: TableInstaller
+  m_EditorClassIdentifier: 
+  stageDataTable: {fileID: 11400000, guid: 84a44f863fd002e4eae42a398a958356, type: 2}
