@@ -94,8 +94,6 @@ GameObject:
   - component: {fileID: 4807518428999830758}
   - component: {fileID: 8693360604688305097}
   - component: {fileID: 7349584274500734288}
-  - component: {fileID: 1460143558614896802}
-  - component: {fileID: 2585873562035592226}
   m_Layer: 0
   m_Name: Block - Ball
   m_TagString: Untagged
@@ -225,33 +223,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8a610ea9389a74d912085e321e17a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1460143558614896802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7888064616010387851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbb595b6f0bc439bb107322f10e4892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2585873562035592226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7888064616010387851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 1460143558614896802}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}

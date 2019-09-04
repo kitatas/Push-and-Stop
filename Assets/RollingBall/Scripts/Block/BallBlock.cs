@@ -8,12 +8,13 @@ using Zenject;
 public class BallBlock : MonoBehaviour, IHittable
 {
     [Inject] private readonly PlayerController _playerController = default;
-    [Inject] private readonly Rigidbody2D _rigidbody = default;
+    private Rigidbody2D _rigidbody;
 
     private bool _isMove;
 
     private void Start()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
         _isMove = false;
 
         this.OnCollisionEnter2DAsObservable()
