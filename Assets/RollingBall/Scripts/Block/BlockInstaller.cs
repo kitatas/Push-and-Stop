@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class MoveBlockInstaller : MonoInstaller
+public class BlockInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
