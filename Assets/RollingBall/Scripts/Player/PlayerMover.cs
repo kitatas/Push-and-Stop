@@ -12,6 +12,9 @@ public class PlayerMover : MonoBehaviour
     private bool _isMove;
     [SerializeField] private float moveSpeed = 300f;
 
+    private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(Vector2.zero);
+    public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
+
     private void Start()
     {
         _isMove = false;
@@ -52,7 +55,8 @@ public class PlayerMover : MonoBehaviour
             .OnComplete(() =>
             {
                 _rigidbody.velocity = Vector3.zero;
-                //if  goal position => game clear
+
+                _onComplete.Value = nextPosition;
             });
     }
 }
