@@ -1,42 +1,46 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UniRx;
 using Zenject;
 
 public class PlayerController : IInitializable
 {
     [Inject] private readonly PlayerMover _playerMover = default;
     [Inject] private readonly PlayerRotate _playerRotate = default;
-
-    private Image _moveButtonImage;
-    private Image _rotateButtonImage;
+    [Inject] private readonly MoveButton _moveButton = default;
+    [Inject] private readonly RotateButton _rotateButton = default;
 
     public void Initialize()
     {
-        _moveButtonImage = _playerMover.moveButton.GetComponent<Image>();
-        _rotateButtonImage = _playerRotate.rotateButton.GetComponent<Image>();
+        _moveButton
+            .OnPushed()
+            .Subscribe(_ =>
+            {
+                DeactivatePlayerButton();
+                _playerMover.Move();
+            });
+
+        _rotateButton
+            .OnPushed()
+            .Subscribe(_ =>
+            {
+                DeactivatePlayerButton();
+                _playerRotate.Rotate();
+            });
+
+        _playerRotate
+            .OnComplete()
+            .Where(value => value)
+            .Subscribe(_ => ActivatePlayerButton());
     }
 
     public void ActivatePlayerButton()
     {
-        ActivateMoveButton(true);
-        ActivateRotateButton(true);
+        _moveButton.ActivateButton(true);
+        _rotateButton.ActivateButton(true);
     }
 
-    public void DeactivatePlayerButton()
+    private void DeactivatePlayerButton()
     {
-        ActivateMoveButton(false);
-        ActivateRotateButton(false);
-    }
-
-    private void ActivateMoveButton(bool value)
-    {
-        _playerMover.moveButton.enabled = value;
-        _moveButtonImage.color = value ? Color.white : Color.gray;
-    }
-
-    private void ActivateRotateButton(bool value)
-    {
-        _playerRotate.rotateButton.enabled = value;
-        _rotateButtonImage.color = value ? Color.white : Color.gray;
+        _moveButton.ActivateButton(false);
+        _rotateButton.ActivateButton(false);
     }
 }

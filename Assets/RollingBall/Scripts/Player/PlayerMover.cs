@@ -1,36 +1,20 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class PlayerMover : MonoBehaviour
 {
-    [Inject] private readonly PlayerController _playerController = default;
     [Inject] private readonly Rigidbody2D _rigidbody = default;
 
     private bool _isMove;
     [SerializeField] private float moveSpeed = 300f;
-    public Button moveButton = null;
-
-    private readonly Subject<Unit> _subject = new Subject<Unit>();
-    public IObservable<Unit> OnPushed() => _subject;
 
     private void Start()
     {
         _isMove = false;
-
-        // ボタンによる移動・移動回数カウント
-        moveButton
-            .OnClickAsObservable()
-            .Subscribe(_ =>
-            {
-                _subject.OnNext(Unit.Default);
-                Move();
-            });
 
         //　stageのオブジェクトに当たったら...
         this.OnCollisionEnter2DAsObservable()
@@ -45,10 +29,8 @@ public class PlayerMover : MonoBehaviour
             });
     }
 
-    private async void Move()
+    public async void Move()
     {
-        // Button Off
-        _playerController.DeactivatePlayerButton();
         _isMove = true;
 
         while (_isMove)
