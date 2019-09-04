@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -600,7 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9568a167cf1fe0e4d8589677bb5d766c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateButton: {fileID: 1381785456}
 --- !u!114 &409467727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,7 +613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 300
-  moveButton: {fileID: 1075727259}
 --- !u!114 &409467728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1503,6 +1501,8 @@ GameObject:
   - component: {fileID: 1075727261}
   - component: {fileID: 1075727260}
   - component: {fileID: 1075727259}
+  - component: {fileID: 1075727263}
+  - component: {fileID: 1075727262}
   m_Layer: 5
   m_Name: Button - Move
   m_TagString: Untagged
@@ -1613,6 +1613,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075727257}
   m_CullTransparentMesh: 0
+--- !u!114 &1075727262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075727257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1075727263}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
+--- !u!114 &1075727263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075727257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7392719d5bed428a1f28e5250a99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1117071074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7970653872103302653, guid: 78c4f459a22d44622ba4754920d63f8e,
@@ -2110,6 +2140,8 @@ GameObject:
   - component: {fileID: 1381785458}
   - component: {fileID: 1381785457}
   - component: {fileID: 1381785456}
+  - component: {fileID: 1381785460}
+  - component: {fileID: 1381785459}
   m_Layer: 5
   m_Name: Button - Rotate
   m_TagString: Untagged
@@ -2220,6 +2252,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381785454}
   m_CullTransparentMesh: 0
+--- !u!114 &1381785459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381785454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1381785460}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
+--- !u!114 &1381785460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381785454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366ef76c0c069eb428bffa970e0fede6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1415732845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1719158525383641490, guid: 4314d3be0bda3493d9f10507c3dedec0,
