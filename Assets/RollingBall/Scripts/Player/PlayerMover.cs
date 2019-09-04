@@ -12,7 +12,7 @@ public class PlayerMover : MonoBehaviour
     private bool _isMove;
     [SerializeField] private float moveSpeed = 300f;
 
-    private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(Vector2.one);
+    private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(new Vector2(10f, 10f));
     public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
 
     private void Start()
