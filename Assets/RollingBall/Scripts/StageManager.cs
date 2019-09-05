@@ -1,16 +1,20 @@
-﻿using CharTween;
+﻿using System;
+using System.Threading.Tasks;
+using CharTween;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class StageManager : MonoBehaviour
 {
     [Inject] private readonly DiContainer _diContainer = default;
     [Inject] private readonly StageDataTable _stageDataTable = default;
-    [Inject] private readonly TextMeshProUGUI _clearText = default;
 
+    [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Transform goal = null;
+    [SerializeField] private Button[] nextButton = null;
 
     public Vector2 goalPosition { get; private set; }
 
@@ -21,6 +25,11 @@ public class StageManager : MonoBehaviour
         goal.position = _stageDataTable.goalPosition[index];
 
         goalPosition = GameObject.FindGameObjectWithTag("Goal").transform.position;
+
+        foreach (var button in nextButton)
+        {
+            button.enabled = false;
+        }
     }
 
     public void DisplayClearText()
@@ -30,7 +39,7 @@ public class StageManager : MonoBehaviour
 
     private void TweenClearText()
     {
-        var tweener = _clearText.GetCharTweener();
+        var tweener = clearText.GetCharTweener();
         var characterCount = tweener.CharacterCount;
         var sequence = DOTween.Sequence();
 
@@ -56,6 +65,27 @@ public class StageManager : MonoBehaviour
                     .SetEase(Ease.OutBounce));
 
             sequence.Insert(timeOffset, charSequence);
+        }
+
+        DisplayNext();
+    }
+
+    private async void DisplayNext()
+    {
+        await Task.Delay(TimeSpan.FromSeconds(1.5f));
+
+        clearText.transform
+            .DOLocalMoveY(75f, 0.5f);
+
+        await Task.Delay(TimeSpan.FromSeconds(0.5f));
+
+        foreach (var button in nextButton)
+        {
+            DOTween.Sequence()
+                .Append(button.image
+                    .DOFade(1f, 0.5f));
+
+            button.enabled = true;
         }
     }
 }
