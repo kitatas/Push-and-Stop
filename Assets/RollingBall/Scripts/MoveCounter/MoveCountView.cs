@@ -7,6 +7,6 @@ public class MoveCountView : MonoBehaviour
 
     public void UpdateText(int moveCount)
     {
-        moveCountText.text = $"Move Count : {moveCount}";
+        moveCountText.text = $"{moveCount}";
     }
 }
