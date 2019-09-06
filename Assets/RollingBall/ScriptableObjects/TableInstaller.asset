@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: TableInstaller
   m_EditorClassIdentifier: 
   stageDataTable: {fileID: 11400000, guid: 84a44f863fd002e4eae42a398a958356, type: 2}
+  bgmTable: {fileID: 11400000, guid: f9455a2e39746bc4d8b358b712b6b311, type: 2}
+  seTable: {fileID: 11400000, guid: 723c081bb4b17bc4f9f131cead89d204, type: 2}

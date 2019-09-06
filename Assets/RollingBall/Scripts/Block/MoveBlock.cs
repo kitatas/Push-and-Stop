@@ -6,7 +6,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-public class MoveBlock : MonoBehaviour, IHittable
+public class MoveBlock : BaseBlock
 {
     [Inject] private readonly PlayerController _playerController = default;
 
@@ -25,8 +25,10 @@ public class MoveBlock : MonoBehaviour, IHittable
             });
     }
 
-    public void Hit(Vector3 moveDirection)
+    public override void Hit(Vector3 moveDirection)
     {
+        base.Hit(moveDirection);
+
         _startPosition = transform.position;
         var nextPosition = _startPosition + moveDirection;
 

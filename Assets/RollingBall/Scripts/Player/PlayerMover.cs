@@ -27,7 +27,7 @@ public class PlayerMover : MonoBehaviour
             {
                 _isMove = false;
 
-                hittable?.Hit(transform.up);
+                hittable.Hit(transform.up);
 
                 CorrectPosition();
             });

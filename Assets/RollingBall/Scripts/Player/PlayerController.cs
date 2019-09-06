@@ -8,6 +8,7 @@ public class PlayerController : IInitializable
     [Inject] private readonly MoveButton _moveButton = default;
     [Inject] private readonly RotateButton _rotateButton = default;
     [Inject] private readonly StageManager _stageManager = default;
+    [Inject] private readonly SeManager _seManager = default;
     private bool _isGoal;
 
     public void Initialize()
@@ -36,6 +37,7 @@ public class PlayerController : IInitializable
             .Where(value => value == _stageManager.goalPosition)
             .Subscribe(_ =>
             {
+                _seManager.PlaySe(SeType.Clear);
                 _isGoal = true;
                 _stageManager.DisplayClearText();
                 DeactivatePlayerButton();

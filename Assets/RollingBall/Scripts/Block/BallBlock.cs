@@ -5,7 +5,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-public class BallBlock : MonoBehaviour, IHittable
+public class BallBlock : BaseBlock
 {
     [Inject] private readonly PlayerController _playerController = default;
     private Rigidbody2D _rigidbody;
@@ -27,10 +27,17 @@ public class BallBlock : MonoBehaviour, IHittable
             });
     }
 
-    public async void Hit(Vector3 moveDirection)
+    public override void Hit(Vector3 moveDirection)
     {
+        base.Hit(moveDirection);
+
         _isMove = true;
 
+        Move(moveDirection);
+    }
+
+    private async void Move(Vector3 moveDirection)
+    {
         while (_isMove)
         {
             _rigidbody.velocity = 300f * Time.deltaTime * moveDirection;
