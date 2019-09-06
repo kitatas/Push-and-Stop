@@ -3,7 +3,7 @@ using Zenject;
 
 public class LoadButton : BaseButton
 {
-    [Inject] private readonly ZenjectSceneLoader _sceneLoader = default;
+    [Inject] private readonly Transition _transition = default;
     [SerializeField, SceneName] private string sceneName = null;
 
     [Inject] private readonly StageDataTable _stageDataTable = default;
@@ -15,7 +15,7 @@ public class LoadButton : BaseButton
 
         _stageDataTable.stageIndex = LoadIndex();
 
-        _sceneLoader.LoadScene(sceneName);
+        _transition.LoadScene(sceneName);
     }
 
     private int LoadIndex()
