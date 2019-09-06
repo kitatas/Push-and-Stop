@@ -12,7 +12,7 @@ public class PlayerMover : MonoBehaviour
     private bool _isMove;
     [SerializeField] private float moveSpeed = 300f;
 
-    private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(new Vector2(10f, 10f));
+    private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(Vector2.one * -1f);
     public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
 
     private void Start()
@@ -50,13 +50,10 @@ public class PlayerMover : MonoBehaviour
         var y = Mathf.RoundToInt(transform.position.y);
         var nextPosition = new Vector2(x, y);
 
+        _onComplete.Value = nextPosition;
+
         transform
             .DOMove(nextPosition, 0.3f)
-            .OnComplete(() =>
-            {
-                _rigidbody.velocity = Vector3.zero;
-
-                _onComplete.Value = nextPosition;
-            });
+            .OnComplete(() => _rigidbody.velocity = Vector2.zero);
     }
 }
