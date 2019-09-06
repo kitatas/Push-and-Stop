@@ -49,7 +49,7 @@ public class BallBlock : MonoBehaviour, IHittable
             .DOMove(nextPosition, 0.3f)
             .OnComplete(() =>
             {
-                _rigidbody.velocity = Vector3.zero;
+                _rigidbody.velocity = Vector2.zero;
 
                 // Button ON
                 _playerController.ActivatePlayerButton();

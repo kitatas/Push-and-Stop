@@ -22,6 +22,7 @@ public class PlayerMover : MonoBehaviour
         //　stageのオブジェクトに当たったら...
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
+            .Where(hittable => hittable != null)
             .Subscribe(hittable =>
             {
                 _isMove = false;
