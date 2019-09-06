@@ -75,7 +75,7 @@ public class StageManager : MonoBehaviour
         await Task.Delay(TimeSpan.FromSeconds(1.5f));
 
         clearText.transform
-            .DOLocalMoveY(75f, 0.5f);
+            .DOLocalMoveY(50f, 0.5f);
 
         await Task.Delay(TimeSpan.FromSeconds(0.5f));
 

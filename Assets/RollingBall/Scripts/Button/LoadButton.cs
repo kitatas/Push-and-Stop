@@ -15,7 +15,7 @@ public class LoadButton : BaseButton
 
         _stageDataTable.stageIndex = LoadIndex();
 
-        _transition.LoadScene(sceneName);
+        _transition.LoadScene(sceneName, 0.7f);
     }
 
     private int LoadIndex()
