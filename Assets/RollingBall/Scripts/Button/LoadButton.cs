@@ -14,7 +14,7 @@ public class LoadButton : BaseButton
     /// -1 : Next
     /// over 0 : StageIndex
     /// </summary>
-    [SerializeField, Range(-2, 4)] private int stageNumber = 0;
+    [SerializeField, Range(-2, 9)] private int stageNumber = 0;
 
     protected override void OnPush()
     {

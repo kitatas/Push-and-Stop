@@ -21,8 +21,8 @@ public class StageManager : MonoBehaviour
     public void Initialize()
     {
         var index = _stageDataTable.stageIndex;
-        _diContainer.InstantiatePrefab(_stageDataTable.stageData[index]);
-        goal.position = _stageDataTable.goalPosition[index];
+        _diContainer.InstantiatePrefab(_stageDataTable.stageData[index].stage);
+        goal.position = _stageDataTable.stageData[index].goalPosition;
 
         goalPosition = GameObject.FindGameObjectWithTag("Goal").transform.position;
 
