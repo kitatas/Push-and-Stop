@@ -7,7 +7,13 @@ public class LoadButton : BaseButton
     [SerializeField, SceneName] private string sceneName = null;
 
     [Inject] private readonly StageDataTable _stageDataTable = default;
-    [SerializeField, Range(-1, 4)] private int stageNumber = 0;
+
+    /// <summary>
+    /// -2 : Reload
+    /// -1 : Next
+    /// over 0 : StageIndex
+    /// </summary>
+    [SerializeField, Range(-2, 4)] private int stageNumber = 0;
 
     protected override void OnPush()
     {
@@ -20,9 +26,14 @@ public class LoadButton : BaseButton
 
     private int LoadIndex()
     {
-        if (stageNumber != -1)
+        if (stageNumber >= 0)
         {
             return stageNumber;
+        }
+
+        if (stageNumber == -2)
+        {
+            return _stageDataTable.stageIndex;
         }
 
         if (++_stageDataTable.stageIndex < 4)
