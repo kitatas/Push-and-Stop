@@ -17,7 +17,7 @@ MonoBehaviour:
   - stage: {fileID: 8570384546616393726, guid: 5e6f2ad98a0617844ae20d27ee292d4c, type: 3}
     goalPosition: {x: 2, y: 2, z: 0.25}
   - stage: {fileID: 6204168434014384508, guid: 6c5abbf293e77480db0541f90d413455, type: 3}
-    goalPosition: {x: 0, y: 0, z: 0.25}
+    goalPosition: {x: 0, y: 2, z: 0.25}
   - stage: {fileID: 982825636654969168, guid: 93ddf79dc861540d19dded3ed6565cc8, type: 3}
     goalPosition: {x: 1, y: 1, z: 0.25}
   - stage: {fileID: 8570384546616393726, guid: 19df159a7d860fc44ab8250f0fe306f8, type: 3}
