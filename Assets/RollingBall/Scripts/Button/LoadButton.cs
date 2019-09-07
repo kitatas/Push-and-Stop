@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class LoadButton : BaseButton
@@ -19,6 +20,11 @@ public class LoadButton : BaseButton
     {
         base.OnPush();
 
+        foreach (var b in FindObjectsOfType<Button>())
+        {
+            b.enabled = false;
+        }
+
         _stageDataTable.stageIndex = LoadIndex();
 
         _transition.LoadScene(sceneName, 0.7f);
@@ -36,7 +42,7 @@ public class LoadButton : BaseButton
             return _stageDataTable.stageIndex;
         }
 
-        if (++_stageDataTable.stageIndex < 4)
+        if (++_stageDataTable.stageIndex < _stageDataTable.stageData.Length)
         {
             return _stageDataTable.stageIndex;
         }

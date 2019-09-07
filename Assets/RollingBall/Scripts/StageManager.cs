@@ -42,6 +42,7 @@ public class StageManager : MonoBehaviour
         var tweener = clearText.GetCharTweener();
         var characterCount = tweener.CharacterCount;
         var sequence = DOTween.Sequence();
+        var time = 0.5f;
 
         for (var i = 0; i < characterCount; ++i)
         {
@@ -51,17 +52,17 @@ public class StageManager : MonoBehaviour
             var charSequence = DOTween.Sequence();
             charSequence
                 .Append(tweener
-                    .DOLocalMoveY(i, 0.5f, 0.5f)
+                    .DOLocalMoveY(i, 0.5f, time)
                     .SetEase(Ease.InOutCubic))
                 .Join(tweener
-                    .DOFade(i, 0, 0.5f)
+                    .DOFade(i, 0, time)
                     .From())
                 .Join(tweener
-                    .DOScale(i, 0, 0.5f)
+                    .DOScale(i, 0, time)
                     .From()
                     .SetEase(Ease.OutBack, 5))
                 .Append(tweener
-                    .DOLocalMoveY(i, 0, 0.5f)
+                    .DOLocalMoveY(i, 0, time)
                     .SetEase(Ease.OutBounce));
 
             sequence.Insert(timeOffset, charSequence);
