@@ -10,7 +10,7 @@ public class PlayerMover : MonoBehaviour
     [Inject] private readonly Rigidbody2D _rigidbody = default;
 
     private bool _isMove;
-    [SerializeField] private float moveSpeed = 300f;
+    [SerializeField] private float moveSpeed = 200f;
 
     private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(Vector2.one * -1f);
     public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
@@ -18,6 +18,7 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         _isMove = false;
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         //　stageのオブジェクトに当たったら...
         this.OnCollisionEnter2DAsObservable()

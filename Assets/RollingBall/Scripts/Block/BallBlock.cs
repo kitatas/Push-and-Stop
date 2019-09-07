@@ -40,7 +40,7 @@ public class BallBlock : BaseBlock
     {
         while (_isMove)
         {
-            _rigidbody.velocity = 300f * Time.deltaTime * moveDirection;
+            _rigidbody.velocity = 200f * Time.deltaTime * moveDirection;
 
             await Task.Yield();
         }
