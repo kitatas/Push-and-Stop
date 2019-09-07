@@ -10,6 +10,7 @@ public class BgmManager : AudioInitializer
     protected override void Awake()
     {
         base.Awake();
+        audioSource.loop = true;
 
         _bgmList = new Dictionary<BgmType, AudioClip>
         {

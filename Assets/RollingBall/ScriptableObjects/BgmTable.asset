@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5476f232e449c45b7cb3455ce06adc, type: 3}
   m_Name: BgmTable
   m_EditorClassIdentifier: 
-  mainClip: {fileID: 0}
+  mainClip: {fileID: 8300000, guid: 35750c516b5254f0da99ccac20f1f865, type: 3}
