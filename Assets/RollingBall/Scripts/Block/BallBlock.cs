@@ -5,6 +5,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BallBlock : BaseBlock
 {
     [Inject] private readonly PlayerController _playerController = default;
@@ -15,6 +16,7 @@ public class BallBlock : BaseBlock
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         _isMove = false;
 
         this.OnCollisionEnter2DAsObservable()
@@ -32,7 +34,6 @@ public class BallBlock : BaseBlock
         base.Hit(moveDirection);
 
         _isMove = true;
-
         Move(moveDirection);
     }
 

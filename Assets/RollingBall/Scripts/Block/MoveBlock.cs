@@ -6,6 +6,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class MoveBlock : BaseBlock
 {
     [Inject] private readonly PlayerController _playerController = default;
@@ -15,6 +16,9 @@ public class MoveBlock : BaseBlock
 
     private void Start()
     {
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        _startPosition = transform.position;
+
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
             .Where(hittable => hittable != null)
