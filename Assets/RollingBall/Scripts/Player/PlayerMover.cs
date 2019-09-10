@@ -46,8 +46,9 @@ public class PlayerMover : MonoBehaviour
 
     private void CorrectPosition()
     {
-        var x = Mathf.RoundToInt(transform.position.x);
-        var y = Mathf.RoundToInt(transform.position.y);
+        var p = transform.position;
+        var x = Mathf.RoundToInt(p.x);
+        var y = Mathf.RoundToInt(p.y);
         var nextPosition = new Vector2(x, y);
 
         _onComplete.Value = nextPosition;

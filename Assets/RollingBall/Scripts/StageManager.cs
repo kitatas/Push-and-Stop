@@ -16,15 +16,13 @@ public class StageManager : MonoBehaviour
     [SerializeField] private Transform goal = null;
     [SerializeField] private Button[] nextButton = null;
 
-    public Vector2 goalPosition { get; private set; }
+    public Vector2 goalPosition => goal.position;
 
     public void Initialize()
     {
         var index = _stageDataTable.stageIndex;
         _diContainer.InstantiatePrefab(_stageDataTable.stageData[index].stage);
         goal.position = _stageDataTable.stageData[index].goalPosition;
-
-        goalPosition = GameObject.FindGameObjectWithTag("Goal").transform.position;
 
         foreach (var button in nextButton)
         {
