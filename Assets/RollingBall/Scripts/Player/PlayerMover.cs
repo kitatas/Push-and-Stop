@@ -45,7 +45,7 @@ public class PlayerMover : MonoBehaviour
 
     private void CorrectPosition()
     {
-        var nextPosition = ExpansionClass.RoundPosition(transform.position);
+        var nextPosition = transform.RoundPosition();
 
         _onComplete.Value = nextPosition;
 

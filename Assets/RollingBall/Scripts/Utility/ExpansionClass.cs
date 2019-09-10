@@ -2,10 +2,11 @@
 
 public static class ExpansionClass
 {
-    public static Vector2 RoundPosition(Vector2 currentPosition)
+    public static Vector2 RoundPosition(this Transform transform)
     {
-        var x = Mathf.RoundToInt(currentPosition.x);
-        var y = Mathf.RoundToInt(currentPosition.y);
+        var p = transform.position;
+        var x = Mathf.RoundToInt(p.x);
+        var y = Mathf.RoundToInt(p.y);
         return new Vector2(x, y);
     }
 }
