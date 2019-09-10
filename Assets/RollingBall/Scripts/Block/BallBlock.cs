@@ -5,18 +5,14 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class BallBlock : BaseBlock
 {
     [Inject] private readonly PlayerController _playerController = default;
-    private Rigidbody2D _rigidbody;
 
     private bool _isMove;
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         _isMove = false;
 
         this.OnCollisionEnter2DAsObservable()
@@ -41,7 +37,7 @@ public class BallBlock : BaseBlock
     {
         while (_isMove)
         {
-            _rigidbody.velocity = 200f * Time.deltaTime * moveDirection;
+            transform.position += 5f * Time.deltaTime * moveDirection;
 
             await Task.Yield();
         }
@@ -49,16 +45,15 @@ public class BallBlock : BaseBlock
 
     private void CorrectPosition()
     {
-        var x = Mathf.RoundToInt(transform.position.x);
-        var y = Mathf.RoundToInt(transform.position.y);
+        var p = transform.position;
+        var x = Mathf.RoundToInt(p.x);
+        var y = Mathf.RoundToInt(p.y);
         var nextPosition = new Vector2(x, y);
 
         transform
             .DOMove(nextPosition, 0.3f)
             .OnComplete(() =>
             {
-                _rigidbody.velocity = Vector2.zero;
-
                 // Button ON
                 _playerController.ActivatePlayerButton();
             });
