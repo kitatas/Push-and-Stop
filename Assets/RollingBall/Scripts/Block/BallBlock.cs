@@ -44,10 +44,7 @@ public class BallBlock : BaseBlock
 
     private void CorrectPosition()
     {
-        var p = transform.position;
-        var x = Mathf.RoundToInt(p.x);
-        var y = Mathf.RoundToInt(p.y);
-        var nextPosition = new Vector2(x, y);
+        var nextPosition = ExpansionClass.RoundPosition(transform.position);
 
         transform
             .DOMove(nextPosition, 0.3f)
