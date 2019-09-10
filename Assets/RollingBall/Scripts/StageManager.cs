@@ -43,7 +43,6 @@ public class StageManager : MonoBehaviour
         var tweener = clearText.GetCharTweener();
         var characterCount = tweener.CharacterCount;
         var sequence = DOTween.Sequence();
-        const float time = 0.5f;
 
         for (var i = 0; i < characterCount; ++i)
         {
@@ -53,17 +52,17 @@ public class StageManager : MonoBehaviour
             var charSequence = DOTween.Sequence();
             charSequence
                 .Append(tweener
-                    .DOLocalMoveY(i, 0.5f, time)
+                    .DOLocalMoveY(i, 0.5f, ConstantList.uiAnimationTime)
                     .SetEase(Ease.InOutCubic))
                 .Join(tweener
-                    .DOFade(i, 0, time)
+                    .DOFade(i, 0, ConstantList.uiAnimationTime)
                     .From())
                 .Join(tweener
-                    .DOScale(i, 0, time)
+                    .DOScale(i, 0, ConstantList.uiAnimationTime)
                     .From()
                     .SetEase(Ease.OutBack, 5))
                 .Append(tweener
-                    .DOLocalMoveY(i, 0, time)
+                    .DOLocalMoveY(i, 0, ConstantList.uiAnimationTime)
                     .SetEase(Ease.OutBounce));
 
             sequence.Insert(timeOffset, charSequence);
@@ -77,16 +76,16 @@ public class StageManager : MonoBehaviour
         await Observable.Timer(TimeSpan.FromSeconds(1.5f));
 
         clearText.transform
-            .DOLocalMoveY(50f, 0.5f);
+            .DOLocalMoveY(50f, ConstantList.uiAnimationTime);
 
-        await Observable.Timer(TimeSpan.FromSeconds(0.5f));
+        await Observable.Timer(TimeSpan.FromSeconds(ConstantList.uiAnimationTime));
 
         foreach (var button in nextButton)
         {
             DOTween
                 .Sequence()
                 .Append(button.image
-                    .DOFade(1f, 0.5f));
+                    .DOFade(1f, ConstantList.uiAnimationTime));
 
             button.enabled = true;
         }

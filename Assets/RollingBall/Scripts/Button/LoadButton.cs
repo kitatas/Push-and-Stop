@@ -6,6 +6,7 @@ public class LoadButton : BaseButton
 {
     [Inject] private readonly Transition _transition = default;
     [SerializeField, SceneName] private string sceneName = null;
+    [SerializeField] private float fadeTime = 0.7f;
 
     [Inject] private readonly StageDataTable _stageDataTable = default;
 
@@ -27,7 +28,7 @@ public class LoadButton : BaseButton
 
         _stageDataTable.stageIndex = LoadIndex();
 
-        _transition.LoadScene(sceneName, 0.7f);
+        _transition.LoadScene(sceneName, fadeTime);
     }
 
     private int LoadIndex()

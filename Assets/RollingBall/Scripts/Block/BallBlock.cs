@@ -47,7 +47,7 @@ public class BallBlock : BaseBlock
         var nextPosition = transform.RoundPosition();
 
         transform
-            .DOMove(nextPosition, 0.3f)
+            .DOMove(nextPosition, ConstantList.correctTime)
             .OnComplete(() =>
             {
                 // Button ON

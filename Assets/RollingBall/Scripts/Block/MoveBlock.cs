@@ -34,7 +34,7 @@ public class MoveBlock : BaseBlock
         var nextPosition = _startPosition + moveDirection;
 
         _tweenCore = transform
-            .DOMove(nextPosition, 0.3f)
+            .DOMove(nextPosition, ConstantList.correctTime)
             .OnComplete(() =>
             {
                 _startPosition = nextPosition;
@@ -47,7 +47,7 @@ public class MoveBlock : BaseBlock
     private void CorrectPosition()
     {
         transform
-            .DOMove(_startPosition, 0.3f)
+            .DOMove(_startPosition, ConstantList.correctTime)
             .OnComplete(() =>
             {
                 // Button ON

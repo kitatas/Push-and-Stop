@@ -50,7 +50,7 @@ public class PlayerMover : MonoBehaviour
         _onComplete.Value = nextPosition;
 
         transform
-            .DOMove(nextPosition, 0.3f)
+            .DOMove(nextPosition, ConstantList.correctTime)
             .OnComplete(() => _rigidbody.velocity = Vector2.zero);
     }
 }

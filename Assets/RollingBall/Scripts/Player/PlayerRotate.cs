@@ -28,7 +28,7 @@ public class PlayerRotate : MonoBehaviour
         _rotateIndex = RotateIndex();
 
         transform
-            .DORotate(_rotateVector[_rotateIndex], 0.3f)
+            .DORotate(_rotateVector[_rotateIndex], ConstantList.correctTime)
             .OnComplete(() =>
             {
                 // Button ON
