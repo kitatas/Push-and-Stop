@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -40,7 +39,7 @@ public class PlayerMover : MonoBehaviour
         {
             _rigidbody.velocity = moveSpeed * Time.deltaTime * transform.up;
 
-            await Task.Yield();
+            await Observable.TimerFrame(0);
         }
     }
 

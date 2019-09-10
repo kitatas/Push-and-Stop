@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -27,8 +27,9 @@ public class Transition : MonoBehaviour
 		{
 			return;
 		}
+
 		_isFading = true;
-		
+
 		_transitionDuration = fadeTime;
 		FadeCoroutine(sceneName);
 	}
@@ -46,12 +47,12 @@ public class Transition : MonoBehaviour
 				break;
 			}
 
-			await Task.Yield();
+			await Observable.TimerFrame(0);
 		}
 
 		SetUpFade(_alphaCutOffMin);
 		_zenjectSceneLoader.LoadScene(sceneName);
-		await Task.Delay(TimeSpan.FromSeconds(0.5f));
+		await Observable.Timer(TimeSpan.FromSeconds(0.5f));
 
 		while (true)
 		{
@@ -62,7 +63,7 @@ public class Transition : MonoBehaviour
 				break;
 			}
 
-			await Task.Yield();
+			await Observable.TimerFrame(0);
 		}
 
 		_isFading = false;

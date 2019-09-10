@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -39,7 +38,7 @@ public class BallBlock : BaseBlock
         {
             transform.position += 5f * Time.deltaTime * moveDirection;
 
-            await Task.Yield();
+            await Observable.TimerFrame(0);
         }
     }
 

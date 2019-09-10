@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CharTween;
 using DG.Tweening;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -74,12 +74,12 @@ public class StageManager : MonoBehaviour
 
     private async void DisplayNextButton()
     {
-        await Task.Delay(TimeSpan.FromSeconds(1.5f));
+        await Observable.Timer(TimeSpan.FromSeconds(1.5f));
 
         clearText.transform
             .DOLocalMoveY(50f, 0.5f);
 
-        await Task.Delay(TimeSpan.FromSeconds(0.5f));
+        await Observable.Timer(TimeSpan.FromSeconds(0.5f));
 
         foreach (var button in nextButton)
         {
