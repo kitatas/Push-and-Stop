@@ -31,13 +31,14 @@ public class MoveBlock : BaseBlock
     {
         base.Hit(moveDirection);
 
-        _startPosition = transform.position;
         var nextPosition = _startPosition + moveDirection;
 
         _tweenCore = transform
             .DOMove(nextPosition, 0.3f)
             .OnComplete(() =>
             {
+                _startPosition = nextPosition;
+
                 // Button ON
                 _playerController.ActivatePlayerButton();
             });
