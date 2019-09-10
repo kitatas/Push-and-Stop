@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
 {
     [Inject] private readonly DiContainer _diContainer = default;
     [Inject] private readonly StageDataTable _stageDataTable = default;
+    [Inject] private readonly SeManager _seManager = default;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Transform goal = null;
@@ -37,10 +38,12 @@ public class StageManager : MonoBehaviour
 
     private void TweenClearText()
     {
+        _seManager.PlaySe(SeType.Clear);
+
         var tweener = clearText.GetCharTweener();
         var characterCount = tweener.CharacterCount;
         var sequence = DOTween.Sequence();
-        var time = 0.5f;
+        const float time = 0.5f;
 
         for (var i = 0; i < characterCount; ++i)
         {
@@ -66,10 +69,10 @@ public class StageManager : MonoBehaviour
             sequence.Insert(timeOffset, charSequence);
         }
 
-        DisplayNext();
+        DisplayNextButton();
     }
 
-    private async void DisplayNext()
+    private async void DisplayNextButton()
     {
         await Task.Delay(TimeSpan.FromSeconds(1.5f));
 
@@ -80,7 +83,8 @@ public class StageManager : MonoBehaviour
 
         foreach (var button in nextButton)
         {
-            DOTween.Sequence()
+            DOTween
+                .Sequence()
                 .Append(button.image
                     .DOFade(1f, 0.5f));
 

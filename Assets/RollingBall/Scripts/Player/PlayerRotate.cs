@@ -4,28 +4,40 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    private Vector3 _rotateVector;
-    private readonly Vector3 _addRotateVector = new Vector3(0f, 0f, 90f);
+    private int _rotateIndex;
+
+    private readonly Vector3[] _rotateVector =
+    {
+        new Vector3(0f, 0f, 0f),
+        new Vector3(0f, 0f, 90f),
+        new Vector3(0f, 0f, 180f),
+        new Vector3(0f, 0f, 270f),
+    };
 
     private readonly ReactiveProperty<bool> _onComplete = new ReactiveProperty<bool>(false);
     public IReadOnlyReactiveProperty<bool> OnComplete() => _onComplete;
 
     private void Start()
     {
-        _rotateVector = Vector3.zero;
+        _rotateIndex = 0;
     }
 
     public void Rotate()
     {
         _onComplete.Value = false;
-        _rotateVector += _addRotateVector;
+        _rotateIndex = RotateIndex();
 
         transform
-            .DORotate(_rotateVector, 0.3f)
+            .DORotate(_rotateVector[_rotateIndex], 0.3f)
             .OnComplete(() =>
             {
                 // Button ON
                 _onComplete.Value = true;
             });
+    }
+
+    private int RotateIndex()
+    {
+        return ++_rotateIndex < _rotateVector.Length ? _rotateIndex : 0;
     }
 }
