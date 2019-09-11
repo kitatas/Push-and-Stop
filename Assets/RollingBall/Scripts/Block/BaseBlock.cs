@@ -5,6 +5,7 @@ using Zenject;
 public abstract class BaseBlock : MonoBehaviour, IHittable
 {
     [Inject] private readonly SeManager _seManager = default;
+    [Inject] private readonly PlayerController _playerController = default;
 
     private void Awake()
     {
@@ -14,5 +15,10 @@ public abstract class BaseBlock : MonoBehaviour, IHittable
     public virtual void Hit(Vector3 moveDirection)
     {
         _seManager.PlaySe(SeType.Hit);
+    }
+
+    protected void ActivatePlayerButton()
+    {
+        _playerController.ActivatePlayerButton();
     }
 }

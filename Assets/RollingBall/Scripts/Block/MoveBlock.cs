@@ -4,12 +4,9 @@ using DG.Tweening.Plugins.Options;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Zenject;
 
 public class MoveBlock : BaseBlock
 {
-    [Inject] private readonly PlayerController _playerController = default;
-
     private Vector3 _startPosition;
     private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;
 
@@ -39,8 +36,7 @@ public class MoveBlock : BaseBlock
             {
                 _startPosition = nextPosition;
 
-                // Button ON
-                _playerController.ActivatePlayerButton();
+                ActivatePlayerButton();
             });
     }
 
@@ -48,10 +44,6 @@ public class MoveBlock : BaseBlock
     {
         transform
             .DOMove(_startPosition, ConstantList.correctTime)
-            .OnComplete(() =>
-            {
-                // Button ON
-                _playerController.ActivatePlayerButton();
-            });
+            .OnComplete(ActivatePlayerButton);
     }
 }

@@ -2,12 +2,9 @@
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using Zenject;
 
 public class BallBlock : BaseBlock
 {
-    [Inject] private readonly PlayerController _playerController = default;
-
     private bool _isMove;
 
     private void Start()
@@ -48,10 +45,6 @@ public class BallBlock : BaseBlock
 
         transform
             .DOMove(nextPosition, ConstantList.correctTime)
-            .OnComplete(() =>
-            {
-                // Button ON
-                _playerController.ActivatePlayerButton();
-            });
+            .OnComplete(ActivatePlayerButton);
     }
 }
