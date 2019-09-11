@@ -7,12 +7,11 @@ public class PlayerController : IInitializable
     [Inject] private readonly PlayerRotate _playerRotate = default;
     [Inject] private readonly MoveButton _moveButton = default;
     [Inject] private readonly RotateButton _rotateButton = default;
-    [Inject] private readonly StageManager _stageManager = default;
+    [Inject] private readonly ClearAction _clearAction = default;
     private bool _isGoal;
 
     public void Initialize()
     {
-        _stageManager.Initialize();
         _isGoal = false;
 
         _moveButton
@@ -33,11 +32,11 @@ public class PlayerController : IInitializable
 
         _playerMover
             .OnComplete()
-            .Where(value => value == _stageManager.goalPosition)
+            .Where(position => _clearAction.IsGoalPosition(position))
             .Subscribe(_ =>
             {
                 _isGoal = true;
-                _stageManager.DisplayClearText();
+                _clearAction.DisplayClearUi();
                 DeactivatePlayerButton();
             });
 
