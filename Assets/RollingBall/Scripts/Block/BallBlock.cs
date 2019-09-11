@@ -25,12 +25,13 @@ public class BallBlock : BaseBlock
     {
         base.Hit(moveDirection);
 
-        _isMove = true;
         Move(moveDirection);
     }
 
     private async void Move(Vector3 moveDirection)
     {
+        _isMove = true;
+
         while (_isMove)
         {
             transform.position += 5f * Time.deltaTime * moveDirection;

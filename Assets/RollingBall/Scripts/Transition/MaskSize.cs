@@ -2,24 +2,22 @@
 
 public class MaskSize : MonoBehaviour
 {
-    private Camera _camera;
-
     private void Start()
     {
-        _camera = Camera.main;
+        var mainCamera = Camera.main;
 
-        SetScreenSize();
+        SetScreenSize(mainCamera);
 
-        SetPosition();
+        SetPosition(mainCamera.transform);
     }
 
-    private void SetScreenSize()
+    private void SetScreenSize(Camera mainCamera)
     {
         var spriteRenderer = GetComponent<SpriteRenderer>().sprite;
         var width = spriteRenderer.bounds.size.x;
         var height = spriteRenderer.bounds.size.y;
 
-        var worldScreenHeight = _camera.orthographicSize * 2f;
+        var worldScreenHeight = mainCamera.orthographicSize * 2f;
         var worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
         var w = worldScreenWidth / width;
@@ -27,11 +25,9 @@ public class MaskSize : MonoBehaviour
         transform.localScale = new Vector3(w, h);
     }
 
-    private void SetPosition()
+    private void SetPosition(Transform cameraTransform)
     {
-        var camTrans = _camera.transform;
-
-        transform.position = camTrans.position + camTrans.forward;
-        transform.rotation = camTrans.rotation;
+        transform.position = cameraTransform.position + cameraTransform.forward;
+        transform.rotation = cameraTransform.rotation;
     }
 }
