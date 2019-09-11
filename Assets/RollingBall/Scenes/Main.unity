@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Main
+  fadeTime: 0.7
   stageNumber: -2
 --- !u!114 &43793104
 MonoBehaviour:
@@ -621,6 +622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409573950}
   - component: {fileID: 409573949}
+  - component: {fileID: 409573952}
   - component: {fileID: 409573951}
   m_Layer: 0
   m_Name: StageManager
@@ -641,10 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b566ab4ac9d58274cae2e5ff645b0674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearText: {fileID: 904547546}
   goal: {fileID: 492919207}
-  nextButton:
-  - {fileID: 1154904140}
 --- !u!4 &409573950
 Transform:
   m_ObjectHideFlags: 0
@@ -673,10 +672,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 409573949}
+  - {fileID: 409573952}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &409573952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409573948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3af5b858f7846a289dce2e6c15d378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearText: {fileID: 904547546}
+  nextButton:
+  - {fileID: 1154904140}
 --- !u!1 &432376415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Main
+  fadeTime: 0.7
   stageNumber: -1
 --- !u!222 &1154904143
 CanvasRenderer:
@@ -2168,6 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Title
+  fadeTime: 0.7
   stageNumber: -1
 --- !u!114 &1972360596
 MonoBehaviour:
