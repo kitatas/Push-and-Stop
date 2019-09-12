@@ -1,25 +1,25 @@
 ﻿using UniRx;
 using Zenject;
 
-public class PlayerController : IInitializable
+public class PlayerController
 {
-    [Inject] private readonly PlayerMover _playerMover = default;
-    [Inject] private readonly PlayerRotate _playerRotate = default;
-    [Inject] private readonly MoveButton _moveButton = default;
-    [Inject] private readonly RotateButton _rotateButton = default;
-    [Inject] private readonly ClearAction _clearAction = default;
+    private readonly MoveButton _moveButton = default;
+    private readonly RotateButton _rotateButton = default;
     private bool _isGoal;
 
-    public void Initialize()
+    [Inject]
+    public PlayerController(MoveButton moveButton, RotateButton rotateButton, PlayerMover playerMover, PlayerRotate playerRotate, ClearAction clearAction)
     {
         _isGoal = false;
+        _moveButton = moveButton;
+        _rotateButton = rotateButton;
 
         _moveButton
             .OnPushed()
             .Subscribe(_ =>
             {
                 DeactivatePlayerButton();
-                _playerMover.Move();
+                playerMover.Move();
             });
 
         _rotateButton
@@ -27,20 +27,20 @@ public class PlayerController : IInitializable
             .Subscribe(_ =>
             {
                 DeactivatePlayerButton();
-                _playerRotate.Rotate();
+                playerRotate.Rotate();
             });
 
-        _playerMover
+        playerMover
             .OnComplete()
-            .Where(position => _clearAction.IsGoalPosition(position))
+            .Where(clearAction.IsGoalPosition)
             .Subscribe(_ =>
             {
                 _isGoal = true;
-                _clearAction.DisplayClearUi();
+                clearAction.DisplayClearUi();
                 DeactivatePlayerButton();
             });
 
-        _playerRotate
+        playerRotate
             .OnComplete()
             .Where(value => value)
             .Subscribe(_ => ActivatePlayerButton());
