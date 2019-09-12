@@ -5,14 +5,17 @@ public class PlayerController
 {
     private readonly MoveButton _moveButton = default;
     private readonly RotateButton _rotateButton = default;
+    private readonly ReverseRotateButton _reverseRotateButton = default;
     private bool _isGoal;
 
     [Inject]
-    public PlayerController(MoveButton moveButton, RotateButton rotateButton, PlayerMover playerMover, PlayerRotate playerRotate, ClearAction clearAction)
+    public PlayerController(MoveButton moveButton, RotateButton rotateButton, ReverseRotateButton reverseRotateButton,
+        PlayerMover playerMover, PlayerRotate playerRotate, ClearAction clearAction)
     {
         _isGoal = false;
         _moveButton = moveButton;
         _rotateButton = rotateButton;
+        _reverseRotateButton = reverseRotateButton;
 
         _moveButton
             .OnPushed()
@@ -27,7 +30,15 @@ public class PlayerController
             .Subscribe(_ =>
             {
                 DeactivatePlayerButton();
-                playerRotate.Rotate();
+                playerRotate.Rotate(1);
+            });
+
+        _reverseRotateButton
+            .OnPushed()
+            .Subscribe(_ =>
+            {
+                DeactivatePlayerButton();
+                playerRotate.Rotate(-1);
             });
 
         playerMover
@@ -55,11 +66,13 @@ public class PlayerController
 
         _moveButton.ActivateButton(true);
         _rotateButton.ActivateButton(true);
+        _reverseRotateButton.ActivateButton(true);
     }
 
     private void DeactivatePlayerButton()
     {
         _moveButton.ActivateButton(false);
         _rotateButton.ActivateButton(false);
+        _reverseRotateButton.ActivateButton(false);
     }
 }

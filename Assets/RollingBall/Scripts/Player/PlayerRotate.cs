@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    private int _rotateIndex;
+    private ReactiveProperty<int> _rotateIndex;
 
     private readonly Vector3[] _rotateVector =
     {
@@ -19,25 +19,39 @@ public class PlayerRotate : MonoBehaviour
 
     private void Start()
     {
-        _rotateIndex = 0;
-    }
+        _rotateIndex = new ReactiveProperty<int>(0);
 
-    public void Rotate()
-    {
-        _onComplete.Value = false;
-        _rotateIndex = RotateIndex();
-
-        transform
-            .DORotate(_rotateVector[_rotateIndex], ConstantList.correctTime)
-            .OnComplete(() =>
+        _rotateIndex
+            .SkipLatestValueOnSubscribe()
+            .Subscribe(value =>
             {
-                // Button ON
-                _onComplete.Value = true;
+                transform
+                    .DORotate(_rotateVector[value], ConstantList.correctTime)
+                    .OnComplete(() => _onComplete.Value = true);
             });
     }
 
-    private int RotateIndex()
+    public void Rotate(int addValue)
     {
-        return ++_rotateIndex < _rotateVector.Length ? _rotateIndex : 0;
+        _onComplete.Value = false;
+
+        _rotateIndex.Value = RotateIndex(addValue);
+    }
+
+    private int RotateIndex(int addValue)
+    {
+        var index = _rotateIndex.Value + addValue;
+
+        if (index < 0)
+        {
+            return _rotateVector.Length - 1;
+        }
+
+        if (index < _rotateVector.Length)
+        {
+            return index;
+        }
+
+        return 0;
     }
 }
