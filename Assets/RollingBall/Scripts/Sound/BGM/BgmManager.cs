@@ -5,12 +5,12 @@ using Zenject;
 public class BgmManager : AudioInitializer
 {
     [Inject] private readonly BgmTable _bgmTable = default;
-    private Dictionary<BgmType, AudioClip> _bgmList;
+    private Dictionary<BgmType, AudioClip> _bgmList = null;
 
     protected override void Awake()
     {
         base.Awake();
-        audioSource.loop = true;
+        PlayLoop(true);
 
         _bgmList = new Dictionary<BgmType, AudioClip>
         {
@@ -22,12 +22,6 @@ public class BgmManager : AudioInitializer
 
     public void PlayBgm(BgmType bgmType)
     {
-        audioSource.clip = _bgmList[bgmType];
-        audioSource.Play();
-    }
-
-    public void StopBgm()
-    {
-        audioSource.Stop();
+        PlayBgm(_bgmList[bgmType]);
     }
 }

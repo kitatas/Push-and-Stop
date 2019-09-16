@@ -5,7 +5,7 @@ using Zenject;
 public class SeManager : AudioInitializer
 {
     [Inject] private readonly SeTable _seTable = default;
-    private Dictionary<SeType, AudioClip> _seList;
+    private Dictionary<SeType, AudioClip> _seList = null;
 
     protected override void Awake()
     {
@@ -21,6 +21,6 @@ public class SeManager : AudioInitializer
 
     public void PlaySe(SeType seType)
     {
-        audioSource.PlayOneShot(_seList[seType]);
+        PlayOneShot(_seList[seType]);
     }
 }
