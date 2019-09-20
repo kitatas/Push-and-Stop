@@ -2,7 +2,7 @@
 using CharTween;
 using DG.Tweening;
 using TMPro;
-using UniRx;
+using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -70,14 +70,14 @@ public class ClearAction : MonoBehaviour
         }
     }
 
-    private async void DisplayNextButton()
+    private async UniTaskVoid DisplayNextButton()
     {
-        await Observable.Timer(TimeSpan.FromSeconds(1.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
 
         clearText.transform
             .DOLocalMoveY(50f, ConstantList.uiAnimationTime);
 
-        await Observable.Timer(TimeSpan.FromSeconds(ConstantList.uiAnimationTime));
+        await UniTask.Delay(TimeSpan.FromSeconds(ConstantList.uiAnimationTime));
 
         foreach (var button in nextButton)
         {

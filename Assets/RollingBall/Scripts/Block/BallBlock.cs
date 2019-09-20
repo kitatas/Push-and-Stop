@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UniRx;
+using UniRx.Async;
 using UniRx.Triggers;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class BallBlock : BaseBlock
         Move(moveDirection);
     }
 
-    private async void Move(Vector3 moveDirection)
+    private async UniTaskVoid Move(Vector3 moveDirection)
     {
         _isMove = true;
 
@@ -36,7 +37,7 @@ public class BallBlock : BaseBlock
         {
             transform.position += 5f * Time.deltaTime * moveDirection;
 
-            await Observable.TimerFrame(0);
+            await UniTask.Yield();
         }
     }
 

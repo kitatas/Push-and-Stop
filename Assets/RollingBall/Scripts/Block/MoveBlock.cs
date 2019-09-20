@@ -28,6 +28,11 @@ public class MoveBlock : BaseBlock
     {
         base.Hit(moveDirection);
 
+        Move(moveDirection);
+    }
+
+    private void Move(Vector3 moveDirection)
+    {
         var nextPosition = _startPosition + moveDirection;
 
         _tweenCore = transform

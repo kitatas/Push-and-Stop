@@ -1,5 +1,5 @@
 ﻿using System;
-using UniRx;
+using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
@@ -34,7 +34,7 @@ public class Transition : MonoBehaviour
 		FadeCoroutine(sceneName);
 	}
 
-	private async void FadeCoroutine(string sceneName)
+	private async UniTaskVoid FadeCoroutine(string sceneName)
 	{
 		SetUpFade(_alphaCutOffMax);
 
@@ -47,12 +47,12 @@ public class Transition : MonoBehaviour
 				break;
 			}
 
-			await Observable.TimerFrame(0);
+			await UniTask.Yield();
 		}
 
 		SetUpFade(_alphaCutOffMin);
 		_zenjectSceneLoader.LoadScene(sceneName);
-		await Observable.Timer(TimeSpan.FromSeconds(0.5f));
+		await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
 		while (true)
 		{
@@ -63,7 +63,7 @@ public class Transition : MonoBehaviour
 				break;
 			}
 
-			await Observable.TimerFrame(0);
+			await UniTask.Yield();
 		}
 
 		_isFading = false;

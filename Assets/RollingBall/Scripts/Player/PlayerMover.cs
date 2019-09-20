@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UniRx;
+using UniRx.Async;
 using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
@@ -31,7 +32,7 @@ public class PlayerMover : MonoBehaviour
             });
     }
 
-    public async void Move()
+    public async UniTaskVoid Move()
     {
         _isMove = true;
 
@@ -39,7 +40,7 @@ public class PlayerMover : MonoBehaviour
         {
             _rigidbody.velocity = moveSpeed * Time.deltaTime * transform.up;
 
-            await Observable.TimerFrame(0);
+            await UniTask.Yield();
         }
     }
 
