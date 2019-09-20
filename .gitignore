@@ -42,15 +42,21 @@ sysinfo.txt
 Assets/Plugins
 Assets/Plugins.meta
 
+# Asset Resources
+Assets/Resources
+Assets/Resources.meta
+
 # DOTween
 Assets/Demigiant
 Assets/Demigiant.meta
-Assets/Resources
-Assets/Resources.meta
 
 # TextMeshPro
 Assets/TextMesh Pro
 Assets/TextMesh Pro.meta
+
+# UniTask
+Assets/UniRx.Async
+Assets/UniRx.Async.meta
 
 # Other Materials
 Assets/MyAsset
