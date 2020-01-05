@@ -36,7 +36,7 @@ public class ClearAction : MonoBehaviour
 
         TweenClearText();
 
-        DisplayNextButton();
+        DisplayNextButton().Forget();
     }
 
     private void TweenClearText()

@@ -31,7 +31,7 @@ public class Transition : MonoBehaviour
 		_isFading = true;
 
 		_transitionDuration = fadeTime;
-		FadeCoroutine(sceneName);
+		FadeCoroutine(sceneName).Forget();
 	}
 
 	private async UniTaskVoid FadeCoroutine(string sceneName)

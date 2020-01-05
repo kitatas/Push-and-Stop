@@ -22,7 +22,7 @@ public class PlayerController
             .Subscribe(_ =>
             {
                 DeactivatePlayerButton();
-                playerMover.Move();
+                playerMover.Move().Forget();
             });
 
         _rotateButton

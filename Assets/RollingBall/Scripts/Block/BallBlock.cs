@@ -26,7 +26,7 @@ public class BallBlock : BaseBlock
     {
         base.Hit(moveDirection);
 
-        Move(moveDirection);
+        Move(moveDirection).Forget();
     }
 
     private async UniTaskVoid Move(Vector3 moveDirection)
