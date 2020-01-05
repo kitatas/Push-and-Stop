@@ -12,13 +12,13 @@ public class SeManager : AudioInitializer
         _seList = new Dictionary<SeType, AudioClip>
         {
             {SeType.Button, seTable.buttonClip},
-            {SeType.Hit, seTable.hitClip},
-            {SeType.Clear, seTable.clearClip},
+            {SeType.Hit,    seTable.hitClip},
+            {SeType.Clear,  seTable.clearClip},
         };
     }
 
     public void PlaySe(SeType seType)
     {
-        PlayOneShot(_seList[seType]);
+        audioSource.PlayOneShot(_seList[seType]);
     }
 }

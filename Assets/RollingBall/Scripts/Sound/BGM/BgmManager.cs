@@ -18,13 +18,15 @@ public class BgmManager : AudioInitializer
     protected override void Awake()
     {
         base.Awake();
-        PlayLoop(true);
+
+        audioSource.loop = true;
 
         PlayBgm(BgmType.Main);
     }
 
     public void PlayBgm(BgmType bgmType)
     {
-        PlayBgm(_bgmList[bgmType]);
+        audioSource.clip = _bgmList[bgmType];
+        audioSource.Play();
     }
 }
