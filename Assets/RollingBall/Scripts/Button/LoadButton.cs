@@ -4,11 +4,11 @@ using Zenject;
 
 public class LoadButton : BaseButton
 {
-    [Inject] private readonly Transition _transition = default;
+    private Transition _transition;
     [SerializeField, SceneName] private string sceneName = null;
     [SerializeField] private float fadeTime = 0.7f;
 
-    [Inject] private readonly StageDataTable _stageDataTable = default;
+    private StageDataTable _stageDataTable;
 
     /// <summary>
     /// -2 : Reload
@@ -16,6 +16,13 @@ public class LoadButton : BaseButton
     /// over 0 : StageIndex
     /// </summary>
     [SerializeField, Range(-2, 9)] private int stageNumber = 0;
+
+    [Inject]
+    private void Construct(Transition transition, StageDataTable stageDataTable)
+    {
+        _transition = transition;
+        _stageDataTable = stageDataTable;
+    }
 
     protected override void OnPush()
     {

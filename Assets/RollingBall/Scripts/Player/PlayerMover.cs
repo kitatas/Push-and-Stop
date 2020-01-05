@@ -7,13 +7,19 @@ using Zenject;
 
 public class PlayerMover : MonoBehaviour
 {
-    [Inject] private readonly Rigidbody2D _rigidbody = default;
+    private Rigidbody2D _rigidbody;
 
     private bool _isMove;
     [SerializeField] private float moveSpeed = 200f;
 
     private readonly ReactiveProperty<Vector2> _onComplete = new ReactiveProperty<Vector2>(Vector2.one * -1f);
     public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
+
+    [Inject]
+    private void Construct(Rigidbody2D rigidbody2D)
+    {
+        _rigidbody = rigidbody2D;
+    }
 
     private void Start()
     {

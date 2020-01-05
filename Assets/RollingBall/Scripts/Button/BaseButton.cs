@@ -5,8 +5,14 @@ using Zenject;
 
 public abstract class BaseButton : MonoBehaviour
 {
-    [Inject] private readonly SeManager _seManager = default;
+    private SeManager _seManager;
     protected Button button { get; private set; }
+
+    [Inject]
+    private void Construct(SeManager seManager)
+    {
+        _seManager = seManager;
+    }
 
     protected virtual void Awake()
     {

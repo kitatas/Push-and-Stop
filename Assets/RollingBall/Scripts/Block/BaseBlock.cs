@@ -4,11 +4,15 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseBlock : MonoBehaviour, IHittable
 {
-    [Inject] private readonly SeManager _seManager = default;
-    [Inject] private readonly PlayerController _playerController = default;
+    private SeManager _seManager;
+    private PlayerController _playerController;
 
-    private void Awake()
+    [Inject]
+    private void Construct(SeManager seManager, PlayerController playerController)
     {
+        _seManager = seManager;
+        _playerController = playerController;
+
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 

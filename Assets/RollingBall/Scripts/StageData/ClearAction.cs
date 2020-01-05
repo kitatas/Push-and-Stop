@@ -9,11 +9,18 @@ using Zenject;
 
 public class ClearAction : MonoBehaviour
 {
-    [Inject] private readonly StageInitializer _stageInitializer = default;
-    [Inject] private readonly SeManager _seManager = default;
+    private StageInitializer _stageInitializer;
+    private SeManager _seManager;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Button[] nextButton = null;
+
+    [Inject]
+    private void Construct(StageInitializer stageInitializer, SeManager seManager)
+    {
+        _stageInitializer = stageInitializer;
+        _seManager = seManager;
+    }
 
     private void Awake()
     {

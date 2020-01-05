@@ -3,12 +3,19 @@ using Zenject;
 
 public class StageInitializer : MonoBehaviour
 {
-    [Inject] private readonly DiContainer _diContainer = default;
-    [Inject] private readonly StageDataTable _stageDataTable = default;
+    private DiContainer _diContainer;
+    private StageDataTable _stageDataTable;
 
     [SerializeField] private Transform goal = null;
 
     public Vector2 goalPosition => goal.position;
+
+    [Inject]
+    private void Construct(DiContainer diContainer, StageDataTable stageDataTable)
+    {
+        _diContainer = diContainer;
+        _stageDataTable = stageDataTable;
+    }
 
     public void Initialize()
     {

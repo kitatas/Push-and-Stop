@@ -4,10 +4,16 @@ using Zenject;
 
 public class MenuButton : BaseButton
 {
-    [Inject] private readonly RectTransform _menuObj = default;
+    private RectTransform _menuObj;
     [SerializeField] private GameObject menuImage = null;
     [SerializeField] private bool isActive = default;
     private float _originHeight;
+
+    [Inject]
+    private void Construct(RectTransform rectTransform)
+    {
+        _menuObj = rectTransform;
+    }
 
     protected override void Awake()
     {

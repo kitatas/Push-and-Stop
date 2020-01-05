@@ -4,18 +4,16 @@ using Zenject;
 
 public class SeManager : AudioInitializer
 {
-    [Inject] private readonly SeTable _seTable = default;
     private Dictionary<SeType, AudioClip> _seList = null;
 
-    protected override void Awake()
+    [Inject]
+    private void Construct(SeTable seTable)
     {
-        base.Awake();
-
         _seList = new Dictionary<SeType, AudioClip>
         {
-            {SeType.Button, _seTable.buttonClip},
-            {SeType.Hit,    _seTable.hitClip},
-            {SeType.Clear,  _seTable.clearClip},
+            {SeType.Button, seTable.buttonClip},
+            {SeType.Hit, seTable.hitClip},
+            {SeType.Clear, seTable.clearClip},
         };
     }
 

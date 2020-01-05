@@ -5,8 +5,8 @@ using Zenject;
 
 public class Transition : MonoBehaviour
 {
-	[Inject] private readonly ZenjectSceneLoader _zenjectSceneLoader = default;
-	[Inject] private readonly TransitionSpriteMask _transitionSpriteMask = default;
+	private ZenjectSceneLoader _zenjectSceneLoader;
+	private TransitionSpriteMask _transitionSpriteMask;
 	private static bool _isFading = false;
 
 	private const float _alphaCutOffMax = 0.7f;
@@ -14,6 +14,13 @@ public class Transition : MonoBehaviour
 
 	private float _transitionProgress;
 	private float _transitionDuration;
+
+	[Inject]
+	private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask)
+	{
+		_zenjectSceneLoader = zenjectSceneLoader;
+		_transitionSpriteMask = transitionSpriteMask;
+	}
 
 
 	/// <summary>

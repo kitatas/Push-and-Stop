@@ -3,7 +3,13 @@ using Zenject;
 
 public class TransitionSpriteMask : MonoBehaviour
 {
-    [Inject] private readonly SpriteMask _spriteMask = default;
+    private SpriteMask _spriteMask;
+
+    [Inject]
+    private void Construct(SpriteMask spriteMask)
+    {
+        _spriteMask = spriteMask;
+    }
 
     public void SetAlphaCutOff(float alphaCutOffValue)
     {
