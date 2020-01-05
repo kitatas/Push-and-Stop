@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class MaskSize : MonoBehaviour
+public class TransitionMaskSize : MonoBehaviour
 {
     private void Start()
     {
-        var mainCamera = Camera.main;
+        var mainCamera = FindObjectOfType<Camera>();
 
         SetScreenSize(mainCamera);
 
