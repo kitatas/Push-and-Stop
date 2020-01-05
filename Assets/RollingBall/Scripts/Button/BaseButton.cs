@@ -14,7 +14,7 @@ public abstract class BaseButton : MonoBehaviour
         _seManager = seManager;
     }
 
-    protected virtual void Awake()
+    private void Awake()
     {
         button = GetComponent<Button>();
 
