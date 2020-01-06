@@ -23,6 +23,6 @@ public abstract class BaseBlock : MonoBehaviour, IHittable
 
     protected void ActivatePlayerButton()
     {
-        _playerController.ActivatePlayerButton();
+        _playerController.ActivateButton(true);
     }
 }

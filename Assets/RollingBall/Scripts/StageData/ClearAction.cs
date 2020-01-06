@@ -13,7 +13,7 @@ public class ClearAction : MonoBehaviour
     private SeManager _seManager;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
-    [SerializeField] private Button[] nextButton = null;
+    [SerializeField] private Button nextButton = null;
 
     [Inject]
     private void Construct(StageInitializer stageInitializer, SeManager seManager)
@@ -26,10 +26,7 @@ public class ClearAction : MonoBehaviour
     {
         _stageInitializer.Initialize();
 
-        foreach (var button in nextButton)
-        {
-            button.enabled = false;
-        }
+        nextButton.enabled = false;
     }
 
     public bool IsGoalPosition(Vector2 currentPosition)
@@ -86,14 +83,7 @@ public class ClearAction : MonoBehaviour
 
         await UniTask.Delay(TimeSpan.FromSeconds(ConstantList.uiAnimationTime));
 
-        foreach (var button in nextButton)
-        {
-            DOTween
-                .Sequence()
-                .Append(button.image
-                    .DOFade(1f, ConstantList.uiAnimationTime));
-
-            button.enabled = true;
-        }
+        nextButton.image.DOFade(1f, ConstantList.uiAnimationTime);
+        nextButton.enabled = true;
     }
 }

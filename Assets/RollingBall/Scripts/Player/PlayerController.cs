@@ -1,35 +1,39 @@
 ﻿using UniRx;
+using UnityEngine;
+using Zenject;
 
-public class PlayerController
+public sealed class PlayerController : MonoBehaviour
 {
-    private readonly MoveButton _moveButton;
-    private bool _isGoal;
+    [SerializeField] private MoveButton[] moveButtons = null;
 
-    public PlayerController(MoveButton moveButton, PlayerMover playerMover, ClearAction clearAction)
+    [Inject]
+    private void Construct(PlayerMover playerMover, MoveCountModel moveCountModel, ClearAction clearAction)
     {
-        _isGoal = false;
-        _moveButton = moveButton;
-
-        _moveButton.OnPushed()
-            .Subscribe(_ => playerMover.Move().Forget());
+        foreach (var moveButton in moveButtons)
+        {
+            moveButton.OnPushed()
+                .Subscribe(_ =>
+                {
+                    playerMover.Move(moveButton.MoveDirection()).Forget();
+                    moveCountModel.UpdateMoveCount();
+                    ActivateButton(false);
+                });
+        }
 
         playerMover.OnComplete()
             .Where(clearAction.IsGoalPosition)
             .Subscribe(_ =>
             {
-                _isGoal = true;
                 clearAction.DisplayClearUi();
-                _moveButton.ActivateButton(false);
+                ActivateButton(false);
             });
     }
 
-    public void ActivatePlayerButton()
+    public void ActivateButton(bool value)
     {
-        if (_isGoal)
+        foreach (var moveButton in moveButtons)
         {
-            return;
+            moveButton.ActivateButton(value);
         }
-
-        _moveButton.ActivateButton(true);
     }
 }
