@@ -1,16 +1,16 @@
 using Zenject;
 
-public class MoveCountInstaller : MonoInstaller
+public sealed class MoveCountInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
         Container
             .Bind<MoveCountModel>()
-            .AsSingle();
+            .AsCached();
 
         Container
             .Bind<MoveCountPresenter>()
-            .AsSingle()
+            .AsCached()
             .NonLazy();
     }
 }

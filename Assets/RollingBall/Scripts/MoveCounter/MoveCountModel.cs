@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-public class MoveCountModel
+public sealed class MoveCountModel
 {
     private readonly ReactiveProperty<int> _moveCount;
 

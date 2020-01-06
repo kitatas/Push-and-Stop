@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class MoveCountView : MonoBehaviour
+public sealed class MoveCountView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI moveCountText = null;
 
