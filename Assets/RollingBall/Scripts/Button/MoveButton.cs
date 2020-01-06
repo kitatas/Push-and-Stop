@@ -13,12 +13,15 @@ public class MoveButton : BaseButton
     {
         base.OnPush();
 
+        ActivateButton(false);
+
         _subject.OnNext(Unit.Default);
     }
 
     public void ActivateButton(bool value)
     {
         button.enabled = value;
+        button.interactable = value;
         // button.image.color = value ? _activateColor : _deactivateColor;
     }
 }
