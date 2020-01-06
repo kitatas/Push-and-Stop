@@ -4,7 +4,7 @@ using UniRx.Async;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class BallBlock : BaseBlock
+public sealed class BallBlock : BaseBlock
 {
     private bool _isMove;
 
@@ -26,10 +26,10 @@ public class BallBlock : BaseBlock
     {
         base.Hit(moveDirection);
 
-        Move(moveDirection).Forget();
+        MoveAsync(moveDirection).Forget();
     }
 
-    private async UniTaskVoid Move(Vector3 moveDirection)
+    private async UniTaskVoid MoveAsync(Vector3 moveDirection)
     {
         _isMove = true;
 

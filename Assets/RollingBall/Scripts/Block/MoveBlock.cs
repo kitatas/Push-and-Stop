@@ -5,7 +5,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class MoveBlock : BaseBlock
+public sealed class MoveBlock : BaseBlock
 {
     private Vector3 _startPosition;
     private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;

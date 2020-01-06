@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Block : BaseBlock
+public sealed class Block : BaseBlock
 {
     public override void Hit(Vector3 moveDirection)
     {
