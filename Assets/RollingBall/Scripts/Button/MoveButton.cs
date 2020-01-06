@@ -2,13 +2,12 @@
 using UniRx;
 using UnityEngine;
 
-public class MoveButton : BaseButton
+public sealed class MoveButton : BaseButton
 {
     private readonly Subject<Unit> _subject = new Subject<Unit>();
     public IObservable<Unit> OnPushed() => _subject;
 
     [SerializeField] private Direction direction = default;
-
     public Vector3 MoveDirection() => ConstantList.moveDirection[direction];
 
     protected override void OnPush()
@@ -21,6 +20,5 @@ public class MoveButton : BaseButton
     public void ActivateButton(bool value)
     {
         button.enabled = value;
-        button.interactable = value;
     }
 }

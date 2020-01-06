@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class PopUpButton : BaseButton
+public sealed class PopUpButton : BaseButton
 {
     [SerializeField] private CanvasGroup canvasGroup = null;
     [SerializeField] private RectTransform window = null;

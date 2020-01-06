@@ -5,19 +5,16 @@ using Zenject;
 
 public abstract class BaseButton : MonoBehaviour
 {
-    private SeManager _seManager;
     protected Button button { get; private set; }
+
+    private SeManager _seManager;
 
     [Inject]
     private void Construct(SeManager seManager)
     {
         _seManager = seManager;
-    }
 
-    private void Awake()
-    {
         button = GetComponent<Button>();
-
         button
             .OnClickAsObservable()
             .Subscribe(_ => OnPush());

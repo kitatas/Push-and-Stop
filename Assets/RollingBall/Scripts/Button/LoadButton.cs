@@ -2,13 +2,10 @@
 using UnityEngine.UI;
 using Zenject;
 
-public class LoadButton : BaseButton
+public sealed class LoadButton : BaseButton
 {
-    private Transition _transition;
     [SerializeField, SceneName] private string sceneName = null;
     [SerializeField] private float fadeTime = 0.7f;
-
-    private StageDataTable _stageDataTable;
 
     /// <summary>
     /// -2 : Reload
@@ -16,6 +13,9 @@ public class LoadButton : BaseButton
     /// over 0 : StageIndex
     /// </summary>
     [SerializeField, Range(-2, 9)] private int stageNumber = 0;
+
+    private Transition _transition;
+    private StageDataTable _stageDataTable;
 
     [Inject]
     private void Construct(Transition transition, StageDataTable stageDataTable)
