@@ -3,7 +3,7 @@ using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
-public class Transition : MonoBehaviour
+public sealed class Transition : MonoBehaviour
 {
     private const float _alphaCutOffMax = 0.7f;
     private const float _alphaCutOffMin = 0f;
@@ -15,10 +15,12 @@ public class Transition : MonoBehaviour
     private TransitionSpriteMask _transitionSpriteMask;
 
     [Inject]
-    private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask)
+    private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask, SpriteMask spriteMask)
     {
         _zenjectSceneLoader = zenjectSceneLoader;
         _transitionSpriteMask = transitionSpriteMask;
+
+        _transitionSpriteMask.Construct(spriteMask);
     }
 
     /// <summary>

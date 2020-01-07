@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TransitionMaskSize : MonoBehaviour
+public sealed class TransitionMaskSize : MonoBehaviour
 {
     private void Start()
     {

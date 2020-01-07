@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using Zenject;
 
-public class TransitionSpriteMask : MonoBehaviour
+public sealed class TransitionSpriteMask : MonoBehaviour
 {
     private SpriteMask _spriteMask;
 
-    [Inject]
-    private void Construct(SpriteMask spriteMask)
+    public void Construct(SpriteMask spriteMask)
     {
         _spriteMask = spriteMask;
     }
