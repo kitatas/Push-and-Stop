@@ -5,7 +5,7 @@ public sealed class MoveCountInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container
-            .Bind<MoveCountModel>()
+            .BindInterfacesTo<MoveCountModel>()
             .AsCached();
 
         Container

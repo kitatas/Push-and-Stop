@@ -2,7 +2,7 @@
 
 public sealed class MoveCountPresenter
 {
-    public MoveCountPresenter(MoveCountModel moveCountModel, MoveCountView moveCountView)
+    public MoveCountPresenter(IMoveCountModel moveCountModel, MoveCountView moveCountView)
     {
         moveCountModel.MoveCount()
             .Subscribe(moveCountView.UpdateText);

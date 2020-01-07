@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-public sealed class MoveCountModel
+public sealed class MoveCountModel : IMoveCountModel, IMoveCountUpdatable
 {
     private readonly ReactiveProperty<int> _moveCount;
 

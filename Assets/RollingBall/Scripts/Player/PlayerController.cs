@@ -9,7 +9,7 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private MoveButton[] moveButtons = null;
 
     [Inject]
-    private void Construct(PlayerMover playerMover, MoveCountModel moveCountModel, ClearAction clearAction)
+    private void Construct(PlayerMover playerMover, IMoveCountUpdatable moveCountUpdatable, ClearAction clearAction)
     {
         foreach (var moveButton in moveButtons)
         {
@@ -17,7 +17,7 @@ public sealed class PlayerController : MonoBehaviour
                 .Subscribe(_ =>
                 {
                     playerMover.MoveAsync(moveButton.MoveDirection()).Forget();
-                    moveCountModel.UpdateMoveCount();
+                    moveCountUpdatable.UpdateMoveCount();
                     ActivateButton(false);
                 });
         }
