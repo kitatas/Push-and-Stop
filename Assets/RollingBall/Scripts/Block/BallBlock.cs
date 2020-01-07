@@ -7,10 +7,12 @@ using UnityEngine;
 public sealed class BallBlock : BaseBlock
 {
     private bool _isMove;
+    private Vector3 _moveDirection;
 
     private void Start()
     {
         _isMove = false;
+        _moveDirection = Vector3.zero;
 
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
@@ -32,13 +34,16 @@ public sealed class BallBlock : BaseBlock
     private async UniTaskVoid MoveAsync(Vector3 moveDirection)
     {
         _isMove = true;
+        _moveDirection = moveDirection;
 
-        while (_isMove)
-        {
-            transform.position += 5f * Time.deltaTime * moveDirection;
+        await UniTask.WaitWhile(Move);
+    }
 
-            await UniTask.Yield();
-        }
+    private bool Move()
+    {
+        transform.position += 5f * Time.deltaTime * _moveDirection;
+
+        return _isMove;
     }
 
     private void CorrectPosition()
