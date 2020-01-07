@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class BgmManager : AudioInitializer
+public sealed class BgmManager : AudioInitializer
 {
     private Dictionary<BgmType, AudioClip> _bgmList = null;
 

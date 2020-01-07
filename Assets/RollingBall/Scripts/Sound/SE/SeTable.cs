@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
-public class SeTable : ScriptableObject
+public sealed class SeTable : ScriptableObject
 {
     public AudioClip buttonClip;
     public AudioClip hitClip;
