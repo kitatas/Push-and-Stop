@@ -7,25 +7,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class ClearAction : MonoBehaviour
+public sealed class ClearAction : MonoBehaviour
 {
-    private StageInitializer _stageInitializer;
     private SeManager _seManager;
+    private StageInitializer _stageInitializer;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Button nextButton = null;
 
     [Inject]
-    private void Construct(StageInitializer stageInitializer, SeManager seManager)
+    private void Construct(SeManager seManager, StageInitializer stageInitializer)
     {
-        _stageInitializer = stageInitializer;
         _seManager = seManager;
-    }
+        _stageInitializer = stageInitializer;
 
-    private void Awake()
-    {
         _stageInitializer.Initialize();
-
         nextButton.enabled = false;
     }
 

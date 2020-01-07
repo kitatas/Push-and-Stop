@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class StageInitializer : MonoBehaviour
+public sealed class StageInitializer : MonoBehaviour
 {
     private DiContainer _diContainer;
     private StageDataTable _stageDataTable;
@@ -19,8 +19,8 @@ public class StageInitializer : MonoBehaviour
 
     public void Initialize()
     {
-        var index = _stageDataTable.stageIndex;
-        _diContainer.InstantiatePrefab(_stageDataTable.stageData[index].stage);
-        goal.position = _stageDataTable.stageData[index].goalPosition;
+        var stageData = _stageDataTable.StageDataInfo();
+        _diContainer.InstantiatePrefab(stageData.stage);
+        goal.position = stageData.goalPosition;
     }
 }

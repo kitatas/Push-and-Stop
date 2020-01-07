@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class StageData
+public sealed class StageData
 {
     public GameObject stage;
     public Vector3 goalPosition;
