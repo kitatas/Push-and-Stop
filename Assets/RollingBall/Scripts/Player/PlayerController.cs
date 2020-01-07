@@ -1,4 +1,6 @@
-﻿using UniRx;
+﻿using DG.Tweening;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -14,11 +16,25 @@ public sealed class PlayerController : MonoBehaviour
             moveButton.OnPushed()
                 .Subscribe(_ =>
                 {
-                    playerMover.Move(moveButton.MoveDirection()).Forget();
+                    playerMover.MoveAsync(moveButton.MoveDirection()).Forget();
                     moveCountModel.UpdateMoveCount();
                     ActivateButton(false);
                 });
         }
+
+        this.OnCollisionEnter2DAsObservable()
+            .Select(other => other.gameObject.GetComponent<IHittable>())
+            .Where(hittable => hittable != null)
+            .Subscribe(_ =>
+            {
+                playerMover.HitBlock(_);
+
+                var roundPosition = transform.RoundPosition();
+                playerMover.UpdatePosition(roundPosition);
+                transform
+                    .DOMove(roundPosition, ConstantList.correctTime)
+                    .OnComplete(playerMover.ResetVelocity);
+            });
 
         playerMover.OnComplete()
             .Where(clearAction.IsGoalPosition)
