@@ -21,7 +21,8 @@ public sealed class MoveBlock : BaseBlock
             {
                 _tweenCore.Kill();
                 CorrectPosition();
-            });
+            })
+            .AddTo(gameObject);
     }
 
     public override void Hit(Vector3 moveDirection)
@@ -37,18 +38,12 @@ public sealed class MoveBlock : BaseBlock
 
         _tweenCore = transform
             .DOMove(nextPosition, ConstantList.correctTime)
-            .OnComplete(() =>
-            {
-                _startPosition = nextPosition;
-
-                ActivatePlayerButton();
-            });
+            .OnComplete(() => _startPosition = nextPosition);
     }
 
     private void CorrectPosition()
     {
         transform
-            .DOMove(_startPosition, ConstantList.correctTime)
-            .OnComplete(ActivatePlayerButton);
+            .DOMove(_startPosition, ConstantList.correctTime);
     }
 }

@@ -21,7 +21,8 @@ public sealed class BallBlock : BaseBlock
             {
                 _isMove = false;
                 CorrectPosition();
-            });
+            })
+            .AddTo(gameObject);
     }
 
     public override void Hit(Vector3 moveDirection)
@@ -51,7 +52,6 @@ public sealed class BallBlock : BaseBlock
         var nextPosition = transform.RoundPosition();
 
         transform
-            .DOMove(nextPosition, ConstantList.correctTime)
-            .OnComplete(ActivatePlayerButton);
+            .DOMove(nextPosition, ConstantList.correctTime);
     }
 }
