@@ -42,3 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 210398399
+    locked: 0
+  - name: Block
+    uniqueID: 3534279789
+    locked: 0
+  - name: Goal
+    uniqueID: 4063621027
+    locked: 0
+  - name: UI
+    uniqueID: 525546301
+    locked: 0
+  - name: Transition
+    uniqueID: 937232585
+    locked: 0
