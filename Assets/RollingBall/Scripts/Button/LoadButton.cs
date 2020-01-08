@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public sealed class LoadButton : BaseButton
@@ -27,11 +26,6 @@ public sealed class LoadButton : BaseButton
     protected override void OnPush()
     {
         base.OnPush();
-
-        foreach (var b in FindObjectsOfType<Button>())
-        {
-            b.enabled = false;
-        }
 
         _stageDataTable.stageIndex = LoadIndex();
 

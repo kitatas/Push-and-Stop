@@ -1,6 +1,7 @@
 ﻿using System;
 using UniRx.Async;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public sealed class Transition : MonoBehaviour
@@ -36,15 +37,20 @@ public sealed class Transition : MonoBehaviour
 
     private async UniTaskVoid FadeAsync(string sceneName)
     {
+        var beforeSceneButtons = FindObjectsOfType<Button>();
+        beforeSceneButtons.ActivateAllButtons(false);
         SetUpFade(_alphaCutOffMax);
-
         await UniTask.WaitUntil(FadeOut);
 
-        SetUpFade(_alphaCutOffMin);
         _zenjectSceneLoader.LoadScene(sceneName);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
 
+        var afterSceneButtons = FindObjectsOfType<Button>();
+        afterSceneButtons.ActivateAllButtons(false);
+        SetUpFade(_alphaCutOffMin);
         await UniTask.WaitUntil(FadeIn);
+
+        afterSceneButtons.ActivateAllButtons(true);
     }
 
     private void SetUpFade(float alphaCutOffValue)
