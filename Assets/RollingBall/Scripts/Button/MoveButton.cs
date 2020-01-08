@@ -21,4 +21,9 @@ public sealed class MoveButton : BaseButton
     {
         button.enabled = value;
     }
+
+    public void InteractButton(bool value)
+    {
+        button.interactable = value;
+    }
 }

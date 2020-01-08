@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -25,31 +26,44 @@ public sealed class PlayerController : MonoBehaviour
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
             .Where(hittable => hittable != null)
-            .Subscribe(_ =>
+            .Subscribe(hittable =>
             {
-                playerMover.HitBlock(_);
+                playerMover.HitBlock(hittable);
 
                 var roundPosition = transform.RoundPosition();
-                playerMover.UpdatePosition(roundPosition);
+
                 transform
                     .DOMove(roundPosition, ConstantList.correctTime)
                     .OnComplete(playerMover.ResetVelocity);
-            });
 
-        playerMover.OnComplete()
-            .Where(clearAction.IsGoalPosition)
-            .Subscribe(_ =>
-            {
-                clearAction.DisplayClearUi();
-                ActivateButton(false);
-            });
+                var isClear = clearAction.IsGoalPosition(roundPosition);
+                if (isClear)
+                {
+                    InteractButton(false);
+                    clearAction.DisplayClearUi();
+                    return;
+                }
+
+                Observable
+                    .Timer(TimeSpan.FromSeconds(ConstantList.correctTime))
+                    .Subscribe(_ => ActivateButton(true));
+            })
+            .AddTo(gameObject);
     }
 
-    public void ActivateButton(bool value)
+    private void ActivateButton(bool value)
     {
         foreach (var moveButton in moveButtons)
         {
             moveButton.ActivateButton(value);
+        }
+    }
+
+    private void InteractButton(bool value)
+    {
+        foreach (var moveButton in moveButtons)
+        {
+            moveButton.InteractButton(value);
         }
     }
 }

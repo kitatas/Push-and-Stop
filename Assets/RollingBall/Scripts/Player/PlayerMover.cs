@@ -1,5 +1,4 @@
-﻿using UniRx;
-using UniRx.Async;
+﻿using UniRx.Async;
 using UnityEngine;
 
 public sealed class PlayerMover
@@ -10,9 +9,6 @@ public sealed class PlayerMover
     private Vector3 _direction;
     private float moveSpeed = 200f;
 
-    private readonly ReactiveProperty<Vector2> _onComplete;
-    public IReadOnlyReactiveProperty<Vector2> OnComplete() => _onComplete;
-
     private PlayerMover(Rigidbody2D rigidbody)
     {
         _rigidbody = rigidbody;
@@ -20,8 +16,6 @@ public sealed class PlayerMover
 
         _isMove = false;
         _direction = Vector3.zero;
-
-        _onComplete = new ReactiveProperty<Vector2>(Vector2.one * -1f);
     }
 
     public async UniTaskVoid MoveAsync(Vector3 direction)
@@ -43,11 +37,6 @@ public sealed class PlayerMover
     {
         _isMove = false;
         hittable.Hit(_direction);
-    }
-
-    public void UpdatePosition(Vector3 roundPosition)
-    {
-        _onComplete.Value = roundPosition;
     }
 
     public void ResetVelocity()
