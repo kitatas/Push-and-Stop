@@ -19,7 +19,7 @@ public sealed class PlayerController : MonoBehaviour
                 {
                     playerMover.MoveAsync(moveButton.MoveDirection()).Forget();
                     moveCountUpdatable.UpdateMoveCount();
-                    ActivateButton(false);
+                    moveButtons.ActivateAllButtons(false);
                 });
         }
 
@@ -46,17 +46,9 @@ public sealed class PlayerController : MonoBehaviour
 
                 Observable
                     .Timer(TimeSpan.FromSeconds(ConstantList.correctTime))
-                    .Subscribe(_ => ActivateButton(true));
+                    .Subscribe(_ => moveButtons.ActivateAllButtons(true));
             })
             .AddTo(gameObject);
-    }
-
-    private void ActivateButton(bool value)
-    {
-        foreach (var moveButton in moveButtons)
-        {
-            moveButton.ActivateButton(value);
-        }
     }
 
     private void InteractButton(bool value)

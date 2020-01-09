@@ -24,4 +24,9 @@ public abstract class BaseButton : MonoBehaviour
     {
         _seManager.PlaySe(SeType.Button);
     }
+
+    public void ActivateButton(bool value)
+    {
+        button.enabled = value;
+    }
 }

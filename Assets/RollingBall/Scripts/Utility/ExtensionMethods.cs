@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public static class ExtensionMethods
 {
@@ -12,11 +11,11 @@ public static class ExtensionMethods
         return new Vector2(x, y);
     }
 
-    public static void ActivateAllButtons(this IEnumerable<Button> buttons, bool value)
+    public static void ActivateAllButtons(this IEnumerable<BaseButton> buttons, bool value)
     {
         foreach (var button in buttons)
         {
-            button.enabled = value;
+            button.ActivateButton(value);
         }
     }
 }

@@ -17,11 +17,6 @@ public sealed class MoveButton : BaseButton
         _subject.OnNext(Unit.Default);
     }
 
-    public void ActivateButton(bool value)
-    {
-        button.enabled = value;
-    }
-
     public void InteractButton(bool value)
     {
         button.interactable = value;
