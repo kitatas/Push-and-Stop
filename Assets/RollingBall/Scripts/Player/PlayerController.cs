@@ -10,7 +10,7 @@ public sealed class PlayerController : MonoBehaviour
     [SerializeField] private MoveButton[] moveButtons = null;
 
     [Inject]
-    private void Construct(PlayerMover playerMover, IMoveCountUpdatable moveCountUpdatable, ClearAction clearAction)
+    private void Construct(PlayerMover playerMover, IMoveCountUpdatable moveCountUpdatable, GoalInfo goalInfo, ClearAction clearAction)
     {
         foreach (var moveButton in moveButtons)
         {
@@ -36,7 +36,7 @@ public sealed class PlayerController : MonoBehaviour
                     .DOMove(roundPosition, ConstantList.correctTime)
                     .OnComplete(playerMover.ResetVelocity);
 
-                var isClear = clearAction.IsGoalPosition(roundPosition);
+                var isClear = goalInfo.EqualPosition(roundPosition);
                 if (isClear)
                 {
                     InteractButton(false);
