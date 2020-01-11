@@ -10,24 +10,16 @@ using Zenject;
 public sealed class ClearAction : MonoBehaviour
 {
     private SeManager _seManager;
-    private StageInitializer _stageInitializer;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Button nextButton = null;
 
     [Inject]
-    private void Construct(SeManager seManager, StageInitializer stageInitializer)
+    private void Construct(SeManager seManager)
     {
         _seManager = seManager;
-        _stageInitializer = stageInitializer;
 
-        _stageInitializer.Initialize();
         nextButton.enabled = false;
-    }
-
-    public bool IsGoalPosition(Vector2 currentPosition)
-    {
-        return _stageInitializer.goalPosition == currentPosition;
     }
 
     public void DisplayClearUi()
