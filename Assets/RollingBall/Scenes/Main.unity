@@ -746,9 +746,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 409573950}
-  - component: {fileID: 409573949}
   - component: {fileID: 409573952}
   - component: {fileID: 409573951}
+  - component: {fileID: 409573949}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -765,10 +765,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 409573948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b566ab4ac9d58274cae2e5ff645b0674, type: 3}
+  m_Script: {fileID: 11500000, guid: e0fed5678d8434cbea25d06e8e313e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 492919207}
 --- !u!4 &409573950
 Transform:
   m_ObjectHideFlags: 0
@@ -796,7 +795,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _components:
-  - {fileID: 409573949}
   - {fileID: 409573952}
   _identifier: 
   _useSceneContext: 0
@@ -1179,12 +1177,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef7fe68aab812940a69daae72c5bdb1, type: 3}
---- !u!4 &492919207 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1428894898845609454, guid: 6ef7fe68aab812940a69daae72c5bdb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 492919206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674532762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,6 +2358,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1521401436}
   - {fileID: 409467725}
+  - {fileID: 409573949}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
