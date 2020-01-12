@@ -28,7 +28,7 @@ public sealed class ClearAction : MonoBehaviour
 
         TweenClearText();
 
-        DisplayNextButton().Forget();
+        DisplayNextButtonAsync().Forget();
     }
 
     private void TweenClearText()
@@ -62,16 +62,16 @@ public sealed class ClearAction : MonoBehaviour
         }
     }
 
-    private async UniTaskVoid DisplayNextButton()
+    private async UniTaskVoid DisplayNextButtonAsync()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        const float waitTime = ConstantList.uiAnimationTime * 2 + 0.5f;
+        await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
 
-        clearText.transform
-            .DOLocalMoveY(50f, ConstantList.uiAnimationTime);
-
-        await UniTask.Delay(TimeSpan.FromSeconds(ConstantList.uiAnimationTime));
-
-        nextButton.image.DOFade(1f, ConstantList.uiAnimationTime);
-        nextButton.enabled = true;
+        DOTween.Sequence()
+            .Append(clearText.RectTransform()
+                .DOAnchorPosY(50f, ConstantList.uiAnimationTime))
+            .Append(nextButton.image
+                .DOFade(1f, ConstantList.uiAnimationTime)
+                .OnComplete(() => nextButton.enabled = true));
     }
 }

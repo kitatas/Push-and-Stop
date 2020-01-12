@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class ExtensionMethods
 {
@@ -17,5 +18,10 @@ public static class ExtensionMethods
         {
             button.ActivateButton(value);
         }
+    }
+
+    public static RectTransform RectTransform(this UIBehaviour uiBehaviour)
+    {
+        return uiBehaviour.transform as RectTransform;
     }
 }
