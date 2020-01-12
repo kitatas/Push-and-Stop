@@ -19,7 +19,7 @@ public sealed class ClearAction : MonoBehaviour
     {
         _seManager = seManager;
 
-        nextButton.enabled = false;
+        nextButton.interactable = false;
     }
 
     public void DisplayClearUi()
@@ -64,6 +64,9 @@ public sealed class ClearAction : MonoBehaviour
 
     private async UniTaskVoid DisplayNextButtonAsync()
     {
+        nextButton.enabled = false;
+        nextButton.interactable = true;
+
         const float waitTime = ConstantList.uiAnimationTime * 2 + 0.5f;
         await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
 
