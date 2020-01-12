@@ -15,10 +15,8 @@ public sealed class BgmManager : AudioInitializer
         };
     }
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         audioSource.loop = true;
 
         PlayBgm(BgmType.Main);

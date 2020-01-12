@@ -3,10 +3,18 @@
 [RequireComponent(typeof(AudioSource))]
 public abstract class AudioInitializer : MonoBehaviour
 {
-    protected AudioSource audioSource { get; private set; }
+    private AudioSource _audioSource;
 
-    protected virtual void Awake()
+    protected AudioSource audioSource
     {
-        audioSource = GetComponent<AudioSource>();
+        get
+        {
+            if (_audioSource == null)
+            {
+                _audioSource = GetComponent<AudioSource>();
+            }
+
+            return _audioSource;
+        }
     }
 }
