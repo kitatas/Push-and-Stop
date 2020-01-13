@@ -6,4 +6,5 @@ public sealed class StageData
 {
     public GameObject stage;
     public Vector3 goalPosition;
+    public int minMoveCount;
 }
