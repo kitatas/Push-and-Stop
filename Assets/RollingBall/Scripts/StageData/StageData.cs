@@ -4,7 +4,6 @@ using UnityEngine;
 [Serializable]
 public sealed class StageData
 {
-    public GameObject stage;
-    public Vector3 goalPosition;
+    public TextAsset stageFile;
     public int minMoveCount;
 }

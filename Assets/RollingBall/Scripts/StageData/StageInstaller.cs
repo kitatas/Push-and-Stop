@@ -8,5 +8,9 @@ public sealed class StageInstaller : MonoInstaller
             .Bind<StageInitializer>()
             .AsCached()
             .NonLazy();
+
+        Container
+            .Bind<StageLoader>()
+            .AsCached();
     }
 }

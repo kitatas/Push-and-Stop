@@ -1,12 +1,9 @@
-﻿using Zenject;
-
-public sealed class StageInitializer
+﻿public sealed class StageInitializer
 {
-    public StageInitializer(StageDataTable stageDataTable, DiContainer diContainer, GoalInfo goalInfo, MinMoveCountView minMoveCountView)
+    public StageInitializer(StageDataTable stageDataTable, StageLoader stageLoader, MinMoveCountView minMoveCountView)
     {
         var stageData = stageDataTable.StageDataInfo();
-        diContainer.InstantiatePrefab(stageData.stage);
-        goalInfo.SetPosition(stageData.goalPosition);
+        stageLoader.LoadStageData(stageData.stageFile);
         minMoveCountView.Display(stageData.minMoveCount);
     }
 }
