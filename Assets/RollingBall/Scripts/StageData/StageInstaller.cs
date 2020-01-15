@@ -6,10 +6,6 @@ public sealed class StageInstaller : MonoInstaller
     {
         Container
             .Bind<StageLoader>()
-            .AsCached();
-
-        Container
-            .Bind<StageInitializer>()
             .AsCached()
             .NonLazy();
     }

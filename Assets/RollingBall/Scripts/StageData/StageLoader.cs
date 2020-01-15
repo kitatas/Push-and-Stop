@@ -18,11 +18,16 @@ public sealed class StageLoader
     private readonly GoalInfo _goalInfo;
     private readonly DiContainer _diContainer;
 
-    public StageLoader(StageObjectTable stageObjectTable, GoalInfo goalInfo, DiContainer diContainer)
+    public StageLoader(StageObjectTable stageObjectTable, GoalInfo goalInfo, DiContainer diContainer,
+        StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
     {
         _stageObjectTable = stageObjectTable;
         _goalInfo = goalInfo;
         _diContainer = diContainer;
+
+        var stageData = stageDataTable.StageDataInfo();
+        minMoveCountView.Display(stageData.minMoveCount);
+        LoadStageData(stageData.stageFile);
     }
 
     public void LoadStageData(TextAsset stage)
