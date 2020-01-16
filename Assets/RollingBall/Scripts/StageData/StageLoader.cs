@@ -30,7 +30,7 @@ public sealed class StageLoader
         LoadStageData(stageData.stageFile);
     }
 
-    public void LoadStageData(TextAsset stage)
+    private void LoadStageData(TextAsset stage)
     {
         var lines = stage.text.Split(new[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
 
@@ -54,27 +54,21 @@ public sealed class StageLoader
         switch (squareType)
         {
             case SquareType.None:
-                // skip
                 break;
             case SquareType.Player:
-                // set position
                 break;
             case SquareType.Goal:
-                // set position
                 _goalInfo.SetPosition(position);
                 break;
             case SquareType.Block:
-                // create
                 var block = _diContainer.InstantiatePrefab(_stageObjectTable.Block);
                 block.transform.position = position;
                 break;
             case SquareType.MoveBlock:
-                // create
                 var moveBlock = _diContainer.InstantiatePrefab(_stageObjectTable.MoveBlock);
                 moveBlock.transform.position = position;
                 break;
             case SquareType.BallBlock:
-                // create
                 var ballBlock = _diContainer.InstantiatePrefab(_stageObjectTable.BallBlock);
                 ballBlock.transform.position = position;
                 break;
