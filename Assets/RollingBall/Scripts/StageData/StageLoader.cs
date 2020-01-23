@@ -61,15 +61,15 @@ public sealed class StageLoader
                 _goalInfo.SetPosition(position);
                 break;
             case SquareType.Block:
-                var block = _diContainer.InstantiatePrefab(_stageObjectTable.Block);
+                var block = _diContainer.InstantiatePrefab(_stageObjectTable.block);
                 block.transform.position = position;
                 break;
             case SquareType.MoveBlock:
-                var moveBlock = _diContainer.InstantiatePrefab(_stageObjectTable.MoveBlock);
+                var moveBlock = _diContainer.InstantiatePrefab(_stageObjectTable.moveBlock);
                 moveBlock.transform.position = position;
                 break;
             case SquareType.BallBlock:
-                var ballBlock = _diContainer.InstantiatePrefab(_stageObjectTable.BallBlock);
+                var ballBlock = _diContainer.InstantiatePrefab(_stageObjectTable.ballBlock);
                 ballBlock.transform.position = position;
                 break;
             default:
