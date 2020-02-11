@@ -46,17 +46,13 @@ Assets/Plugins.meta
 Assets/Resources
 Assets/Resources.meta
 
-# DOTween
-Assets/Demigiant
-Assets/Demigiant.meta
-
 # TextMeshPro
 Assets/TextMesh Pro
 Assets/TextMesh Pro.meta
 
-# UniTask
-Assets/UniRx.Async
-Assets/UniRx.Async.meta
+# EasySave
+Assets/Easy Save 2
+Assets/Easy Save 2.meta
 
 # Other Materials
 Assets/MyAsset
