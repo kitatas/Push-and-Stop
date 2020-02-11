@@ -6,8 +6,8 @@ public sealed class PlayerMover
     private readonly Rigidbody2D _rigidbody;
 
     private bool _isMove;
-    private Vector3 _direction;
-    private float moveSpeed = 200f;
+    private Vector3 _moveDirection;
+    private const float _moveSpeed = 10f;
 
     private PlayerMover(Rigidbody2D rigidbody)
     {
@@ -15,20 +15,20 @@ public sealed class PlayerMover
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         _isMove = false;
-        _direction = Vector3.zero;
+        _moveDirection = Vector3.zero;
     }
 
-    public async UniTaskVoid MoveAsync(Vector3 direction)
+    public async UniTaskVoid MoveAsync(Vector3 moveDirection)
     {
         _isMove = true;
-        _direction = direction;
+        _moveDirection = moveDirection;
 
         await UniTask.WaitWhile(Move, PlayerLoopTiming.FixedUpdate);
     }
 
     private bool Move()
     {
-        _rigidbody.velocity = moveSpeed * Time.deltaTime * _direction;
+        _rigidbody.velocity = _moveSpeed * _moveDirection;
 
         return _isMove;
     }
@@ -36,7 +36,7 @@ public sealed class PlayerMover
     public void HitBlock(IHittable hittable)
     {
         _isMove = false;
-        hittable.Hit(_direction);
+        hittable.Hit(_moveDirection);
     }
 
     public void ResetVelocity()

@@ -8,6 +8,7 @@ public sealed class BallBlock : BaseBlock
 {
     private bool _isMove;
     private Vector3 _moveDirection;
+    private const float _moveSpeed = 0.1f;
 
     private void Start()
     {
@@ -42,7 +43,7 @@ public sealed class BallBlock : BaseBlock
 
     private bool Move()
     {
-        transform.position += 5f * Time.deltaTime * _moveDirection;
+        transform.position += _moveSpeed * _moveDirection;
 
         return _isMove;
     }
