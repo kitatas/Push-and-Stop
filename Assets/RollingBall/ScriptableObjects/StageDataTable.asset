@@ -12,25 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab86dbc25b66c924fb12d40f841cb790, type: 3}
   m_Name: StageDataTable
   m_EditorClassIdentifier: 
-  stageIndex: 0
+  stageIndex: 4
   stageData:
-  - stage: {fileID: 8570384546616393726, guid: 5e6f2ad98a0617844ae20d27ee292d4c, type: 3}
-    goalPosition: {x: 2, y: 2, z: 0.25}
-  - stage: {fileID: 6204168434014384508, guid: 6c5abbf293e77480db0541f90d413455, type: 3}
-    goalPosition: {x: 0, y: 2, z: 0.25}
-  - stage: {fileID: 982825636654969168, guid: 93ddf79dc861540d19dded3ed6565cc8, type: 3}
-    goalPosition: {x: 1, y: 1, z: 0.25}
-  - stage: {fileID: 8570384546616393726, guid: 19df159a7d860fc44ab8250f0fe306f8, type: 3}
-    goalPosition: {x: 1, y: 1, z: 0.25}
-  - stage: {fileID: 8570384546616393726, guid: ef384f26b4cf29845bb3d983f74126d3, type: 3}
-    goalPosition: {x: 1, y: -2, z: 0.25}
-  - stage: {fileID: 8570384546616393726, guid: 127ba2cb92a35ad4b970851021091814, type: 3}
-    goalPosition: {x: -1, y: 1, z: 0.25}
-  - stage: {fileID: 3666775409935919687, guid: d3b04a66156004f8eadefa1a32474c3c, type: 3}
-    goalPosition: {x: 0, y: 1, z: 0.25}
-  - stage: {fileID: 6600723870455102898, guid: 3489120cc37194b798d69b9486d6fbe1, type: 3}
-    goalPosition: {x: 0, y: 1, z: 0.25}
-  - stage: {fileID: 4288198115143075121, guid: 8e97374ad68e64bb7bba8de019c1c3bf, type: 3}
-    goalPosition: {x: 0, y: 0, z: 0.25}
-  - stage: {fileID: 8860627334495105793, guid: c0e0e1661c0754044a5a5bc25dcac671, type: 3}
-    goalPosition: {x: -1, y: 0, z: 0.25}
+  - stageFile: {fileID: 4900000, guid: 512c32f49a1f43f49ae74a88553326d2, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 6ba38902e5eb9f54792f3c04ffeebb28, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 32a75a1d0027f374796ac6a53ce5131a, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 7990ddb52134ad444a52d71a5530f567, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: d8e1096767fcbd44bb35b8e609df8cf0, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 456723d2c1e11b34aaa18076928fb4b7, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 7d63f253efb669e489f04d83bd08e6dd, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: ade2637b53714cc43afdc0f10e10b58a, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 0dd4bb0922c3980459718bdc4cdfeac8, type: 3}
+    minMoveCount: 0
+  - stageFile: {fileID: 4900000, guid: 2e620ae66f4cd7741bd8001886bac827, type: 3}
+    minMoveCount: 0
