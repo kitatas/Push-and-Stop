@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public sealed class StageLoader
+public sealed class StageLoader : MonoBehaviour
 {
     private enum SquareType
     {
@@ -14,16 +14,15 @@ public sealed class StageLoader
         BallBlock = 5,
     }
 
-    private readonly StageObjectTable _stageObjectTable;
-    private readonly GoalInfo _goalInfo;
-    private readonly DiContainer _diContainer;
+    private StageObjectTable _stageObjectTable;
+    private GoalInfo _goalInfo;
 
-    public StageLoader(StageObjectTable stageObjectTable, GoalInfo goalInfo, DiContainer diContainer,
-        StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
+    [Inject]
+    private void Construct(StageObjectTable stageObjectTable, GoalInfo goalInfo, StageDataTable stageDataTable,
+        MinMoveCountView minMoveCountView)
     {
         _stageObjectTable = stageObjectTable;
         _goalInfo = goalInfo;
-        _diContainer = diContainer;
 
         var stageData = stageDataTable.StageDataInfo();
         minMoveCountView.Display(stageData.minMoveCount);
@@ -61,15 +60,15 @@ public sealed class StageLoader
                 _goalInfo.SetPosition(position);
                 break;
             case SquareType.Block:
-                var block = _diContainer.InstantiatePrefab(_stageObjectTable.block);
+                var block = Instantiate(_stageObjectTable.block);
                 block.transform.position = position;
                 break;
             case SquareType.MoveBlock:
-                var moveBlock = _diContainer.InstantiatePrefab(_stageObjectTable.moveBlock);
+                var moveBlock = Instantiate(_stageObjectTable.moveBlock);
                 moveBlock.transform.position = position;
                 break;
             case SquareType.BallBlock:
-                var ballBlock = _diContainer.InstantiatePrefab(_stageObjectTable.ballBlock);
+                var ballBlock = Instantiate(_stageObjectTable.ballBlock);
                 ballBlock.transform.position = position;
                 break;
             default:
