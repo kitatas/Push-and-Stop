@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4628539148484384176}
   - component: {fileID: 945562911727507662}
   - component: {fileID: 7624761525349758927}
+  - component: {fileID: 5417282720276589789}
   m_Layer: 0
   m_Name: Block - Ball
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -760687507
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1b6119b4b1f0242db8dc0e370e8fc2fa, type: 3}
   m_Color: {r: 0.2784314, g: 0.89411765, b: 0.73333335, a: 1}
@@ -142,3 +143,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8a610ea9389a74d912085e321e17a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5417282720276589789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593544251075039821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 1
