@@ -5,7 +5,20 @@ using Zenject;
 
 public abstract class BaseButton : MonoBehaviour
 {
-    protected Button button { get; private set; }
+    private Button _button;
+
+    protected Button button
+    {
+        get
+        {
+            if (_button == null)
+            {
+                _button = GetComponent<Button>();
+            }
+
+            return _button;
+        }
+    }
 
     private SeManager _seManager;
 
@@ -14,7 +27,6 @@ public abstract class BaseButton : MonoBehaviour
     {
         _seManager = seManager;
 
-        button = GetComponent<Button>();
         button
             .OnClickAsObservable()
             .Subscribe(_ => OnPush());
