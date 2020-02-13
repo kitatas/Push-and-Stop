@@ -74,7 +74,7 @@ public sealed class ClearAction : MonoBehaviour
             .Append(clearText.RectTransform()
                 .DOAnchorPosY(50f, ConstantList.uiAnimationTime))
             .Append(nextButton.image
-                .DOFade(1f, ConstantList.uiAnimationTime)
-                .OnComplete(() => nextButton.enabled = true));
+                .DOFade(1f, ConstantList.uiAnimationTime))
+            .OnComplete(() => nextButton.enabled = true);
     }
 }

@@ -10,7 +10,10 @@ public abstract class BaseBlock : MonoBehaviour, IHittable
     private void Construct(SeManager seManager)
     {
         _seManager = seManager;
+    }
 
+    private void Awake()
+    {
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 

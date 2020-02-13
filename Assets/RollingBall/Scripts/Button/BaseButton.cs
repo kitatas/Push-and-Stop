@@ -26,10 +26,14 @@ public abstract class BaseButton : MonoBehaviour
     private void Construct(SeManager seManager)
     {
         _seManager = seManager;
+    }
 
+    private void Awake()
+    {
         button
             .OnClickAsObservable()
-            .Subscribe(_ => OnPush());
+            .Subscribe(_ => OnPush())
+            .AddTo(this);
     }
 
     protected virtual void OnPush()

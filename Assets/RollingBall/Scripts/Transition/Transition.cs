@@ -1,5 +1,4 @@
-﻿using System;
-using UniRx.Async;
+﻿using UniRx.Async;
 using UnityEngine;
 using Zenject;
 
@@ -41,8 +40,7 @@ public sealed class Transition : MonoBehaviour
         SetUpFade(_alphaCutOffMax);
         await UniTask.WaitUntil(FadeOut);
 
-        _zenjectSceneLoader.LoadScene(sceneName);
-        await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
+        await _zenjectSceneLoader.LoadSceneAsync(sceneName);
 
         var afterSceneButtons = FindObjectsOfType<BaseButton>();
         afterSceneButtons.ActivateAllButtons(false);

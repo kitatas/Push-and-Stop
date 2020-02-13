@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 
 [CreateAssetMenu(fileName = "TableInstaller", menuName = "Installers/TableInstaller")]
-public class TableInstaller : ScriptableObjectInstaller<TableInstaller>
+public sealed class TableInstaller : ScriptableObjectInstaller<TableInstaller>
 {
     [SerializeField] private StageDataTable stageDataTable = null;
     [SerializeField] private StageObjectTable stageObjectTable = null;
