@@ -27,12 +27,12 @@ public sealed class LoadButton : BaseButton
     {
         base.OnPush();
 
-        _stageDataTable.stageIndex = LoadIndex();
+        _stageDataTable.stageIndex = GetNextStageIndex();
 
         _transition.LoadScene(sceneName, fadeTime);
     }
 
-    private int LoadIndex()
+    private int GetNextStageIndex()
     {
         if (stageNumber >= 0)
         {
