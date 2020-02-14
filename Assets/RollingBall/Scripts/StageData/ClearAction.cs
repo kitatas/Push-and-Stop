@@ -1,8 +1,6 @@
-﻿using System;
-using CharTween;
+﻿using CharTween;
 using DG.Tweening;
 using TMPro;
-using UniRx.Async;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -28,7 +26,7 @@ public sealed class ClearAction : MonoBehaviour
 
         TweenClearText();
 
-        DisplayNextButtonAsync().Forget();
+        DisplayNextButton();
     }
 
     private void TweenClearText()
@@ -62,15 +60,15 @@ public sealed class ClearAction : MonoBehaviour
         }
     }
 
-    private async UniTaskVoid DisplayNextButtonAsync()
+    private void DisplayNextButton()
     {
         nextButton.enabled = false;
         nextButton.interactable = true;
 
         const float waitTime = ConstantList.uiAnimationTime * 2 + 0.5f;
-        await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
 
         DOTween.Sequence()
+            .AppendInterval(waitTime)
             .Append(clearText.RectTransform()
                 .DOAnchorPosY(50f, ConstantList.uiAnimationTime))
             .Append(nextButton.image
