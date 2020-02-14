@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public sealed class GoalInfo : MonoBehaviour
+public sealed class GoalInfo : MonoBehaviour, IStageObject
 {
-    public void SetPosition(Vector2 goalPosition)
+    public void SetPosition(Vector2 initializePosition)
     {
-        transform.position = goalPosition;
+        transform.position = initializePosition;
     }
 
     public bool EqualPosition(Vector2 roundPosition)

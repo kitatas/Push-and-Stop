@@ -2,7 +2,7 @@
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class BaseBlock : MonoBehaviour, IHittable
+public abstract class BaseBlock : MonoBehaviour, IHittable, IStageObject
 {
     private SeManager _seManager;
 
@@ -20,5 +20,10 @@ public abstract class BaseBlock : MonoBehaviour, IHittable
     public virtual void Hit(Vector3 moveDirection)
     {
         _seManager.PlaySe(SeType.Hit);
+    }
+
+    public void SetPosition(Vector2 initializePosition)
+    {
+        transform.position = initializePosition;
     }
 }

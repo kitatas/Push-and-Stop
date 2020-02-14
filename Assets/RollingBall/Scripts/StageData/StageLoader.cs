@@ -15,13 +15,15 @@ public sealed class StageLoader : MonoBehaviour
     }
 
     private StageObjectTable _stageObjectTable;
+    private PlayerController _playerController;
     private GoalInfo _goalInfo;
 
     [Inject]
-    private void Construct(StageObjectTable stageObjectTable, GoalInfo goalInfo, StageDataTable stageDataTable,
-        MinMoveCountView minMoveCountView)
+    private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, GoalInfo goalInfo,
+        StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
     {
         _stageObjectTable = stageObjectTable;
+        _playerController = playerController;
         _goalInfo = goalInfo;
 
         var stageData = stageDataTable.StageDataInfo();
@@ -50,29 +52,30 @@ public sealed class StageLoader : MonoBehaviour
 
     private void Create(SquareType squareType, Vector2 position)
     {
+        IStageObject stageObject;
         switch (squareType)
         {
             case SquareType.None:
-                break;
+                return;
             case SquareType.Player:
+                stageObject = _playerController;
                 break;
             case SquareType.Goal:
-                _goalInfo.SetPosition(position);
+                stageObject = _goalInfo;
                 break;
             case SquareType.Block:
-                var block = Instantiate(_stageObjectTable.block);
-                block.transform.position = position;
+                stageObject = Instantiate(_stageObjectTable.block);
                 break;
             case SquareType.MoveBlock:
-                var moveBlock = Instantiate(_stageObjectTable.moveBlock);
-                moveBlock.transform.position = position;
+                stageObject = Instantiate(_stageObjectTable.moveBlock);
                 break;
             case SquareType.BallBlock:
-                var ballBlock = Instantiate(_stageObjectTable.ballBlock);
-                ballBlock.transform.position = position;
+                stageObject = Instantiate(_stageObjectTable.ballBlock);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(squareType), squareType, null);
         }
+
+        stageObject.SetPosition(position);
     }
 }
