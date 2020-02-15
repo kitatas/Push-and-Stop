@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4e9d783ffce40fda18082231d586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 3
+  moveDirection: 3
 --- !u!1 &208166016 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5386715869757879576, guid: 4ad322bbda48d4a05aef5dc503919593,
@@ -767,7 +767,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -40}
-  m_SizeDelta: {x: 175, y: 50}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &229277285
 MonoBehaviour:
@@ -1197,7 +1197,6 @@ GameObject:
   - component: {fileID: 409467726}
   - component: {fileID: 409467728}
   - component: {fileID: 409467725}
-  - component: {fileID: 409467727}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1334,24 +1333,6 @@ MonoBehaviour:
   - {fileID: 1275648027}
   - {fileID: 1701591344}
   - {fileID: 195732667}
---- !u!114 &409467727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409467720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 409467725}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
 --- !u!114 &409467728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4e9d783ffce40fda18082231d586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  moveDirection: 0
 --- !u!114 &430141195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,7 +1635,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1726,7 +1707,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 175, y: 50}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &435598272 stripped
 GameObject:
@@ -2868,7 +2849,7 @@ MonoBehaviour:
     - {fileID: 2011539593}
     - {fileID: 2011539592}
     - {fileID: 11500000, guid: 9d0f3aa92c171c04ba470fb61e7a573e, type: 3}
-    - {fileID: 409467727}
+    - {fileID: 0}
     - {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
     - {fileID: 0}
   prefabs: []
@@ -4069,7 +4050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4e9d783ffce40fda18082231d586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
+  moveDirection: 1
 --- !u!1 &1280455767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,7 +4088,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 175, y: 50}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1280455769
 MonoBehaviour:
@@ -4175,7 +4156,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -4639,8 +4620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -120}
-  m_SizeDelta: {x: 175, y: 50}
+  m_AnchoredPosition: {x: -100, y: -130}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1563943085
 MonoBehaviour:
@@ -4813,6 +4794,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1521401436}
+  - {fileID: 409467725}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -5154,7 +5136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4e9d783ffce40fda18082231d586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 2
+  moveDirection: 2
 --- !u!1 &1705600936 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3741804685465140451, guid: 4ad322bbda48d4a05aef5dc503919593,
