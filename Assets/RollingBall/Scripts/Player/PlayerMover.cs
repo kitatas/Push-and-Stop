@@ -8,6 +8,7 @@ public sealed class PlayerMover
     private bool _isMove;
     private Vector3 _moveDirection;
     private const float _moveSpeed = 10f;
+    private readonly Vector2 _zero = Vector2.zero;
 
     private PlayerMover(Rigidbody2D rigidbody)
     {
@@ -23,15 +24,12 @@ public sealed class PlayerMover
         _isMove = true;
         _moveDirection = moveDirection;
 
-        await UniTask.WaitWhile(Move, PlayerLoopTiming.FixedUpdate);
-    }
-
-    private bool Move()
-    {
         _rigidbody.velocity = _moveSpeed * _moveDirection;
 
-        return _isMove;
+        await UniTask.WaitWhile(Move);
     }
+
+    private bool Move() => _isMove;
 
     public void HitBlock(IHittable hittable)
     {
@@ -41,6 +39,6 @@ public sealed class PlayerMover
 
     public void ResetVelocity()
     {
-        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.velocity = _zero;
     }
 }

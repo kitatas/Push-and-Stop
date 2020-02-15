@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -8,17 +7,24 @@ using Zenject;
 public sealed class PlayerController : MonoBehaviour, IStageObject
 {
     [SerializeField] private MoveButton[] moveButtons = null;
+    private PlayerMover _playerMover;
+    private GoalInfo _goalInfo;
 
     [Inject]
-    private void Construct(PlayerMover playerMover, IMoveCountUpdatable moveCountUpdatable, GoalInfo goalInfo, ClearAction clearAction)
+    private void Construct(PlayerMover playerMover, GoalInfo goalInfo)
+    {
+        _playerMover = playerMover;
+        _goalInfo = goalInfo;
+    }
+
+    private void Start()
     {
         foreach (var moveButton in moveButtons)
         {
             moveButton.OnPushed()
                 .Subscribe(moveDirection =>
                 {
-                    playerMover.MoveAsync(moveDirection).Forget();
-                    moveCountUpdatable.UpdateMoveCount();
+                    _playerMover.MoveAsync(moveDirection).Forget();
                     moveButtons.ActivateAllButtons(false);
                 });
         }
@@ -28,25 +34,22 @@ public sealed class PlayerController : MonoBehaviour, IStageObject
             .Where(hittable => hittable != null)
             .Subscribe(hittable =>
             {
-                playerMover.HitBlock(hittable);
+                _playerMover.HitBlock(hittable);
 
                 var roundPosition = transform.RoundPosition();
 
-                transform
-                    .DOMove(roundPosition, ConstantList.correctTime)
-                    .OnComplete(playerMover.ResetVelocity);
-
-                var isClear = goalInfo.EqualPosition(roundPosition);
-                if (isClear)
+                if (_goalInfo.EqualPosition(roundPosition))
                 {
                     InteractButton(false);
-                    clearAction.DisplayClearUi();
-                    return;
                 }
 
-                Observable
-                    .Timer(TimeSpan.FromSeconds(ConstantList.correctTime))
-                    .Subscribe(_ => moveButtons.ActivateAllButtons(true));
+                transform
+                    .DOMove(roundPosition, ConstantList.correctTime)
+                    .OnComplete(() =>
+                    {
+                        _playerMover.ResetVelocity();
+                        moveButtons.ActivateAllButtons(true);
+                    });
             })
             .AddTo(gameObject);
     }

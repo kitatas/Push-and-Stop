@@ -1,6 +1,7 @@
 ﻿using System;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 public sealed class MoveButton : BaseButton
 {
@@ -9,9 +10,19 @@ public sealed class MoveButton : BaseButton
 
     [SerializeField] private MoveDirection moveDirection = default;
 
+    private IMoveCountUpdatable _moveCountUpdatable;
+
+    [Inject]
+    private void Construct(IMoveCountUpdatable moveCountUpdatable)
+    {
+        _moveCountUpdatable = moveCountUpdatable;
+    }
+
     protected override void OnPush()
     {
         base.OnPush();
+
+        _moveCountUpdatable.UpdateMoveCount();
 
         _subject.OnNext(ConstantList.moveDirection[moveDirection]);
     }
