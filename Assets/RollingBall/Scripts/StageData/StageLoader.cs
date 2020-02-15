@@ -64,13 +64,13 @@ public sealed class StageLoader : MonoBehaviour
                 stageObject = _goalInfo;
                 break;
             case SquareType.Block:
-                stageObject = Instantiate(_stageObjectTable.block);
+                stageObject = Instantiate(_stageObjectTable.block, transform);
                 break;
             case SquareType.MoveBlock:
-                stageObject = Instantiate(_stageObjectTable.moveBlock);
+                stageObject = Instantiate(_stageObjectTable.moveBlock, transform);
                 break;
             case SquareType.BallBlock:
-                stageObject = Instantiate(_stageObjectTable.ballBlock);
+                stageObject = Instantiate(_stageObjectTable.ballBlock, transform);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(squareType), squareType, null);
