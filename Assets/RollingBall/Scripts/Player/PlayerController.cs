@@ -15,9 +15,9 @@ public sealed class PlayerController : MonoBehaviour, IStageObject
         foreach (var moveButton in moveButtons)
         {
             moveButton.OnPushed()
-                .Subscribe(_ =>
+                .Subscribe(moveDirection =>
                 {
-                    playerMover.MoveAsync(moveButton.MoveDirection()).Forget();
+                    playerMover.MoveAsync(moveDirection).Forget();
                     moveCountUpdatable.UpdateMoveCount();
                     moveButtons.ActivateAllButtons(false);
                 });
