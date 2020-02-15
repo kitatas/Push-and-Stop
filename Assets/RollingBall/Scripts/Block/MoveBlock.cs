@@ -12,13 +12,15 @@ public sealed class MoveBlock : BaseBlock
 
     private void Start()
     {
+        isMove = false;
         _startPosition = transform.position;
 
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
-            .Where(hittable => hittable != null)
+            .Where(hittable => hittable != null && hittable.isMove == false)
             .Subscribe(_ =>
             {
+                isMove = false;
                 _tweenCore.Kill();
                 CorrectPosition();
             })
@@ -34,11 +36,16 @@ public sealed class MoveBlock : BaseBlock
 
     private void Move(Vector3 moveDirection)
     {
+        isMove = true;
         var nextPosition = _startPosition + moveDirection;
 
         _tweenCore = transform
             .DOMove(nextPosition, ConstantList.correctTime)
-            .OnComplete(() => _startPosition = nextPosition);
+            .OnComplete(() =>
+            {
+                isMove = false;
+                _startPosition = nextPosition;
+            });
     }
 
     private void CorrectPosition()

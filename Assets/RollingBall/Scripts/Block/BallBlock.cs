@@ -6,21 +6,20 @@ using UnityEngine;
 
 public sealed class BallBlock : BaseBlock
 {
-    private bool _isMove;
     private Vector3 _moveDirection;
     private const float _moveSpeed = 0.1f;
 
     private void Start()
     {
-        _isMove = false;
+        isMove = false;
         _moveDirection = Vector3.zero;
 
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
-            .Where(hittable => hittable != null)
+            .Where(hittable => hittable != null && hittable.isMove == false)
             .Subscribe(_ =>
             {
-                _isMove = false;
+                isMove = false;
                 CorrectPosition();
             })
             .AddTo(gameObject);
@@ -35,7 +34,7 @@ public sealed class BallBlock : BaseBlock
 
     private async UniTaskVoid MoveAsync(Vector3 moveDirection)
     {
-        _isMove = true;
+        isMove = true;
         _moveDirection = moveDirection;
 
         await UniTask.WaitWhile(Move);
@@ -45,7 +44,7 @@ public sealed class BallBlock : BaseBlock
     {
         transform.position += _moveSpeed * _moveDirection;
 
-        return _isMove;
+        return isMove;
     }
 
     private void CorrectPosition()
