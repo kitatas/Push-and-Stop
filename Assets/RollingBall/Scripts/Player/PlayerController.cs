@@ -8,13 +8,13 @@ public sealed class PlayerController : MonoBehaviour, IStageObject
 {
     [SerializeField] private MoveButton[] moveButtons = null;
     private PlayerMover _playerMover;
-    private GoalInfo _goalInfo;
+    private IGoal _goal;
 
     [Inject]
-    private void Construct(PlayerMover playerMover, GoalInfo goalInfo)
+    private void Construct(PlayerMover playerMover, IGoal goal)
     {
         _playerMover = playerMover;
-        _goalInfo = goalInfo;
+        _goal = goal;
     }
 
     private void Start()
@@ -38,7 +38,7 @@ public sealed class PlayerController : MonoBehaviour, IStageObject
 
                 var roundPosition = transform.RoundPosition();
 
-                if (_goalInfo.EqualPosition(roundPosition))
+                if (_goal.EqualPosition(roundPosition))
                 {
                     InteractButton(false);
                 }

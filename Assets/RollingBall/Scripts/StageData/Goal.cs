@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public sealed class GoalInfo : MonoBehaviour, IStageObject
+public sealed class Goal : MonoBehaviour, IStageObject, IGoal
 {
     private ClearAction _clearAction;
 
