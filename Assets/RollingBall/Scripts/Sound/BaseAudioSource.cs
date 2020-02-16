@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public abstract class AudioInitializer : MonoBehaviour
+public abstract class BaseAudioSource : MonoBehaviour
 {
     private AudioSource _audioSource;
 
@@ -17,4 +17,8 @@ public abstract class AudioInitializer : MonoBehaviour
             return _audioSource;
         }
     }
+
+    public float GetVolume() => audioSource.volume;
+
+    public void SetVolume(float value) => audioSource.volume = value;
 }

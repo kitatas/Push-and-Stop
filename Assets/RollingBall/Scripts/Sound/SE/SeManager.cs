@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public sealed class SeManager : AudioInitializer
+public sealed class SeManager : BaseAudioSource
 {
     private Dictionary<SeType, AudioClip> _seList = null;
 
