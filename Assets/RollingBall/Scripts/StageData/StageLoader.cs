@@ -15,16 +15,16 @@ public sealed class StageLoader : MonoBehaviour
     }
 
     private StageObjectTable _stageObjectTable;
-    private PlayerController _playerController;
-    private GoalInfo _goalInfo;
+    private IStageObject _player;
+    private IStageObject _goal;
 
     [Inject]
-    private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, GoalInfo goalInfo,
+    private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
         StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
     {
         _stageObjectTable = stageObjectTable;
-        _playerController = playerController;
-        _goalInfo = goalInfo;
+        _player = playerController;
+        _goal = goal;
 
         var stageData = stageDataTable.StageDataInfo();
         minMoveCountView.Display(stageData.minMoveCount);
@@ -58,10 +58,10 @@ public sealed class StageLoader : MonoBehaviour
             case SquareType.None:
                 return;
             case SquareType.Player:
-                stageObject = _playerController;
+                stageObject = _player;
                 break;
             case SquareType.Goal:
-                stageObject = _goalInfo;
+                stageObject = _goal;
                 break;
             case SquareType.Block:
                 stageObject = Instantiate(_stageObjectTable.block, transform);
