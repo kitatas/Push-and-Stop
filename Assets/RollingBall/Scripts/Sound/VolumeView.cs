@@ -11,22 +11,20 @@ public sealed class VolumeView : MonoBehaviour
     [Inject]
     private void Construct(BgmManager bgmManager, SeManager seManager)
     {
-        Initialize(bgmManager.GetVolume(), seManager.GetVolume());
+        IVolumeUpdatable bgm = bgmManager;
+        IVolumeUpdatable se = seManager;
+
+        bgmSlider.value = bgm.GetVolume();
+        seSlider.value = se.GetVolume();
 
         bgmSlider
             .OnValueChangedAsObservable()
-            .Subscribe(bgmManager.SetVolume)
+            .Subscribe(bgm.SetVolume)
             .AddTo(this);
 
         seSlider
             .OnValueChangedAsObservable()
-            .Subscribe(seManager.SetVolume)
+            .Subscribe(se.SetVolume)
             .AddTo(this);
-    }
-
-    private void Initialize(float bgmVolume, float seVolume)
-    {
-        bgmSlider.value = bgmVolume;
-        seSlider.value = seVolume;
     }
 }

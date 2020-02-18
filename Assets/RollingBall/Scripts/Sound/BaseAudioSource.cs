@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public abstract class BaseAudioSource : MonoBehaviour
+public abstract class BaseAudioSource : MonoBehaviour, IVolumeUpdatable
 {
     private AudioSource _audioSource;
 
