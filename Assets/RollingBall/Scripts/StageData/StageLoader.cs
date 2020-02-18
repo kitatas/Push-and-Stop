@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
-public sealed class StageLoader : MonoBehaviour
+public sealed class StageLoader
 {
     private enum SquareType
     {
@@ -64,13 +65,13 @@ public sealed class StageLoader : MonoBehaviour
                 stageObject = _goal;
                 break;
             case SquareType.Block:
-                stageObject = Instantiate(_stageObjectTable.block, transform);
+                stageObject = Object.Instantiate(_stageObjectTable.block);
                 break;
             case SquareType.MoveBlock:
-                stageObject = Instantiate(_stageObjectTable.moveBlock, transform);
+                stageObject = Object.Instantiate(_stageObjectTable.moveBlock);
                 break;
             case SquareType.BallBlock:
-                stageObject = Instantiate(_stageObjectTable.ballBlock, transform);
+                stageObject = Object.Instantiate(_stageObjectTable.ballBlock);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(squareType), squareType, null);
