@@ -5,30 +5,36 @@ public sealed class PopUpButton : BaseButton
 {
     [SerializeField] private CanvasGroup canvasGroup = null;
     [SerializeField] private PopType popType = default;
+    private PopInfo _popInfo;
     private const float animationTime = 0.25f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _popInfo = ConstantList.popList[popType];
+    }
 
     protected override void OnPush()
     {
         base.OnPush();
 
-        TweenWindow(popType);
+        TweenWindow();
     }
 
-    private void TweenWindow(PopType type)
+    private void TweenWindow()
     {
-        var popInfo = ConstantList.popList[type];
-
-        canvasGroup.blocksRaycasts = popInfo.isBlocksRaycasts;
+        canvasGroup.blocksRaycasts = _popInfo.isBlocksRaycasts;
 
         DOTween.Sequence()
             .Append(DOTween
                 .To(() => canvasGroup.alpha,
                     alpha => canvasGroup.alpha = alpha,
-                    popInfo.targetAlpha,
+                    _popInfo.targetAlpha,
                     animationTime)
-                .SetEase(popInfo.ease))
+                .SetEase(_popInfo.ease))
             .Join(canvasGroup.RectTransform()
-                .DOScale(popInfo.targetScale, animationTime)
-                .SetEase(popInfo.ease));
+                .DOScale(_popInfo.targetScale, animationTime)
+                .SetEase(_popInfo.ease));
     }
 }

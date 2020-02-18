@@ -28,7 +28,7 @@ public abstract class BaseButton : MonoBehaviour
         _seManager = seManager;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         button
             .OnClickAsObservable()
