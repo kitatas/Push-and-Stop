@@ -7,6 +7,7 @@ public sealed class VolumeView : MonoBehaviour
 {
     [SerializeField] private Slider bgmSlider = null;
     [SerializeField] private Slider seSlider = null;
+    [SerializeField] private Button resetButton = null;
 
     [Inject]
     private void Construct(BgmManager bgmManager, SeManager seManager)
@@ -14,8 +15,13 @@ public sealed class VolumeView : MonoBehaviour
         IVolumeUpdatable bgm = bgmManager;
         IVolumeUpdatable se = seManager;
 
-        bgmSlider.value = bgm.GetVolume();
-        seSlider.value = se.GetVolume();
+        void SetSliderValue()
+        {
+            bgmSlider.value = bgm.GetVolume();
+            seSlider.value = se.GetVolume();
+        }
+
+        SetSliderValue();
 
         bgmSlider
             .OnValueChangedAsObservable()
@@ -25,6 +31,17 @@ public sealed class VolumeView : MonoBehaviour
         seSlider
             .OnValueChangedAsObservable()
             .Subscribe(se.SetVolume)
+            .AddTo(this);
+
+        resetButton
+            .OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                bgm.SetVolume(0.5f);
+                se.SetVolume(0.5f);
+
+                SetSliderValue();
+            })
             .AddTo(this);
     }
 }
