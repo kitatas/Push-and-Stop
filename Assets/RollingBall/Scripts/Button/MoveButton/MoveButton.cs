@@ -22,7 +22,7 @@ public sealed class MoveButton : BaseButton
     {
         base.OnPush();
 
-        _moveCountUpdatable.UpdateMoveCount();
+        _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
 
         _subject.OnNext(ConstantList.moveDirection[moveDirection]);
     }

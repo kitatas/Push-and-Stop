@@ -11,5 +11,7 @@ public sealed class MoveCountModel : IMoveCountModel, IMoveCountUpdatable
 
     public IReadOnlyReactiveProperty<int> MoveCount() => _moveCount;
 
-    public void UpdateMoveCount() => _moveCount.Value++;
+    private void SetMoveCount(int value) => _moveCount.Value = value;
+
+    public void UpdateMoveCount(UpdateType updateType) => SetMoveCount(_moveCount.Value + (int) updateType);
 }

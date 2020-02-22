@@ -1,4 +1,4 @@
 ﻿public interface IMoveCountUpdatable
 {
-    void UpdateMoveCount();
+    void UpdateMoveCount(UpdateType updateType);
 }
