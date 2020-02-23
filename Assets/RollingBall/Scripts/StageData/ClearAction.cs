@@ -38,7 +38,7 @@ public sealed class ClearAction : MonoBehaviour
         for (var i = 0; i < characterCount; ++i)
         {
             var t = i / (float) characterCount;
-            var timeOffset = Mathf.Lerp(0, 1, t);
+            var timeOffset = Mathf.Lerp(0f, 1f, t);
 
             var charSequence = DOTween.Sequence();
             charSequence
@@ -46,14 +46,14 @@ public sealed class ClearAction : MonoBehaviour
                     .DOLocalMoveY(i, 0.5f, ConstantList.uiAnimationTime)
                     .SetEase(Ease.InOutCubic))
                 .Join(tweener
-                    .DOFade(i, 0, ConstantList.uiAnimationTime)
+                    .DOFade(i, 0f, ConstantList.uiAnimationTime)
                     .From())
                 .Join(tweener
-                    .DOScale(i, 0, ConstantList.uiAnimationTime)
+                    .DOScale(i, 0f, ConstantList.uiAnimationTime)
                     .From()
-                    .SetEase(Ease.OutBack, 5))
+                    .SetEase(Ease.OutBack, 5f))
                 .Append(tweener
-                    .DOLocalMoveY(i, 0, ConstantList.uiAnimationTime)
+                    .DOLocalMoveY(i, 0f, ConstantList.uiAnimationTime)
                     .SetEase(Ease.OutBounce));
 
             sequence.Insert(timeOffset, charSequence);
