@@ -7,12 +7,16 @@ using Zenject;
 public sealed class PlayerController : MonoBehaviour, IMoveObject
 {
     [SerializeField] private MoveButton[] moveButtons = null;
+    private UndoButton _undoButton;
+    private Caretaker _caretaker;
     private PlayerMover _playerMover;
     private IGoal _goal;
 
     [Inject]
-    private void Construct(PlayerMover playerMover, IGoal goal)
+    private void Construct(UndoButton undoButton, Caretaker caretaker, PlayerMover playerMover, IGoal goal)
     {
+        _undoButton = undoButton;
+        _caretaker = caretaker;
         _playerMover = playerMover;
         _goal = goal;
     }
@@ -24,7 +28,9 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
             moveButton.OnPushed()
                 .Subscribe(moveDirection =>
                 {
+                    _caretaker.PushMementoStack();
                     _playerMover.MoveAsync(moveDirection).Forget();
+                    _undoButton.ActivateButton(false);
                     moveButtons.ActivateAllButtons(false);
                 });
         }
@@ -48,6 +54,7 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
                     .OnComplete(() =>
                     {
                         _playerMover.ResetVelocity();
+                        _undoButton.ActivateButton(true);
                         moveButtons.ActivateAllButtons(true);
                     });
             })
@@ -60,6 +67,8 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
         {
             moveButton.InteractButton(value);
         }
+
+        _undoButton.InteractButton(value);
     }
 
     public void SetPosition(Vector2 initializePosition)
