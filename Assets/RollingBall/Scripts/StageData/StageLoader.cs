@@ -21,7 +21,7 @@ public sealed class StageLoader
 
     [Inject]
     private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
-        StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
+        StageDataTable stageDataTable, MinMoveCountView minMoveCountView, Caretaker caretaker)
     {
         _stageObjectTable = stageObjectTable;
         _player = playerController;
@@ -30,6 +30,8 @@ public sealed class StageLoader
         var stageData = stageDataTable.StageDataInfo();
         minMoveCountView.Display(stageData.minMoveCount);
         LoadStageData(stageData.stageFile);
+
+        caretaker.Initialize();
     }
 
     private void LoadStageData(TextAsset stage)
