@@ -5,7 +5,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public sealed class MoveBlock : BaseBlock
+public sealed class MoveBlock : BaseBlock, IMoveObject
 {
     private Vector3 _startPosition;
     private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;
@@ -53,4 +53,11 @@ public sealed class MoveBlock : BaseBlock
         transform
             .DOMove(_startPosition, ConstantList.correctTime);
     }
+
+    public void SetPosition(Vector2 initializePosition)
+    {
+        transform.position = initializePosition;
+    }
+
+    public Vector3 GetPosition() => transform.position;
 }

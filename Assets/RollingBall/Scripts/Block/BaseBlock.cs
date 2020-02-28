@@ -2,7 +2,7 @@
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class BaseBlock : MonoBehaviour, IHittable, IStageObject
+public abstract class BaseBlock : MonoBehaviour, IHittable
 {
     private SeManager _seManager;
 
@@ -23,9 +23,4 @@ public abstract class BaseBlock : MonoBehaviour, IHittable, IStageObject
     }
 
     public bool isMove { get; protected set; }
-
-    public void SetPosition(Vector2 initializePosition)
-    {
-        transform.position = initializePosition;
-    }
 }

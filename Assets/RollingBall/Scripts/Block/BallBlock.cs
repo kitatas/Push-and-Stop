@@ -4,7 +4,7 @@ using UniRx.Async;
 using UniRx.Triggers;
 using UnityEngine;
 
-public sealed class BallBlock : BaseBlock
+public sealed class BallBlock : BaseBlock, IMoveObject
 {
     private Vector3 _moveDirection;
     private const float _moveSpeed = 0.1f;
@@ -54,4 +54,11 @@ public sealed class BallBlock : BaseBlock
         transform
             .DOMove(nextPosition, ConstantList.correctTime);
     }
+
+    public void SetPosition(Vector2 initializePosition)
+    {
+        transform.position = initializePosition;
+    }
+
+    public Vector3 GetPosition() => transform.position;
 }

@@ -4,7 +4,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
-public sealed class PlayerController : MonoBehaviour, IStageObject
+public sealed class PlayerController : MonoBehaviour, IMoveObject
 {
     [SerializeField] private MoveButton[] moveButtons = null;
     private PlayerMover _playerMover;
@@ -66,4 +66,6 @@ public sealed class PlayerController : MonoBehaviour, IStageObject
     {
         transform.position = initializePosition;
     }
+
+    public Vector3 GetPosition() => transform.position;
 }
