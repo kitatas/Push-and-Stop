@@ -3,7 +3,7 @@
 [CreateAssetMenu(menuName = "DataTable/StageObjectTable", fileName = "StageObjectTable")]
 public sealed class StageObjectTable : ScriptableObject
 {
-    public BaseBlock block;
-    public BaseBlock moveBlock;
-    public BaseBlock ballBlock;
+    public Block block;
+    public MoveBlock moveBlock;
+    public BallBlock ballBlock;
 }
