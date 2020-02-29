@@ -46,7 +46,12 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
 
                 if (_goal.EqualPosition(roundPosition))
                 {
-                    InteractButton(false);
+                    InteractMoveButton(false);
+                    _undoButton.InteractButton(false);
+                }
+                else
+                {
+                    _undoButton.InteractButton(true);
                 }
 
                 transform
@@ -61,14 +66,12 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
             .AddTo(gameObject);
     }
 
-    private void InteractButton(bool value)
+    private void InteractMoveButton(bool value)
     {
         foreach (var moveButton in moveButtons)
         {
             moveButton.InteractButton(value);
         }
-
-        _undoButton.InteractButton(value);
     }
 
     public void SetPosition(Vector2 initializePosition)
