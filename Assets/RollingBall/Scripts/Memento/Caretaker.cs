@@ -3,12 +3,12 @@ using UnityEngine;
 
 public sealed class Caretaker : MonoBehaviour
 {
+    private Stack<Memento[]> _mementoStack;
     private List<IMoveObject> _moveObjects;
-    private Stack<List<Memento>> _mementoStack;
 
     public void Initialize()
     {
-        _mementoStack = new Stack<List<Memento>>();
+        _mementoStack = new Stack<Memento[]>();
 
         _moveObjects = new List<IMoveObject>();
         foreach (var component in FindObjectsOfType<Component>())
@@ -24,22 +24,21 @@ public sealed class Caretaker : MonoBehaviour
 
     public void PushMementoStack()
     {
-        var mementos = new List<Memento>();
-        foreach (var moveObject in _moveObjects)
+        var mementoArray = new Memento[_moveObjects.Count];
+        for (int i = 0; i < _moveObjects.Count; i++)
         {
-            var memento = new Memento(moveObject.GetPosition());
-            mementos.Add(memento);
+            mementoArray[i] = new Memento(_moveObjects[i].GetPosition());
         }
 
-        _mementoStack.Push(mementos);
+        _mementoStack.Push(mementoArray);
     }
 
     public void PopMementoStack()
     {
-        var mementoList = _mementoStack.Peek();
+        var mementoArray = _mementoStack.Peek();
         for (int i = 0; i < _moveObjects.Count; i++)
         {
-            _moveObjects[i].SetPosition(mementoList[i].GetPosition());
+            _moveObjects[i].SetPosition(mementoArray[i].GetPosition());
         }
 
         _mementoStack.Pop();
