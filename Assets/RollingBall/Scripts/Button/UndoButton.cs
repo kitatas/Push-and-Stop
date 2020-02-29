@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 public sealed class UndoButton : BaseButton
 {
@@ -15,20 +14,20 @@ public sealed class UndoButton : BaseButton
 
     protected override void OnPush()
     {
-        if (_caretaker.IsMementoStackEmpty())
-        {
-            return;
-        }
-
         base.OnPush();
 
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Decrease);
 
         _caretaker.PopMementoStack();
+
+        if (_caretaker.IsMementoStackEmpty())
+        {
+            InteractButton(false);
+        }
     }
 
     public void InteractButton(bool value)
     {
-        button.interactable = false;
+        button.interactable = value;
     }
 }
