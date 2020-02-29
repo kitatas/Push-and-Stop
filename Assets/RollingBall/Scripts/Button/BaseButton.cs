@@ -43,9 +43,6 @@ public abstract class BaseButton : MonoBehaviour
 
     public void ActivateButton(bool value)
     {
-        if (button.interactable)
-        {
-            button.enabled = value;
-        }
+        button.enabled = value;
     }
 }
