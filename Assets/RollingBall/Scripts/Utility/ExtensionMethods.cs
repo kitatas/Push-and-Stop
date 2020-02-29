@@ -16,7 +16,10 @@ public static class ExtensionMethods
     {
         foreach (var button in buttons)
         {
-            button.ActivateButton(value);
+            if (button.IsInteractable())
+            {
+                button.ActivateButton(value);
+            }
         }
     }
 
