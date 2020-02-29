@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Caretaker : MonoBehaviour
+public sealed class Caretaker
 {
     private Stack<Memento[]> _mementoStack;
     private List<IMoveObject> _moveObjects;
@@ -11,7 +11,7 @@ public sealed class Caretaker : MonoBehaviour
         _mementoStack = new Stack<Memento[]>();
 
         _moveObjects = new List<IMoveObject>();
-        foreach (var component in FindObjectsOfType<Component>())
+        foreach (var component in Object.FindObjectsOfType<Component>())
         {
             if (component is IMoveObject moveObject)
             {
