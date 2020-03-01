@@ -67,7 +67,7 @@ public sealed class StageLoader
                 stageObject = _goal;
                 break;
             case SquareType.Block:
-                stageObject = Object.Instantiate(_stageObjectTable.block);
+                stageObject = Object.Instantiate(_stageObjectTable.normalBlock);
                 break;
             case SquareType.MoveBlock:
                 stageObject = Object.Instantiate(_stageObjectTable.moveBlock);
