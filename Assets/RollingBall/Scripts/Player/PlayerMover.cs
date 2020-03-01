@@ -26,10 +26,10 @@ public sealed class PlayerMover
 
         _rigidbody.velocity = _moveSpeed * _moveDirection;
 
-        await UniTask.WaitWhile(Move);
+        await UniTask.WaitWhile(IsMove);
     }
 
-    private bool Move() => _isMove;
+    private bool IsMove() => _isMove;
 
     public void HitBlock(IHittable hittable)
     {
