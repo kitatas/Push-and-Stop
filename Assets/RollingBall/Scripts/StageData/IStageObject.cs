@@ -2,5 +2,5 @@
 
 public interface IStageObject
 {
-    void SetPosition(Vector2 initializePosition);
+    void SetPosition(Vector2 setPosition);
 }

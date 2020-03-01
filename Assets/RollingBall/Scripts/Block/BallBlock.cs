@@ -55,9 +55,9 @@ public sealed class BallBlock : BaseBlock, IMoveObject
             .DOMove(nextPosition, ConstantList.correctTime);
     }
 
-    public void SetPosition(Vector2 initializePosition)
+    public void SetPosition(Vector2 setPosition)
     {
-        transform.position = initializePosition;
+        transform.position = setPosition;
     }
 
     public Vector3 GetPosition() => transform.position;

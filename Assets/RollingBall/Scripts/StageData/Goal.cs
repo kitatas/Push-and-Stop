@@ -11,9 +11,9 @@ public sealed class Goal : MonoBehaviour, IStageObject, IGoal
         _clearAction = clearAction;
     }
 
-    public void SetPosition(Vector2 initializePosition)
+    public void SetPosition(Vector2 setPosition)
     {
-        transform.position = initializePosition;
+        transform.position = setPosition;
     }
 
     public bool EqualPosition(Vector2 roundPosition)
