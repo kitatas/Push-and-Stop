@@ -7,7 +7,7 @@ using UnityEngine;
 public sealed class BallBlock : BaseBlock, IMoveObject
 {
     private Vector3 _moveDirection;
-    private const float _moveSpeed = 0.1f;
+    private const float _moveSpeed = 0.15f;
 
     private void Start()
     {
@@ -37,10 +37,10 @@ public sealed class BallBlock : BaseBlock, IMoveObject
         isMove = true;
         _moveDirection = moveDirection;
 
-        await UniTask.WaitWhile(Move);
+        await UniTask.WaitWhile(IsMove);
     }
 
-    private bool Move()
+    private bool IsMove()
     {
         transform.position += _moveSpeed * _moveDirection;
 
