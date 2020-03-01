@@ -4,7 +4,7 @@ using Zenject;
 public sealed class LoadButton : BaseButton
 {
     [SerializeField, SceneName] private string sceneName = null;
-    [SerializeField] private float fadeTime = 0.7f;
+    private const float _fadeTime = 0.7f;
 
     /// <summary>
     /// -2 : Reload
@@ -29,7 +29,7 @@ public sealed class LoadButton : BaseButton
 
         _stageDataTable.stageIndex = GetNextStageIndex();
 
-        _transition.LoadScene(sceneName, fadeTime);
+        _transition.LoadScene(sceneName, _fadeTime);
     }
 
     private int GetNextStageIndex()
