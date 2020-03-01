@@ -7,13 +7,11 @@ using UnityEngine;
 
 public sealed class MoveBlock : BaseBlock, IMoveObject
 {
-    private Vector3 _startPosition;
     private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;
 
     private void Start()
     {
         isMove = false;
-        _startPosition = transform.position;
 
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
@@ -37,21 +35,19 @@ public sealed class MoveBlock : BaseBlock, IMoveObject
     private void Move(Vector3 moveDirection)
     {
         isMove = true;
-        var nextPosition = _startPosition + moveDirection;
+        var nextPosition = transform.position + moveDirection;
 
         _tweenCore = transform
             .DOMove(nextPosition, ConstantList.correctTime)
-            .OnComplete(() =>
-            {
-                isMove = false;
-                _startPosition = nextPosition;
-            });
+            .OnComplete(() => isMove = false);
     }
 
     private void CorrectPosition()
     {
+        var roundPosition = transform.RoundPosition();
+
         transform
-            .DOMove(_startPosition, ConstantList.correctTime);
+            .DOMove(roundPosition, ConstantList.correctTime);
     }
 
     public void SetPosition(Vector2 initializePosition)
