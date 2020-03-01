@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3347ccd3a5215a84595f03645d7c5ac3, type: 3}
   m_Name: StageObjectTable
   m_EditorClassIdentifier: 
-  block: {fileID: 7497070650524541311, guid: 78c4f459a22d44622ba4754920d63f8e, type: 3}
+  normalBlock: {fileID: 7497070650524541311, guid: 78c4f459a22d44622ba4754920d63f8e,
+    type: 3}
   moveBlock: {fileID: 8158737695487022503, guid: c22b745893e3b0943b43d3131df075b8,
     type: 3}
   ballBlock: {fileID: 7624761525349758927, guid: faf49b54984d0614b8bbc57824a4dc74,
