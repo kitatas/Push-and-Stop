@@ -11,11 +11,13 @@ public sealed class MoveButton : BaseButton
     [SerializeField] private MoveDirection moveDirection = default;
 
     private IMoveCountUpdatable _moveCountUpdatable;
+    private Caretaker _caretaker;
 
     [Inject]
-    private void Construct(IMoveCountUpdatable moveCountUpdatable)
+    private void Construct(IMoveCountUpdatable moveCountUpdatable, Caretaker caretaker)
     {
         _moveCountUpdatable = moveCountUpdatable;
+        _caretaker = caretaker;
     }
 
     protected override void OnPush()
@@ -23,6 +25,8 @@ public sealed class MoveButton : BaseButton
         base.OnPush();
 
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
+
+        _caretaker.PushMementoStack();
 
         _subject.OnNext(ConstantList.moveDirection[moveDirection]);
     }
