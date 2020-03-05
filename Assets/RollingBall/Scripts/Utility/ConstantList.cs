@@ -6,8 +6,6 @@ public sealed class ConstantList
 {
     public const float correctTime = 0.3f;
 
-    public const float uiAnimationTime = 0.5f;
-
     public static readonly Dictionary<MoveDirection, Vector3> moveDirection = new Dictionary<MoveDirection, Vector3>
     {
         {MoveDirection.Up,    Vector3.up},

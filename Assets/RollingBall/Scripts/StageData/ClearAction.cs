@@ -11,6 +11,7 @@ public sealed class ClearAction : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Button nextButton = null;
+    private const float animationTime = 0.5f;
 
     [Inject]
     private void Construct(SeManager seManager)
@@ -43,17 +44,17 @@ public sealed class ClearAction : MonoBehaviour
             var charSequence = DOTween.Sequence();
             charSequence
                 .Append(tweener
-                    .DOLocalMoveY(i, 0.5f, ConstantList.uiAnimationTime)
+                    .DOLocalMoveY(i, 0.5f, animationTime)
                     .SetEase(Ease.InOutCubic))
                 .Join(tweener
-                    .DOFade(i, 0f, ConstantList.uiAnimationTime)
+                    .DOFade(i, 0f, animationTime)
                     .From())
                 .Join(tweener
-                    .DOScale(i, 0f, ConstantList.uiAnimationTime)
+                    .DOScale(i, 0f, animationTime)
                     .From()
                     .SetEase(Ease.OutBack, 5f))
                 .Append(tweener
-                    .DOLocalMoveY(i, 0f, ConstantList.uiAnimationTime)
+                    .DOLocalMoveY(i, 0f, animationTime)
                     .SetEase(Ease.OutBounce));
 
             sequence.Insert(timeOffset, charSequence);
@@ -65,14 +66,14 @@ public sealed class ClearAction : MonoBehaviour
         nextButton.enabled = false;
         nextButton.interactable = true;
 
-        const float waitTime = ConstantList.uiAnimationTime * 2 + 0.5f;
+        const float waitTime = animationTime * 2 + 0.5f;
 
         DOTween.Sequence()
             .AppendInterval(waitTime)
             .Append(clearText.RectTransform()
-                .DOAnchorPosY(50f, ConstantList.uiAnimationTime))
+                .DOAnchorPosY(50f, animationTime))
             .Append(nextButton.image
-                .DOFade(1f, ConstantList.uiAnimationTime))
+                .DOFade(1f, animationTime))
             .OnComplete(() => nextButton.enabled = true);
     }
 }
