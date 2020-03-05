@@ -51,14 +51,7 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
                     _undoButton.InteractButton(true);
                 }
 
-                transform
-                    .DOMove(roundPosition, ConstantList.correctTime)
-                    .OnComplete(() =>
-                    {
-                        _playerMover.ResetVelocity();
-                        _undoButton.ActivateButton(true);
-                        moveButtons.ActivateAllButtons(true);
-                    });
+                CorrectPosition(roundPosition);
             })
             .AddTo(gameObject);
     }
@@ -69,6 +62,18 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
         {
             moveButton.InteractButton(value);
         }
+    }
+
+    private void CorrectPosition(Vector2 roundPosition)
+    {
+        transform
+            .DOMove(roundPosition, ConstantList.correctTime)
+            .OnComplete(() =>
+            {
+                _playerMover.ResetVelocity();
+                _undoButton.ActivateButton(true);
+                moveButtons.ActivateAllButtons(true);
+            });
     }
 
     public void SetPosition(Vector2 setPosition)
