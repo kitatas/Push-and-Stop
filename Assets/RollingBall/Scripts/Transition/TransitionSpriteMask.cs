@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public sealed class TransitionSpriteMask : MonoBehaviour
+public sealed class TransitionSpriteMask
 {
-    private SpriteMask _spriteMask;
+    private readonly SpriteMask _spriteMask;
 
-    public void Construct(SpriteMask spriteMask)
+    public TransitionSpriteMask(SpriteMask spriteMask)
     {
         _spriteMask = spriteMask;
     }

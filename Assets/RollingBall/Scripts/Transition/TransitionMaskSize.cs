@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public sealed class TransitionMaskSize : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         var mainCamera = FindObjectOfType<Camera>();
 
@@ -13,9 +14,9 @@ public sealed class TransitionMaskSize : MonoBehaviour
 
     private void SetScreenSize(Camera mainCamera)
     {
-        var spriteRenderer = GetComponent<SpriteRenderer>().sprite;
-        var width = spriteRenderer.bounds.size.x;
-        var height = spriteRenderer.bounds.size.y;
+        var sprite = GetComponent<SpriteRenderer>().sprite;
+        var width = sprite.bounds.size.x;
+        var height = sprite.bounds.size.y;
 
         var worldScreenHeight = mainCamera.orthographicSize * 2f;
         var worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;

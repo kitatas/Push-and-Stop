@@ -1,11 +1,14 @@
-﻿using UniRx.Async;
+﻿using System;
+using UniRx.Async;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
-public sealed class Transition : MonoBehaviour
+public sealed class Transition
 {
     private const float alphaCutOffMax = 0.7f;
     private const float alphaCutOffMin = 0f;
+    private const float fadeSpeedRate = 1.25f;
 
     private float _transitionProgress;
     private float _transitionDuration;
@@ -14,12 +17,10 @@ public sealed class Transition : MonoBehaviour
     private TransitionSpriteMask _transitionSpriteMask;
 
     [Inject]
-    private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask, SpriteMask spriteMask)
+    private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask)
     {
         _zenjectSceneLoader = zenjectSceneLoader;
         _transitionSpriteMask = transitionSpriteMask;
-
-        _transitionSpriteMask.Construct(spriteMask);
     }
 
     /// <summary>
@@ -35,14 +36,15 @@ public sealed class Transition : MonoBehaviour
 
     private async UniTaskVoid FadeAsync(string sceneName)
     {
-        var beforeSceneButtons = FindObjectsOfType<BaseButton>();
+        var beforeSceneButtons = Object.FindObjectsOfType<BaseButton>();
         beforeSceneButtons.ActivateAllButtons(false);
         SetUpFade(alphaCutOffMax);
         await UniTask.WaitUntil(FadeOut);
 
         await _zenjectSceneLoader.LoadSceneAsync(sceneName);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
 
-        var afterSceneButtons = FindObjectsOfType<BaseButton>();
+        var afterSceneButtons = Object.FindObjectsOfType<BaseButton>();
         afterSceneButtons.ActivateAllButtons(false);
         SetUpFade(alphaCutOffMin);
         await UniTask.WaitUntil(FadeIn);
@@ -58,7 +60,7 @@ public sealed class Transition : MonoBehaviour
 
     private bool FadeOut()
     {
-        _transitionProgress += Time.deltaTime;
+        _transitionProgress += Time.deltaTime * fadeSpeedRate;
         var alphaCutOffValue = alphaCutOffMax - alphaCutOffMax * _transitionProgress / _transitionDuration;
         _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
 
@@ -67,15 +69,12 @@ public sealed class Transition : MonoBehaviour
 
     private bool FadeIn()
     {
-        _transitionProgress += Time.deltaTime;
+        _transitionProgress += Time.deltaTime * fadeSpeedRate;
         var alphaCutOffValue = alphaCutOffMax * _transitionProgress / _transitionDuration;
         _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
 
         return IsFadeComplete();
     }
 
-    private bool IsFadeComplete()
-    {
-        return _transitionProgress >= _transitionDuration;
-    }
+    private bool IsFadeComplete() => _transitionProgress >= _transitionDuration;
 }
