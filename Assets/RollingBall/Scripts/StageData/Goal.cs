@@ -22,7 +22,7 @@ public sealed class Goal : MonoBehaviour, IStageObject, IGoal
 
     private Vector2 GetPosition() => transform.position;
 
-    public bool EqualPosition(Vector2 roundPosition)
+    public bool IsEqualPosition(Vector2 roundPosition)
     {
         var isEqual = GetPosition() == roundPosition;
         _isClear.Value = isEqual;

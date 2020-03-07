@@ -41,7 +41,7 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
 
                 var roundPosition = transform.RoundPosition();
 
-                if (_goal.EqualPosition(roundPosition))
+                if (_goal.IsEqualPosition(roundPosition))
                 {
                     InteractMoveButton(false);
                     _undoButton.InteractButton(false);

@@ -2,5 +2,5 @@
 
 public interface IGoal
 {
-    bool EqualPosition(Vector2 roundPosition);
+    bool IsEqualPosition(Vector2 roundPosition);
 }
