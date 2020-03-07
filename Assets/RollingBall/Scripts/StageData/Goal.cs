@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 using Zenject;
 
 public sealed class Goal : MonoBehaviour, IStageObject, IGoal
 {
-    private ClearAction _clearAction;
+    private ReactiveProperty<bool> _isClear;
 
     [Inject]
     private void Construct(ClearAction clearAction)
     {
-        _clearAction = clearAction;
+        _isClear = new ReactiveProperty<bool>(false);
+        _isClear
+            .Where(x => x)
+            .Subscribe(_ => clearAction.DisplayClearUi());
     }
 
     public void SetPosition(Vector2 setPosition)
@@ -20,12 +24,8 @@ public sealed class Goal : MonoBehaviour, IStageObject, IGoal
 
     public bool EqualPosition(Vector2 roundPosition)
     {
-        if (GetPosition() == roundPosition)
-        {
-            _clearAction.DisplayClearUi();
-            return true;
-        }
-
-        return false;
+        var isEqual = GetPosition() == roundPosition;
+        _isClear.Value = isEqual;
+        return isEqual;
     }
 }
