@@ -23,6 +23,11 @@ public sealed class Transition
         _transitionSpriteMask = transitionSpriteMask;
     }
 
+    public void LoadScene(string sceneName)
+    {
+        _zenjectSceneLoader.LoadScene(sceneName);
+    }
+
     /// <summary>
     /// Loads the Scene by its name in Build Settings.
     /// </summary>
@@ -41,7 +46,7 @@ public sealed class Transition
         SetUpFade(alphaCutOffMax);
         await UniTask.WaitUntil(FadeOut);
 
-        await _zenjectSceneLoader.LoadSceneAsync(sceneName);
+        LoadScene(sceneName);
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
 
         var afterSceneButtons = Object.FindObjectsOfType<BaseButton>();

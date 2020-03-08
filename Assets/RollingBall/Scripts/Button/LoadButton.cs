@@ -27,29 +27,34 @@ public sealed class LoadButton : BaseButton
     {
         base.OnPush();
 
-        _stageDataTable.stageIndex = GetNextStageIndex();
-
-        _transition.LoadScene(sceneName, _fadeTime);
+        LoadScene();
     }
 
-    private int GetNextStageIndex()
+    private void LoadScene()
     {
+        // Direct Load
         if (stageNumber >= 0)
         {
-            return stageNumber;
+            _stageDataTable.SetStageIndex(stageNumber);
+            _transition.LoadScene(sceneName, _fadeTime);
+            return;
         }
 
+        // Reload
         if (stageNumber == -2)
         {
-            return _stageDataTable.stageIndex;
+            _transition.LoadScene(sceneName);
+            return;
         }
 
-        if (++_stageDataTable.stageIndex < _stageDataTable.stageData.Length)
+        // Next Load
+        if (_stageDataTable.IsNextStage())
         {
-            return _stageDataTable.stageIndex;
+            _transition.LoadScene(sceneName, _fadeTime);
+            return;
         }
 
-        sceneName = "Title";
-        return 0;
+        _stageDataTable.ResetStageIndex();
+        _transition.LoadScene("Title", _fadeTime);
     }
 }
