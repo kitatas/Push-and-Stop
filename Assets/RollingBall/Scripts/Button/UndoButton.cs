@@ -10,6 +10,8 @@ public sealed class UndoButton : BaseButton
     {
         _moveCountUpdatable = moveCountUpdatable;
         _caretaker = caretaker;
+
+        InteractButton(false);
     }
 
     protected override void OnPush()
