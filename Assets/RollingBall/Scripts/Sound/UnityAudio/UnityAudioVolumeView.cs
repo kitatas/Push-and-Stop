@@ -3,17 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public sealed class VolumeView : MonoBehaviour
+public sealed class UnityAudioVolumeView : MonoBehaviour
 {
     [SerializeField] private Slider bgmSlider = null;
     [SerializeField] private Slider seSlider = null;
     [SerializeField] private Button resetButton = null;
 
     [Inject]
-    private void Construct(BgmManager bgmManager, SeManager seManager)
+    private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
     {
-        IVolumeUpdatable bgm = bgmManager;
-        IVolumeUpdatable se = seManager;
+        IVolumeUpdatable bgm = unityAudioBgmController;
+        IVolumeUpdatable se = unityAudioSeController;
 
         void SetSliderValue()
         {
@@ -41,6 +41,8 @@ public sealed class VolumeView : MonoBehaviour
                 se.SetVolume(0.5f);
 
                 SetSliderValue();
+
+                unityAudioSeController.PlaySe(SeType.Button);
             })
             .AddTo(this);
     }
