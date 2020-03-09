@@ -7,23 +7,23 @@ using Zenject;
 
 public sealed class ClearAction : MonoBehaviour
 {
-    private SeManager _seManager;
+    private ISeController _seController;
 
     [SerializeField] private TextMeshProUGUI clearText = null;
     [SerializeField] private Button nextButton = null;
     private const float animationTime = 0.5f;
 
     [Inject]
-    private void Construct(SeManager seManager)
+    private void Construct(ISeController seController)
     {
-        _seManager = seManager;
+        _seController = seController;
 
         nextButton.interactable = false;
     }
 
     public void DisplayClearUi()
     {
-        _seManager.PlaySe(SeType.Clear);
+        _seController.PlaySe(SeType.Clear);
 
         TweenClearText();
 

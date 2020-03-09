@@ -4,12 +4,12 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseBlock : MonoBehaviour, IHittable
 {
-    private SeManager _seManager;
+    private ISeController _seController;
 
     [Inject]
-    private void Construct(SeManager seManager)
+    private void Construct(ISeController seController)
     {
-        _seManager = seManager;
+        _seController = seController;
     }
 
     private void Awake()
@@ -19,7 +19,7 @@ public abstract class BaseBlock : MonoBehaviour, IHittable
 
     public virtual void Hit(Vector3 moveDirection)
     {
-        _seManager.PlaySe(SeType.Hit);
+        _seController.PlaySe(SeType.Hit);
     }
 
     public bool isMove { get; protected set; }

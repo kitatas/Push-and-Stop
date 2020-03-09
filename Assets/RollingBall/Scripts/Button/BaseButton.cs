@@ -20,12 +20,12 @@ public abstract class BaseButton : MonoBehaviour
         }
     }
 
-    private SeManager _seManager;
+    private ISeController _seController;
 
     [Inject]
-    private void Construct(SeManager seManager)
+    private void Construct(ISeController seController)
     {
-        _seManager = seManager;
+        _seController = seController;
     }
 
     protected virtual void Awake()
@@ -38,7 +38,7 @@ public abstract class BaseButton : MonoBehaviour
 
     protected virtual void OnPush()
     {
-        _seManager.PlaySe(SeType.Button);
+        _seController.PlaySe(SeType.Button);
     }
 
     public void ActivateButton(bool value)
