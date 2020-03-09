@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
-public sealed class SeTable : ScriptableObject
+public sealed class SeTable : SerializedScriptableObject
 {
-    public AudioClip buttonClip;
-    public AudioClip hitClip;
-    public AudioClip clearClip;
+    public Dictionary<SeType, AudioClip> seList;
 }

@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 public sealed class BgmManager : BaseAudioSource
 {
-    private Dictionary<BgmType, AudioClip> _bgmList = null;
+    private BgmTable _bgmTable;
 
     [Inject]
     private void Construct(BgmTable bgmTable)
     {
-        _bgmList = new Dictionary<BgmType, AudioClip>
-        {
-            {BgmType.Main, bgmTable.mainClip},
-        };
+        _bgmTable = bgmTable;
     }
 
     private void Awake()
@@ -24,7 +19,12 @@ public sealed class BgmManager : BaseAudioSource
 
     public void PlayBgm(BgmType bgmType)
     {
-        audioSource.clip = _bgmList[bgmType];
+        audioSource.clip = _bgmTable.bgmList[bgmType];
         audioSource.Play();
+    }
+
+    public void StopBgm()
+    {
+        audioSource.Stop();
     }
 }

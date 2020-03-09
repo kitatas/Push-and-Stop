@@ -1,24 +1,17 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 public sealed class SeManager : BaseAudioSource
 {
-    private Dictionary<SeType, AudioClip> _seList = null;
+    private SeTable _seTable;
 
     [Inject]
     private void Construct(SeTable seTable)
     {
-        _seList = new Dictionary<SeType, AudioClip>
-        {
-            {SeType.Button, seTable.buttonClip},
-            {SeType.Hit,    seTable.hitClip},
-            {SeType.Clear,  seTable.clearClip},
-        };
+        _seTable = seTable;
     }
 
     public void PlaySe(SeType seType)
     {
-        audioSource.PlayOneShot(_seList[seType]);
+        audioSource.PlayOneShot(_seTable.seList[seType]);
     }
 }

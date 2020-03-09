@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "DataTable/BgmTable", fileName = "BgmTable")]
-public sealed class BgmTable : ScriptableObject
+public sealed class BgmTable : SerializedScriptableObject
 {
-    public AudioClip mainClip;
+    public Dictionary<BgmType, AudioClip> bgmList;
 }
