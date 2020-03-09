@@ -38,6 +38,14 @@ sysinfo.txt
 # Rider Settings
 .idea
 
+# Asset Editor
+Assets/Editor
+Assets/Editor.meta
+
+# Asset Gizmos
+Assets/Gizmos
+Assets/Gizmos.meta
+
 # Asset Plugins
 Assets/Plugins
 Assets/Plugins.meta
@@ -46,13 +54,13 @@ Assets/Plugins.meta
 Assets/Resources
 Assets/Resources.meta
 
+# Asset StreamingAssets
+Assets/StreamingAssets
+Assets/StreamingAssets.meta
+
 # TextMeshPro
 Assets/TextMesh Pro
 Assets/TextMesh Pro.meta
-
-# EasySave
-Assets/Easy Save 2
-Assets/Easy Save 2.meta
 
 # Other Materials
 Assets/MyAsset
