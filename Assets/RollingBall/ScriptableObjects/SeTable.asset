@@ -12,6 +12,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6141c6267afb26b4884d24bc70c7c859, type: 3}
   m_Name: SeTable
   m_EditorClassIdentifier: 
-  buttonClip: {fileID: 8300000, guid: 8a4e6a6679dfd410e8ff5d4f91775d00, type: 3}
-  hitClip: {fileID: 8300000, guid: b02f560def7094dacaee2d293400e129, type: 3}
-  clearClip: {fileID: 8300000, guid: fcced94e2e54647fa867168218826698, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 8a4e6a6679dfd410e8ff5d4f91775d00, type: 3}
+    - {fileID: 8300000, guid: b02f560def7094dacaee2d293400e129, type: 3}
+    - {fileID: 8300000, guid: fcced94e2e54647fa867168218826698, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: seList
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[SeType, Assembly-CSharp],[UnityEngine.AudioClip,
+        UnityEngine.AudioModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[SeType, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

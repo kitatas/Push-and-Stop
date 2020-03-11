@@ -4,7 +4,7 @@ public sealed class UnityAudioSeController : BaseAudioSource// , ISeController
 {
     private UnityAudioSeTable _unityAudioSeTable;
 
-    [Inject]
+    // [Inject]
     private void Construct(UnityAudioSeTable unityAudioSeTable)
     {
         _unityAudioSeTable = unityAudioSeTable;

@@ -4,7 +4,7 @@ public sealed class UnityAudioBgmController : BaseAudioSource// , IBgmController
 {
     private UnityAudioBgmTable _unityAudioBgmTable;
 
-    [Inject]
+    // [Inject]
     private void Construct(UnityAudioBgmTable unityAudioBgmTable)
     {
         _unityAudioBgmTable = unityAudioBgmTable;
