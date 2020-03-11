@@ -9,7 +9,7 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
     [SerializeField] private Slider seSlider = null;
     [SerializeField] private Button resetButton = null;
 
-    [Inject]
+    // [Inject]
     private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
     {
         IVolumeUpdatable bgm = unityAudioBgmController;

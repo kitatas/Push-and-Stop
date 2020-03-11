@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-public sealed class UnityAudioSeController : BaseAudioSource, ISeController
+public sealed class UnityAudioSeController : BaseAudioSource// , ISeController
 {
     private UnityAudioSeTable _unityAudioSeTable;
 

@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
+public sealed class UnityAudioBgmController : BaseAudioSource// , IBgmController
 {
     private UnityAudioBgmTable _unityAudioBgmTable;
 
