@@ -60,7 +60,7 @@ MonoBehaviour:
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
-  _bindType: 1
+  _bindType: 2
 --- !u!1 &8515535487830078853
 GameObject:
   m_ObjectHideFlags: 0
