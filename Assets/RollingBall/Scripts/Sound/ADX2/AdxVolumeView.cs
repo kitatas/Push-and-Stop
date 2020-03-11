@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public sealed class UnityAudioVolumeView : MonoBehaviour
+public sealed class AdxVolumeView : MonoBehaviour
 {
     [SerializeField] private Slider bgmSlider = null;
     [SerializeField] private Slider seSlider = null;
@@ -11,19 +11,19 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
 
     private readonly Subject<Unit> _subject = new Subject<Unit>();
 
-    // [Inject]
-    private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
+    [Inject]
+    private void Construct(AdxBgmController adxBgmController, AdxSeController adxSeController)
     {
-        SetSliderValue(unityAudioBgmController, unityAudioSeController);
+        SetSliderValue(adxBgmController, adxSeController);
 
-        bgmSlider.UpdateVolumeSlider(unityAudioBgmController);
-        seSlider.UpdateVolumeSlider(unityAudioSeController);
+        bgmSlider.UpdateVolumeSlider(adxBgmController);
+        seSlider.UpdateVolumeSlider(adxSeController);
 
         _subject
-            .Subscribe(_ => unityAudioSeController.PlaySe(SeType.Button))
+            .Subscribe(_ => adxSeController.PlaySe(SeType.Button))
             .AddTo(this);
 
-        OnPushResetButton(unityAudioBgmController, unityAudioSeController);
+        OnPushResetButton(adxBgmController, adxSeController);
     }
 
     private void SetSliderValue(IVolumeUpdatable bgm, IVolumeUpdatable se)
