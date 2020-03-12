@@ -13,13 +13,13 @@ public sealed class LoadButton : BaseButton
     /// </summary>
     [SerializeField, Range(-2, 9)] private int stageNumber = 0;
 
-    private Transition _transition;
+    private SceneLoader _sceneLoader;
     private StageDataTable _stageDataTable;
 
     [Inject]
-    private void Construct(Transition transition, StageDataTable stageDataTable)
+    private void Construct(SceneLoader sceneLoader, StageDataTable stageDataTable)
     {
-        _transition = transition;
+        _sceneLoader = sceneLoader;
         _stageDataTable = stageDataTable;
     }
 
@@ -36,25 +36,25 @@ public sealed class LoadButton : BaseButton
         if (stageNumber >= 0)
         {
             _stageDataTable.SetStageIndex(stageNumber);
-            _transition.LoadScene(sceneName, _fadeTime);
+            _sceneLoader.FadeLoadScene(sceneName, _fadeTime);
             return;
         }
 
         // Reload
         if (stageNumber == -2)
         {
-            _transition.LoadScene(sceneName);
+            _sceneLoader.LoadScene(sceneName);
             return;
         }
 
         // Next Load
         if (_stageDataTable.IsNextStage())
         {
-            _transition.LoadScene(sceneName, _fadeTime);
+            _sceneLoader.FadeLoadScene(sceneName, _fadeTime);
             return;
         }
 
         _stageDataTable.ResetStageIndex();
-        _transition.LoadScene("Title", _fadeTime);
+        _sceneLoader.FadeLoadScene("Title", _fadeTime);
     }
 }

@@ -9,7 +9,7 @@ public sealed class TransitionInstaller : MonoInstaller
             .AsCached();
 
         Container
-            .Bind<Transition>()
+            .Bind<SceneLoader>()
             .AsCached();
     }
 }

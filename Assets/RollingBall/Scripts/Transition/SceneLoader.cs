@@ -4,7 +4,7 @@ using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
-public sealed class Transition
+public sealed class SceneLoader
 {
     private const float alphaCutOffMax = 0.7f;
     private const float alphaCutOffMin = 0f;
@@ -33,7 +33,7 @@ public sealed class Transition
     /// </summary>
     /// <param name="sceneName">Name of the scene to load</param>
     /// <param name="fadeTime">Time to fade</param>
-    public void LoadScene(string sceneName, float fadeTime = 1f)
+    public void FadeLoadScene(string sceneName, float fadeTime = 1f)
     {
         _transitionDuration = fadeTime;
         FadeAsync(sceneName).Forget();
