@@ -20,6 +20,8 @@ public sealed class UndoButton : BaseButton
 
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Decrease);
 
+        _caretaker.PopMementoStack();
+
         if (_caretaker.IsMementoStackEmpty())
         {
             InteractButton(false);

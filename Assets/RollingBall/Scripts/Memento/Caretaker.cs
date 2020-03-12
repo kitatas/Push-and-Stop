@@ -31,7 +31,7 @@ public sealed class Caretaker
         _mementoStack.Push(mementoArray);
     }
 
-    private void PopMementoStack()
+    public void PopMementoStack()
     {
         var mementoArray = _mementoStack.Peek();
         for (int i = 0; i < _moveObjects.Count; i++)
@@ -42,10 +42,5 @@ public sealed class Caretaker
         _mementoStack.Pop();
     }
 
-    public bool IsMementoStackEmpty()
-    {
-        PopMementoStack();
-
-        return _mementoStack.Count == 0;
-    }
+    public bool IsMementoStackEmpty() => _mementoStack.Count == 0;
 }
