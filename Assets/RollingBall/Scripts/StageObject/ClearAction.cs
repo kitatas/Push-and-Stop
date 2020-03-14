@@ -12,6 +12,7 @@ public sealed class ClearAction : MonoBehaviour
     [SerializeField] private Image[] rankImages = null;
     [SerializeField] private Button nextButton = null;
     private const float animationTime = 0.5f;
+    private int _stageIndex;
     private int _minMoveCount;
 
     private ISeController _seController;
@@ -22,6 +23,7 @@ public sealed class ClearAction : MonoBehaviour
     {
         _seController = seController;
         _moveCount = moveCount;
+        _stageIndex = stageDataTable.StageIndex();
         _minMoveCount = stageDataTable.StageDataInfo().minMoveCount;
 
         nextButton.interactable = false;
@@ -73,20 +75,26 @@ public sealed class ClearAction : MonoBehaviour
     {
         rankBackGround.gameObject.SetActive(true);
         var clearRate = (float) _moveCount.moveCount / _minMoveCount;
+        var clearRank = GetClearRank(clearRate);
+        TweenRankImages(clearRank);
 
+        var key = $"stage{_stageIndex}";
+        ES3.Save<int>(key, clearRank);
+    }
+
+    private static int GetClearRank(float clearRate)
+    {
         if (clearRate <= 1.0f)
         {
-            TweenRankImages(3);
-            return;
+            return 3;
         }
 
         if (clearRate <= 1.5f)
         {
-            TweenRankImages(2);
-            return;
+            return 2;
         }
 
-        TweenRankImages(1);
+        return 1;
     }
 
     private void TweenRankImages(int count)
