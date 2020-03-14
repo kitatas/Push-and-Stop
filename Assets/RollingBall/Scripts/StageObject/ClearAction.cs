@@ -122,7 +122,7 @@ public sealed class ClearAction : MonoBehaviour
 
         DOTween.Sequence()
             .AppendInterval(waitTime)
-            .Append(clearText.RectTransform()
+            .Append(clearText.rectTransform
                 .DOAnchorPosY(70f, animationTime))
             .Append(nextButton.image
                 .DOFade(1f, animationTime))

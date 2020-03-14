@@ -25,11 +25,6 @@ public static class ExtensionMethods
         }
     }
 
-    public static RectTransform RectTransform(this UIBehaviour uiBehaviour)
-    {
-        return uiBehaviour.transform as RectTransform;
-    }
-
     public static RectTransform RectTransform(this CanvasGroup canvasGroup)
     {
         return canvasGroup.transform as RectTransform;
