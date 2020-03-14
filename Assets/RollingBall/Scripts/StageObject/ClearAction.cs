@@ -7,16 +7,22 @@ using Zenject;
 
 public sealed class ClearAction : MonoBehaviour
 {
-    private ISeController _seController;
-
     [SerializeField] private TextMeshProUGUI clearText = null;
+    [SerializeField] private Image rankBackGround = null;
+    [SerializeField] private Image[] rankImages = null;
     [SerializeField] private Button nextButton = null;
     private const float animationTime = 0.5f;
+    private int _minMoveCount;
+
+    private ISeController _seController;
+    private IMoveCount _moveCount;
 
     [Inject]
-    private void Construct(ISeController seController)
+    private void Construct(ISeController seController, IMoveCount moveCount, StageDataTable stageDataTable)
     {
         _seController = seController;
+        _moveCount = moveCount;
+        _minMoveCount = stageDataTable.StageDataInfo().minMoveCount;
 
         nextButton.interactable = false;
     }
@@ -26,6 +32,8 @@ public sealed class ClearAction : MonoBehaviour
         _seController.PlaySe(SeType.Clear);
 
         TweenClearText();
+
+        DisplayClearRank();
 
         DisplayNextButton();
     }
@@ -61,6 +69,50 @@ public sealed class ClearAction : MonoBehaviour
         }
     }
 
+    private void DisplayClearRank()
+    {
+        rankBackGround.gameObject.SetActive(true);
+        var clearRate = (float) _moveCount.moveCount / _minMoveCount;
+
+        if (clearRate <= 1.0f)
+        {
+            TweenRankImages(3);
+            return;
+        }
+
+        if (clearRate <= 1.5f)
+        {
+            TweenRankImages(2);
+            return;
+        }
+
+        TweenRankImages(1);
+    }
+
+    private void TweenRankImages(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            TweenRankImage(rankImages[i]);
+        }
+    }
+
+    private static void TweenRankImage(Image image)
+    {
+        var animTime = animationTime * 2f;
+
+        DOTween.Sequence()
+            .Append(image
+                .DOFade(1f, animTime)
+                .SetEase(Ease.InQuad))
+            .Join(image.rectTransform
+                .DOScale(Vector3.one, animTime)
+                .SetEase(Ease.InOutBack))
+            .Join(image.rectTransform
+                .DOLocalRotate(new Vector3(0f, 0f, 360f), animTime, RotateMode.FastBeyond360)
+                .SetEase(Ease.InQuad));
+    }
+
     private void DisplayNextButton()
     {
         nextButton.enabled = false;
@@ -71,7 +123,7 @@ public sealed class ClearAction : MonoBehaviour
         DOTween.Sequence()
             .AppendInterval(waitTime)
             .Append(clearText.RectTransform()
-                .DOAnchorPosY(50f, animationTime))
+                .DOAnchorPosY(70f, animationTime))
             .Append(nextButton.image
                 .DOFade(1f, animationTime))
             .OnComplete(() => nextButton.enabled = true);
