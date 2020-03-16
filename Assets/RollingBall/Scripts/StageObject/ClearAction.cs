@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
-public sealed class ClearAction : MonoBehaviour
+public sealed class ClearAction
 {
     private ISeController _seController;
     private ClearText _clearText;
