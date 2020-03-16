@@ -79,7 +79,11 @@ public sealed class ClearAction : MonoBehaviour
         TweenRankImages(clearRank);
 
         var key = $"stage{_stageIndex}";
-        ES3.Save<int>(key, clearRank);
+        var loadRank = ES3.Load<int>(key, defaultValue: 0);
+        if (clearRank > loadRank)
+        {
+            ES3.Save<int>(key, clearRank);
+        }
     }
 
     private static int GetClearRank(float clearRate)
