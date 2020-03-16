@@ -4,6 +4,7 @@ using UnityEngine;
 
 public sealed class ConstantList
 {
+    public const float uiAnimationTime = 0.5f;
     public const float correctTime = 0.3f;
 
     public static readonly Dictionary<MoveDirection, Vector3> moveDirection = new Dictionary<MoveDirection, Vector3>
