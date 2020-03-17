@@ -10,8 +10,13 @@ public sealed class RankLoader : MonoBehaviour
 
     private void Awake()
     {
+        LoadRank();
+    }
+
+    public void LoadRank()
+    {
         var key = $"stage{stageNumber}";
-        var rank = ES3.Load<int>(key, defaultValue: 0);
+        var rank = ES3.Load(key, 0);
 
         for (int i = 0; i < rankImages.Length; i++)
         {
