@@ -14,11 +14,13 @@ public sealed class ClearRank : MonoBehaviour
     private int _minMoveCount;
 
     [Inject]
-    private void Construct(IMoveCount moveCount, StageDataTable stageDataTable)
+    private void Construct(IMoveCount moveCount, StageDataTable stageDataTable, MinMoveCountView minMoveCountView)
     {
         _moveCount = moveCount;
         _stageIndex = stageDataTable.StageIndex();
         _minMoveCount = stageDataTable.StageDataInfo().minMoveCount;
+
+        minMoveCountView.Display(_minMoveCount);
     }
 
     public void DisplayClearRank()

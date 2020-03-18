@@ -21,15 +21,13 @@ public sealed class StageLoader
 
     [Inject]
     private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
-        StageDataTable stageDataTable, MinMoveCountView minMoveCountView, Caretaker caretaker)
+        StageDataTable stageDataTable, Caretaker caretaker)
     {
         _stageObjectTable = stageObjectTable;
         _player = playerController;
         _goal = goal;
 
-        var stageData = stageDataTable.StageDataInfo();
-        minMoveCountView.Display(stageData.minMoveCount);
-        LoadStageData(stageData.stageFile);
+        LoadStageData(stageDataTable.StageDataInfo().stageFile);
 
         caretaker.Initialize();
     }
