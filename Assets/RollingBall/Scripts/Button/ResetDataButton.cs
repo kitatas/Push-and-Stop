@@ -6,7 +6,7 @@
 
         for (int i = 0; i < 10; i++)
         {
-            var key = $"stage{i}";
+            var key = ConstantList.GetKeyName(i);
             ES3.Save<int>(key, 0);
         }
 
