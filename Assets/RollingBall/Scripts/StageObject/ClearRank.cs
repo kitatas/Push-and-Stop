@@ -31,7 +31,7 @@ public sealed class ClearRank : MonoBehaviour
         var clearRank = GetClearRank(clearRate);
         TweenRankImages(clearRank);
 
-        var key = $"stage{_stageIndex}";
+        var key = ConstantList.GetKeyName(_stageIndex);
         var loadRank = ES3.Load(key, 0);
         if (clearRank > loadRank)
         {

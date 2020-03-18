@@ -20,4 +20,6 @@ public sealed class ConstantList
         {PopType.Open,  new PopInfo(true,  1f, Vector3.one, Ease.OutBack)},
         {PopType.Close, new PopInfo(false, 0f, Vector3.one * 0.8f, Ease.InBack)},
     };
+
+    public static string GetKeyName(int stageIndex) => $"stage{stageIndex}";
 }

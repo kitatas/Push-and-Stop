@@ -15,7 +15,7 @@ public sealed class RankLoader : MonoBehaviour
 
     public void LoadRank()
     {
-        var key = $"stage{stageNumber}";
+        var key = ConstantList.GetKeyName(stageNumber);
         var rank = ES3.Load(key, 0);
 
         for (int i = 0; i < rankImages.Length; i++)
