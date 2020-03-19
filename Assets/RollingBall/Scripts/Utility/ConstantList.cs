@@ -18,7 +18,7 @@ public sealed class ConstantList
     public static readonly Dictionary<PopType, PopInfo> popList = new Dictionary<PopType, PopInfo>
     {
         {PopType.Open,  new PopInfo(true,  1f, Vector3.one, Ease.OutBack)},
-        {PopType.Close, new PopInfo(false, 0f, Vector3.one * 0.8f, Ease.InBack)},
+        {PopType.Close, new PopInfo(false, 0f, Vector3.one * 0.8f, Ease.OutQuart)},
     };
 
     public static string GetKeyName(int stageIndex) => $"stage{stageIndex}";
