@@ -1,11 +1,9 @@
-﻿using UniRx.Async;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class PlayerMover
 {
     private readonly Rigidbody2D _rigidbody;
 
-    private bool _isMove;
     private Vector3 _moveDirection;
     private const float _moveSpeed = 10f;
     private readonly Vector2 _zero = Vector2.zero;
@@ -15,25 +13,18 @@ public sealed class PlayerMover
         _rigidbody = rigidbody;
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        _isMove = false;
         _moveDirection = Vector3.zero;
     }
 
-    public async UniTaskVoid MoveAsync(Vector3 moveDirection)
+    public void Move(Vector3 moveDirection)
     {
-        _isMove = true;
         _moveDirection = moveDirection;
 
         _rigidbody.velocity = _moveSpeed * _moveDirection;
-
-        await UniTask.WaitWhile(IsMove);
     }
-
-    private bool IsMove() => _isMove;
 
     public void HitBlock(IHittable hittable)
     {
-        _isMove = false;
         hittable.Hit(_moveDirection);
     }
 

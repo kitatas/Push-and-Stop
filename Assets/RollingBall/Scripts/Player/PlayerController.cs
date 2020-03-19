@@ -26,7 +26,7 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
             moveButton.OnPushed()
                 .Subscribe(moveDirection =>
                 {
-                    _playerMover.MoveAsync(moveDirection).Forget();
+                    _playerMover.Move(moveDirection);
                     _undoButton.ActivateButton(false);
                     moveButtons.ActivateAllButtons(false);
                 });
