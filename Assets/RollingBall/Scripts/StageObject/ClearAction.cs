@@ -5,17 +5,17 @@ public sealed class ClearAction
     private ISeController _seController;
     private ClearText _clearText;
     private ClearRank _clearRank;
-    private ClearButton _clearButton;
+    private NextButton _nextButton;
 
     [Inject]
-    private void Construct(ISeController seController, ClearText clearText, ClearRank clearRank, ClearButton clearButton)
+    private void Construct(ISeController seController, ClearText clearText, ClearRank clearRank, NextButton nextButton)
     {
         _seController = seController;
         _clearText = clearText;
         _clearRank = clearRank;
-        _clearButton = clearButton;
+        _nextButton = nextButton;
 
-        clearButton.Initialize();
+        nextButton.Initialize();
     }
 
     public void DisplayClearUi()
@@ -26,6 +26,6 @@ public sealed class ClearAction
 
         _clearRank.DisplayClearRank();
 
-        _clearButton.DisplayNextButton(_clearText.RectTransform());
+        _nextButton.DisplayNextButton(_clearText.RectTransform());
     }
 }

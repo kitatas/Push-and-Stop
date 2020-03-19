@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class ClearButton : MonoBehaviour
+public sealed class NextButton : MonoBehaviour
 {
     [SerializeField] private Button nextButton = null;
     private const float animationTime = ConstantList.uiAnimationTime;
