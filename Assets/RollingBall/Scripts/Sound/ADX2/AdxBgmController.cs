@@ -1,4 +1,4 @@
-﻿public sealed class AdxBgmController : BaseCriAtomSource, IBgmController
+﻿public sealed class AdxBgmController : BaseCriAtomSource//, IBgmController
 {
     private void Awake()
     {

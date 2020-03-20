@@ -5,5 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
 public sealed class UnityAudioSeTable : SerializedScriptableObject
 {
-    public Dictionary<SeType, AudioClip> seList;
+    [SerializeField] private Dictionary<SeType, AudioClip> seList;
+
+    public Dictionary<SeType, AudioClip> SeList => seList;
 }

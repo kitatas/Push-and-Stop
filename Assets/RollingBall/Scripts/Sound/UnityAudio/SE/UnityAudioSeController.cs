@@ -1,10 +1,10 @@
 ﻿using Zenject;
 
-public sealed class UnityAudioSeController : BaseAudioSource// , ISeController
+public sealed class UnityAudioSeController : BaseAudioSource, ISeController
 {
     private UnityAudioSeTable _unityAudioSeTable;
 
-    // [Inject]
+    [Inject]
     private void Construct(UnityAudioSeTable unityAudioSeTable)
     {
         _unityAudioSeTable = unityAudioSeTable;
@@ -12,6 +12,11 @@ public sealed class UnityAudioSeController : BaseAudioSource// , ISeController
 
     public void PlaySe(SeType seType)
     {
-        audioSource.PlayOneShot(_unityAudioSeTable.seList[seType]);
+        if (_unityAudioSeTable.SeList.ContainsKey(seType) == false)
+        {
+            return;
+        }
+
+        audioSource.PlayOneShot(_unityAudioSeTable.SeList[seType]);
     }
 }

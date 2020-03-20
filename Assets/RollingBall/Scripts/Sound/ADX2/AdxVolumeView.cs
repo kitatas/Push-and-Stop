@@ -11,7 +11,7 @@ public sealed class AdxVolumeView : MonoBehaviour
 
     private readonly Subject<Unit> _subject = new Subject<Unit>();
 
-    [Inject]
+    // [Inject]
     private void Construct(AdxBgmController adxBgmController, AdxSeController adxSeController)
     {
         SetSliderValue(adxBgmController, adxSeController);

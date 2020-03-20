@@ -1,4 +1,4 @@
-﻿public class AdxSeController : BaseCriAtomSource, ISeController
+﻿public class AdxSeController : BaseCriAtomSource//, ISeController
 {
     public void PlaySe(SeType seType)
     {

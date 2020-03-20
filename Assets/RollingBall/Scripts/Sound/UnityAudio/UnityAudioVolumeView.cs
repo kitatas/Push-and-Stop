@@ -11,7 +11,7 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
 
     private readonly Subject<Unit> _subject = new Subject<Unit>();
 
-    // [Inject]
+    [Inject]
     private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
     {
         SetSliderValue(unityAudioBgmController, unityAudioSeController);

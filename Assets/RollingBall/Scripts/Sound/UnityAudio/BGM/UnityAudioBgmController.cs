@@ -1,10 +1,10 @@
 ﻿using Zenject;
 
-public sealed class UnityAudioBgmController : BaseAudioSource// , IBgmController
+public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
 {
     private UnityAudioBgmTable _unityAudioBgmTable;
 
-    // [Inject]
+    [Inject]
     private void Construct(UnityAudioBgmTable unityAudioBgmTable)
     {
         _unityAudioBgmTable = unityAudioBgmTable;
@@ -19,7 +19,12 @@ public sealed class UnityAudioBgmController : BaseAudioSource// , IBgmController
 
     public void PlayBgm(BgmType bgmType)
     {
-        audioSource.clip = _unityAudioBgmTable.bgmList[bgmType];
+        if (_unityAudioBgmTable.BgmList.ContainsKey(bgmType) == false)
+        {
+            return;
+        }
+
+        audioSource.clip = _unityAudioBgmTable.BgmList[bgmType];
         audioSource.Play();
     }
 
