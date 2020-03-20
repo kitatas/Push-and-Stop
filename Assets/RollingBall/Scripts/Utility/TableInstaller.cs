@@ -6,6 +6,8 @@ public sealed class TableInstaller : ScriptableObjectInstaller<TableInstaller>
 {
     [SerializeField] private StageDataTable stageDataTable = null;
     [SerializeField] private StageObjectTable stageObjectTable = null;
+    [SerializeField] private UnityAudioBgmTable unityAudioBgmTable = null;
+    [SerializeField] private UnityAudioSeTable unityAudioSeTable = null;
 
     public override void InstallBindings()
     {
@@ -14,5 +16,11 @@ public sealed class TableInstaller : ScriptableObjectInstaller<TableInstaller>
 
         Container
             .BindInstance(stageObjectTable);
+
+        Container
+            .BindInstance(unityAudioBgmTable);
+
+        Container
+            .BindInstance(unityAudioSeTable);
     }
 }
