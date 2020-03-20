@@ -37,22 +37,20 @@ public sealed class BallBlock : BaseBlock, IMoveObject
         isMove = true;
         _moveDirection = moveDirection;
 
-        await UniTask.WaitWhile(IsMove);
-    }
+        await UniTask.WaitWhile(() =>
+        {
+            transform.position += _moveSpeed * _moveDirection;
 
-    private bool IsMove()
-    {
-        transform.position += _moveSpeed * _moveDirection;
-
-        return isMove;
+            return isMove;
+        });
     }
 
     private void CorrectPosition()
     {
-        var nextPosition = transform.RoundPosition();
+        var roundPosition = transform.RoundPosition();
 
         transform
-            .DOMove(nextPosition, ConstantList.correctTime);
+            .DOMove(roundPosition, ConstantList.correctTime);
     }
 
     public void SetPosition(Vector2 setPosition)
