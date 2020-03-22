@@ -44,7 +44,14 @@ public sealed class SceneLoader
         var beforeSceneButtons = Object.FindObjectsOfType<BaseButton>();
         beforeSceneButtons.ActivateAllButtons(false);
         SetUpFade(alphaCutOffMax);
-        await UniTask.WaitUntil(FadeOut);
+        await UniTask.WaitUntil(() =>
+        {
+            _transitionProgress += Time.deltaTime * fadeSpeedRate;
+            var alphaCutOffValue = alphaCutOffMax - alphaCutOffMax * _transitionProgress / _transitionDuration;
+            _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
+
+            return IsFadeComplete();
+        });
 
         LoadScene(sceneName);
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
@@ -52,7 +59,14 @@ public sealed class SceneLoader
         var afterSceneButtons = Object.FindObjectsOfType<BaseButton>();
         afterSceneButtons.ActivateAllButtons(false);
         SetUpFade(alphaCutOffMin);
-        await UniTask.WaitUntil(FadeIn);
+        await UniTask.WaitUntil(() =>
+        {
+            _transitionProgress += Time.deltaTime * fadeSpeedRate;
+            var alphaCutOffValue = alphaCutOffMax * _transitionProgress / _transitionDuration;
+            _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
+
+            return IsFadeComplete();
+        });
 
         afterSceneButtons.ActivateAllButtons(true);
     }
@@ -61,24 +75,6 @@ public sealed class SceneLoader
     {
         _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
         _transitionProgress = 0f;
-    }
-
-    private bool FadeOut()
-    {
-        _transitionProgress += Time.deltaTime * fadeSpeedRate;
-        var alphaCutOffValue = alphaCutOffMax - alphaCutOffMax * _transitionProgress / _transitionDuration;
-        _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
-
-        return IsFadeComplete();
-    }
-
-    private bool FadeIn()
-    {
-        _transitionProgress += Time.deltaTime * fadeSpeedRate;
-        var alphaCutOffValue = alphaCutOffMax * _transitionProgress / _transitionDuration;
-        _transitionSpriteMask.SetAlphaCutOff(alphaCutOffValue);
-
-        return IsFadeComplete();
     }
 
     private bool IsFadeComplete() => _transitionProgress >= _transitionDuration;
