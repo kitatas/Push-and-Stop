@@ -32,9 +32,9 @@ public sealed class StageLoader
         caretaker.Initialize();
     }
 
-    private void LoadStageData(TextAsset stage)
+    private void LoadStageData(TextAsset stageFile)
     {
-        var lines = stage.text.Split(new[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+        var lines = stageFile.text.Split(new[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
 
         var col = lines[0].Split(',').Length;
         var row = lines.Length;
