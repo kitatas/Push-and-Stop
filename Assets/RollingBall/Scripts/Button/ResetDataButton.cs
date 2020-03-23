@@ -2,8 +2,6 @@
 {
     protected override void OnPush()
     {
-        base.OnPush();
-
         for (int i = 0; i < 10; i++)
         {
             var key = ConstantList.GetKeyName(i);
