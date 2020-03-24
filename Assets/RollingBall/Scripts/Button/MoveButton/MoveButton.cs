@@ -20,9 +20,9 @@ public sealed class MoveButton : BaseButton
         _caretaker = caretaker;
     }
 
-    protected override void OnPush()
+    protected override void OnPush(ButtonType buttonType)
     {
-        base.OnPush();
+        base.OnPush(ButtonType.Decision);
 
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
 

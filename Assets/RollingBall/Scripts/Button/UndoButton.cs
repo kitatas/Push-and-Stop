@@ -14,9 +14,9 @@ public sealed class UndoButton : BaseButton
         InteractButton(false);
     }
 
-    protected override void OnPush()
+    protected override void OnPush(ButtonType buttonType)
     {
-        base.OnPush();
+        base.OnPush(ButtonType.Cancel);
 
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Decrease);
 

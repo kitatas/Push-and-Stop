@@ -12,17 +12,20 @@ public sealed class LoadButton : BaseButton
 
     private SceneLoader _sceneLoader;
     private StageDataTable _stageDataTable;
+    private ButtonType _buttonType;
 
     [Inject]
     private void Construct(SceneLoader sceneLoader, StageDataTable stageDataTable)
     {
         _sceneLoader = sceneLoader;
         _stageDataTable = stageDataTable;
+
+        _buttonType = loadType == LoadType.Reload ? ButtonType.Cancel : ButtonType.Decision;
     }
 
-    protected override void OnPush()
+    protected override void OnPush(ButtonType buttonType)
     {
-        base.OnPush();
+        base.OnPush(_buttonType);
 
         LoadScene();
     }

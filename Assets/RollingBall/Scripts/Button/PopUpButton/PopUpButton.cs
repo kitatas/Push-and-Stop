@@ -5,6 +5,7 @@ public sealed class PopUpButton : BaseButton
 {
     [SerializeField] private CanvasGroup canvasGroup = null;
     [SerializeField] private PopType popType = default;
+    private ButtonType _buttonType;
     private PopInfo _popInfo;
     private const float animationTime = 0.25f;
 
@@ -13,11 +14,20 @@ public sealed class PopUpButton : BaseButton
         base.Awake();
 
         _popInfo = ConstantList.popList[popType];
+
+        if (popType == PopType.Open || GetComponent<ResetDataButton>() != null)
+        {
+            _buttonType = ButtonType.Decision;
+        }
+        else
+        {
+            _buttonType = ButtonType.Cancel;
+        }
     }
 
-    protected override void OnPush()
+    protected override void OnPush(ButtonType buttonType)
     {
-        base.OnPush();
+        base.OnPush(_buttonType);
 
         TweenWindow();
     }

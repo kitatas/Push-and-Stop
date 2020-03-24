@@ -1,6 +1,6 @@
 ﻿public sealed class ResetDataButton : BaseButton
 {
-    protected override void OnPush()
+    protected override void OnPush(ButtonType buttonType)
     {
         for (int i = 0; i < 10; i++)
         {
