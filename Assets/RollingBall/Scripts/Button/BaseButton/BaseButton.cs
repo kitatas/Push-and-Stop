@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -32,13 +33,26 @@ public abstract class BaseButton : MonoBehaviour
     {
         button
             .OnClickAsObservable()
-            .Subscribe(_ => OnPush())
+            .Subscribe(_ => OnPush(default))
             .AddTo(this);
     }
 
-    protected virtual void OnPush()
+    protected virtual void OnPush(ButtonType buttonType)
     {
-        _seController.PlaySe(SeType.Button);
+        _seController.PlaySe(GetSeType(buttonType));
+    }
+
+    private SeType GetSeType(ButtonType buttonType)
+    {
+        switch (buttonType)
+        {
+            case ButtonType.Decision:
+                return SeType.DecisionButton;
+            case ButtonType.Cancel:
+                return SeType.CancelButton;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null);
+        }
     }
 
     public void ActivateButton(bool value)

@@ -1,6 +1,7 @@
 ﻿public enum SeType
 {
-    Button,
+    DecisionButton,
+    CancelButton,
     Hit,
     Clear,
 }
