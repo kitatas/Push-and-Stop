@@ -20,7 +20,7 @@ public sealed class AdxVolumeView : MonoBehaviour
         seSlider.UpdateVolumeSlider(adxSeController);
 
         _subject
-            .Subscribe(_ => adxSeController.PlaySe(SeType.Button))
+            .Subscribe(_ => adxSeController.PlaySe(SeType.DecisionButton))
             .AddTo(this);
 
         OnPushResetButton(adxBgmController, adxSeController);

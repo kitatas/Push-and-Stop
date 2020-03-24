@@ -20,7 +20,7 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
         seSlider.UpdateVolumeSlider(unityAudioSeController);
 
         _subject
-            .Subscribe(_ => unityAudioSeController.PlaySe(SeType.Button))
+            .Subscribe(_ => unityAudioSeController.PlaySe(SeType.DecisionButton))
             .AddTo(this);
 
         OnPushResetButton(unityAudioBgmController, unityAudioSeController);
