@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class Caretaker
+public sealed class Caretaker : ICaretakerInitializable, ICaretakerPushable, ICaretakerPopable
 {
     private Stack<Memento[]> _mementoStack;
     private List<IMoveObject> _moveObjects;
