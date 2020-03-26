@@ -21,7 +21,7 @@ public sealed class StageLoader
 
     [Inject]
     private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
-        StageDataTable stageDataTable, Caretaker caretaker)
+        StageDataTable stageDataTable, ICaretakerInitializable caretaker)
     {
         _stageObjectTable = stageObjectTable;
         _player = playerController;

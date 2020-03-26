@@ -11,10 +11,10 @@ public sealed class MoveButton : BaseButton
     [SerializeField] private MoveDirection moveDirection = default;
 
     private IMoveCountUpdatable _moveCountUpdatable;
-    private Caretaker _caretaker;
+    private ICaretakerPushable _caretaker;
 
     [Inject]
-    private void Construct(IMoveCountUpdatable moveCountUpdatable, Caretaker caretaker)
+    private void Construct(IMoveCountUpdatable moveCountUpdatable, ICaretakerPushable caretaker)
     {
         _moveCountUpdatable = moveCountUpdatable;
         _caretaker = caretaker;

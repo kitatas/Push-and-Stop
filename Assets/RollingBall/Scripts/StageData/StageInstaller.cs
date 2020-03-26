@@ -5,7 +5,7 @@ public sealed class StageInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container
-            .Bind<Caretaker>()
+            .BindInterfacesTo<Caretaker>()
             .AsCached();
 
         Container

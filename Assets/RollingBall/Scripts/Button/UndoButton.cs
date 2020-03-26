@@ -3,10 +3,10 @@
 public sealed class UndoButton : BaseButton
 {
     private IMoveCountUpdatable _moveCountUpdatable;
-    private Caretaker _caretaker;
+    private ICaretakerPopable _caretaker;
 
     [Inject]
-    private void Construct(IMoveCountUpdatable moveCountUpdatable, Caretaker caretaker)
+    private void Construct(IMoveCountUpdatable moveCountUpdatable, ICaretakerPopable caretaker)
     {
         _moveCountUpdatable = moveCountUpdatable;
         _caretaker = caretaker;
