@@ -34,7 +34,7 @@ public sealed class LoadButton : BaseButton
 
     private void LoadScene()
     {
-        switch (GetLoadType())
+        switch (loadType)
         {
             case LoadType.Direct:
                 _stageDataTable.SetStageIndex(stageNumber);
@@ -50,7 +50,7 @@ public sealed class LoadButton : BaseButton
                 LoadTitle();
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(loadType), loadType, null);
         }
     }
 
