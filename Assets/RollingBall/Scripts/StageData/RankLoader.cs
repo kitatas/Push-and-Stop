@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public sealed class RankLoader : MonoBehaviour
 {
+    private Button _button;
     private int _stageNumber;
     [SerializeField] private Image[] rankImages = null;
     private readonly Color _fillColor = new Color(255f / 255f, 180f / 255f, 0f / 255f);
@@ -10,6 +11,7 @@ public sealed class RankLoader : MonoBehaviour
 
     private void Awake()
     {
+        _button = GetComponent<Button>();
         _stageNumber = GetComponent<LoadButton>().stageNumber;
         LoadRank();
     }
@@ -24,5 +26,19 @@ public sealed class RankLoader : MonoBehaviour
             var color = i <= rank - 1 ? _fillColor : _emptyColor;
             rankImages[i].color = color;
         }
+
+        ActivateButton();
+    }
+
+    private void ActivateButton()
+    {
+        if (_stageNumber == 0)
+        {
+            _button.interactable = true;
+            return;
+        }
+
+        var key = ConstantList.GetKeyName(_stageNumber - 1);
+        _button.interactable = ES3.Load(key, 0) != 0;
     }
 }
