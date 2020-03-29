@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 public static class ExtensionMethods
 {
@@ -27,13 +25,5 @@ public static class ExtensionMethods
     public static RectTransform RectTransform(this CanvasGroup canvasGroup)
     {
         return canvasGroup.transform as RectTransform;
-    }
-
-    public static void UpdateVolumeSlider(this Slider slider, IVolumeUpdatable volumeUpdatable)
-    {
-        slider
-            .OnValueChangedAsObservable()
-            .Subscribe(volumeUpdatable.SetVolume)
-            .AddTo(slider);
     }
 }

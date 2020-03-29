@@ -16,8 +16,7 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
     {
         SetSliderValue(unityAudioBgmController, unityAudioSeController);
 
-        bgmSlider.UpdateVolumeSlider(unityAudioBgmController);
-        seSlider.UpdateVolumeSlider(unityAudioSeController);
+        UpdateVolumeSlider(unityAudioBgmController, unityAudioSeController);
 
         _subject
             .Subscribe(_ => unityAudioSeController.PlaySe(SeType.DecisionButton))
@@ -30,6 +29,19 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
     {
         bgmSlider.value = bgm.GetVolume();
         seSlider.value = se.GetVolume();
+    }
+
+    private void UpdateVolumeSlider(IVolumeUpdatable bgm, IVolumeUpdatable se)
+    {
+        bgmSlider
+            .OnValueChangedAsObservable()
+            .Subscribe(bgm.SetVolume)
+            .AddTo(this);
+
+        seSlider
+            .OnValueChangedAsObservable()
+            .Subscribe(se.SetVolume)
+            .AddTo(this);
     }
 
     private void OnPushResetButton(IVolumeUpdatable bgm, IVolumeUpdatable se)
