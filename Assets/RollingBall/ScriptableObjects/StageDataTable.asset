@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageIndex: 0
   stageData:
-  - stageFile: {fileID: 4900000, guid: 512c32f49a1f43f49ae74a88553326d2, type: 3}
-    minMoveCount: 2
-  - stageFile: {fileID: 4900000, guid: 6ba38902e5eb9f54792f3c04ffeebb28, type: 3}
-    minMoveCount: 2
-  - stageFile: {fileID: 4900000, guid: 32a75a1d0027f374796ac6a53ce5131a, type: 3}
-    minMoveCount: 3
-  - stageFile: {fileID: 4900000, guid: 7990ddb52134ad444a52d71a5530f567, type: 3}
-    minMoveCount: 6
-  - stageFile: {fileID: 4900000, guid: d8e1096767fcbd44bb35b8e609df8cf0, type: 3}
-    minMoveCount: 7
-  - stageFile: {fileID: 4900000, guid: 456723d2c1e11b34aaa18076928fb4b7, type: 3}
-    minMoveCount: 7
-  - stageFile: {fileID: 4900000, guid: 7d63f253efb669e489f04d83bd08e6dd, type: 3}
-    minMoveCount: 8
-  - stageFile: {fileID: 4900000, guid: ade2637b53714cc43afdc0f10e10b58a, type: 3}
-    minMoveCount: 8
-  - stageFile: {fileID: 4900000, guid: 0dd4bb0922c3980459718bdc4cdfeac8, type: 3}
-    minMoveCount: 14
-  - stageFile: {fileID: 4900000, guid: 2e620ae66f4cd7741bd8001886bac827, type: 3}
-    minMoveCount: 11
+  - stageDataFile: {fileID: 4900000, guid: 512c32f49a1f43f49ae74a88553326d2, type: 3}
+    targetMoveCount: 2
+  - stageDataFile: {fileID: 4900000, guid: 6ba38902e5eb9f54792f3c04ffeebb28, type: 3}
+    targetMoveCount: 2
+  - stageDataFile: {fileID: 4900000, guid: 32a75a1d0027f374796ac6a53ce5131a, type: 3}
+    targetMoveCount: 3
+  - stageDataFile: {fileID: 4900000, guid: 7990ddb52134ad444a52d71a5530f567, type: 3}
+    targetMoveCount: 6
+  - stageDataFile: {fileID: 4900000, guid: d8e1096767fcbd44bb35b8e609df8cf0, type: 3}
+    targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: 456723d2c1e11b34aaa18076928fb4b7, type: 3}
+    targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: 7d63f253efb669e489f04d83bd08e6dd, type: 3}
+    targetMoveCount: 8
+  - stageDataFile: {fileID: 4900000, guid: ade2637b53714cc43afdc0f10e10b58a, type: 3}
+    targetMoveCount: 8
+  - stageDataFile: {fileID: 4900000, guid: 0dd4bb0922c3980459718bdc4cdfeac8, type: 3}
+    targetMoveCount: 14
+  - stageDataFile: {fileID: 4900000, guid: 2e620ae66f4cd7741bd8001886bac827, type: 3}
+    targetMoveCount: 11
