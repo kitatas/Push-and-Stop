@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
-public sealed class UnityAudioSeTable : SerializedScriptableObject
+public sealed class UnityAudioSeTable : ScriptableObject
 {
-    [SerializeField] private Dictionary<SeType, AudioClip> seList = null;
+    [SerializeField] private AudioClip decisionButtonClip = null;
+    [SerializeField] private AudioClip cancelButtonClip = null;
+    [SerializeField] private AudioClip hitClip = null;
+    [SerializeField] private AudioClip clearClip = null;
 
-    public Dictionary<SeType, AudioClip> SeList => seList;
+    public AudioClip decisionButton => decisionButtonClip;
+    public AudioClip cancelButton => cancelButtonClip;
+    public AudioClip hit => hitClip;
+    public AudioClip clear => clearClip;
 }
