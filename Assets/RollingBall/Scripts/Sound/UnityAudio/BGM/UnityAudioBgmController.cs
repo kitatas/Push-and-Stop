@@ -1,13 +1,18 @@
-﻿using Zenject;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
 
 public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
 {
-    private UnityAudioBgmTable _unityAudioBgmTable;
+    private Dictionary<BgmType, AudioClip> _bgmList;
 
     [Inject]
     private void Construct(UnityAudioBgmTable unityAudioBgmTable)
     {
-        _unityAudioBgmTable = unityAudioBgmTable;
+        _bgmList = new Dictionary<BgmType, AudioClip>
+        {
+            {BgmType.Main, unityAudioBgmTable.main},
+        };
     }
 
     private void Awake()
@@ -19,12 +24,12 @@ public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
 
     public void PlayBgm(BgmType bgmType)
     {
-        if (_unityAudioBgmTable.BgmList.ContainsKey(bgmType) == false)
+        if (_bgmList.ContainsKey(bgmType) == false)
         {
             return;
         }
 
-        audioSource.clip = _unityAudioBgmTable.BgmList[bgmType];
+        audioSource.clip = _bgmList[bgmType];
         audioSource.Play();
     }
 
