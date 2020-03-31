@@ -2,7 +2,6 @@
 {
     private readonly string _gameId = "nanka_title_v2";
     private readonly string _hashTag = "";
-    private const int _maxStageCount = 30;
 
     protected override void OnPush(ButtonType buttonType)
     {
@@ -19,7 +18,7 @@
         var clearStageIndex = 0;
         var completeCount = 0;
 
-        for (int i = 0; i < _maxStageCount; i++)
+        for (int i = 0; i < ConstantList.maxStageCount; i++)
         {
             var key = ConstantList.GetKeyName(i);
             var clearInfo = ES3.Load(key, 0);
@@ -43,12 +42,12 @@
     {
         var (clearStageIndex, completeCount) = clearInfo;
 
-        if (completeCount == _maxStageCount)
+        if (completeCount == ConstantList.maxStageCount)
         {
             return $"全てのステージを星３でクリアした！\n";
         }
 
-        if (clearStageIndex == _maxStageCount)
+        if (clearStageIndex == ConstantList.maxStageCount)
         {
             return "全てのステージをクリアした！\n";
         }
