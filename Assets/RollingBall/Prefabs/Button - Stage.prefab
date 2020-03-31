@@ -209,7 +209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30C6\u30FC\u30B8\n"
+  m_text: "<cspace=-5>\u30B9\u30C6\u30FC\u30B8</cspace>\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6403832554fc041718239f9779f97014, type: 2}
   m_sharedMaterial: {fileID: 21194872724983810, guid: 6403832554fc041718239f9779f97014,
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_textAlignment: 514
-  m_characterSpacing: -10
+  m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
