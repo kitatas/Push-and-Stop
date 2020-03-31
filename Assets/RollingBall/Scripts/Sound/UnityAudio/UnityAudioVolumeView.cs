@@ -50,8 +50,8 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
             .OnClickAsObservable()
             .Subscribe(_ =>
             {
-                bgm.SetVolume(0.5f);
-                se.SetVolume(0.5f);
+                bgm.SetVolume(bgmSlider.maxValue / 2f);
+                se.SetVolume(seSlider.maxValue / 2f);
                 SetSliderValue(bgm, se);
 
                 _subject.OnNext(Unit.Default);
