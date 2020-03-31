@@ -16,21 +16,61 @@ MonoBehaviour:
   stageData:
   - stageDataFile: {fileID: 4900000, guid: 512c32f49a1f43f49ae74a88553326d2, type: 3}
     targetMoveCount: 2
+  - stageDataFile: {fileID: 4900000, guid: 18ddf344c15ea4fd4b312414503d16b6, type: 3}
+    targetMoveCount: 4
   - stageDataFile: {fileID: 4900000, guid: 6ba38902e5eb9f54792f3c04ffeebb28, type: 3}
     targetMoveCount: 2
   - stageDataFile: {fileID: 4900000, guid: 32a75a1d0027f374796ac6a53ce5131a, type: 3}
     targetMoveCount: 3
+  - stageDataFile: {fileID: 4900000, guid: 878a60175da5c470ebbbd2a11aad9b2f, type: 3}
+    targetMoveCount: 5
   - stageDataFile: {fileID: 4900000, guid: 7990ddb52134ad444a52d71a5530f567, type: 3}
     targetMoveCount: 6
+  - stageDataFile: {fileID: 4900000, guid: eae43773110774a3ca3abc6c3673cd05, type: 3}
+    targetMoveCount: 5
+  - stageDataFile: {fileID: 4900000, guid: bc300e83581a84102890daea66e6da71, type: 3}
+    targetMoveCount: 8
+  - stageDataFile: {fileID: 4900000, guid: 60e1f1334103b4a39befbeb4fbee072d, type: 3}
+    targetMoveCount: 6
+  - stageDataFile: {fileID: 4900000, guid: ade2637b53714cc43afdc0f10e10b58a, type: 3}
+    targetMoveCount: 8
   - stageDataFile: {fileID: 4900000, guid: d8e1096767fcbd44bb35b8e609df8cf0, type: 3}
     targetMoveCount: 7
   - stageDataFile: {fileID: 4900000, guid: 456723d2c1e11b34aaa18076928fb4b7, type: 3}
     targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: 57a5bf225f2c748b881eff85ff2a4c65, type: 3}
+    targetMoveCount: 6
   - stageDataFile: {fileID: 4900000, guid: 7d63f253efb669e489f04d83bd08e6dd, type: 3}
     targetMoveCount: 8
-  - stageDataFile: {fileID: 4900000, guid: ade2637b53714cc43afdc0f10e10b58a, type: 3}
+  - stageDataFile: {fileID: 4900000, guid: bca9a7db0577c48cc8f3f418b6b3d20e, type: 3}
     targetMoveCount: 8
+  - stageDataFile: {fileID: 4900000, guid: 878cc6aa9e69549bca618e40516e2e3f, type: 3}
+    targetMoveCount: 8
+  - stageDataFile: {fileID: 4900000, guid: 299c440430b5e4afd9119afbe1f40634, type: 3}
+    targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: b36814bd0c4084e67ba5b495eac42155, type: 3}
+    targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: c6e778e1504c64403bc088bebbf4d56b, type: 3}
+    targetMoveCount: 9
+  - stageDataFile: {fileID: 4900000, guid: 2056aa5e8c88c4737ad0b3c9e4363142, type: 3}
+    targetMoveCount: 9
+  - stageDataFile: {fileID: 4900000, guid: 68a25e1a7bdd54a408cb81a5b7dac8ae, type: 3}
+    targetMoveCount: 9
+  - stageDataFile: {fileID: 4900000, guid: 63823bf192aa3498db3581955a5cb094, type: 3}
+    targetMoveCount: 7
+  - stageDataFile: {fileID: 4900000, guid: 5d910d488666a407ab81174dcd355930, type: 3}
+    targetMoveCount: 10
+  - stageDataFile: {fileID: 4900000, guid: ce0b24132d251450b9ce6db429b36c6d, type: 3}
+    targetMoveCount: 7
   - stageDataFile: {fileID: 4900000, guid: 0dd4bb0922c3980459718bdc4cdfeac8, type: 3}
     targetMoveCount: 14
   - stageDataFile: {fileID: 4900000, guid: 2e620ae66f4cd7741bd8001886bac827, type: 3}
     targetMoveCount: 11
+  - stageDataFile: {fileID: 4900000, guid: 4a52b3bf9dc4b47c0b4692ef1dcb6052, type: 3}
+    targetMoveCount: 6
+  - stageDataFile: {fileID: 4900000, guid: cb2673bf59b374077ad114e842ce8c64, type: 3}
+    targetMoveCount: 13
+  - stageDataFile: {fileID: 4900000, guid: 6d0ae77ec135042bfabe30ad6b802024, type: 3}
+    targetMoveCount: 9
+  - stageDataFile: {fileID: 4900000, guid: 780381995ec8f496f87336fc70ecf01f, type: 3}
+    targetMoveCount: 13
