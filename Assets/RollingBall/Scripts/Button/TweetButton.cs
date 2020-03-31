@@ -1,15 +1,15 @@
 ﻿public sealed class TweetButton : BaseButton
 {
     private readonly string _gameId = "nanka_title_v2";
-    private readonly string _hashTag = "";
+    private readonly string _hashTag = "unityroom";
 
     protected override void OnPush(ButtonType buttonType)
     {
         base.OnPush(ButtonType.Decision);
 
         var clearInfo = GetClearInfo();
-        var tweetText = $"{GetMainTweetText(clearInfo)}";
-        tweetText += $"{_hashTag}\n";
+        var tweetText = $"{GetMainTweetText(clearInfo)}\n";
+        tweetText += $"#{_hashTag}\n";
         UnityRoomTweet.Tweet(_gameId, tweetText);
     }
 
@@ -44,17 +44,17 @@
 
         if (completeCount == ConstantList.maxStageCount)
         {
-            return $"全てのステージを星３でクリアした！\n";
+            return $"全てのステージを星３でクリアした！";
         }
 
         if (clearStageIndex == ConstantList.maxStageCount)
         {
-            return "全てのステージをクリアした！\n";
+            return "全てのステージをクリアした！";
         }
 
         if (clearStageIndex == 0)
         {
-            return "１つもクリアできてない...\n";
+            return "１つもクリアできてない...";
         }
 
         return $"ステージ{clearStageIndex}までクリアした！";
