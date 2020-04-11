@@ -11,18 +11,32 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
 
     private readonly Subject<Unit> _subject = new Subject<Unit>();
 
+    private float bgmDefaultVolumeValue => bgmSlider.maxValue / 2f;
+    private float seDefaultVolumeValue => seSlider.maxValue / 2f;
+
     [Inject]
     private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
     {
-        SetSliderValue(unityAudioBgmController, unityAudioSeController);
-
-        UpdateVolumeSlider(unityAudioBgmController, unityAudioSeController);
-
         _subject
             .Subscribe(_ => unityAudioSeController.PlaySe(SeType.DecisionButton))
             .AddTo(this);
 
-        OnPushResetButton(unityAudioBgmController, unityAudioSeController);
+        Initialize(unityAudioBgmController, unityAudioSeController);
+    }
+
+    private void Initialize(IVolumeUpdatable bgm, IVolumeUpdatable se)
+    {
+        var bgmVolume = ES3.Load(ConstantList.bgmVolumeKey, bgmDefaultVolumeValue);
+        bgm.SetVolume(bgmVolume);
+
+        var seVolume = ES3.Load(ConstantList.seVolumeKey, seDefaultVolumeValue);
+        se.SetVolume(seVolume);
+
+        SetSliderValue(bgm, se);
+
+        UpdateVolumeSlider(bgm, se);
+
+        OnPushResetButton(bgm, se);
     }
 
     private void SetSliderValue(IVolumeUpdatable bgm, IVolumeUpdatable se)
@@ -50,8 +64,8 @@ public sealed class UnityAudioVolumeView : MonoBehaviour
             .OnClickAsObservable()
             .Subscribe(_ =>
             {
-                bgm.SetVolume(bgmSlider.maxValue / 2f);
-                se.SetVolume(seSlider.maxValue / 2f);
+                bgm.SetVolume(bgmDefaultVolumeValue);
+                se.SetVolume(seDefaultVolumeValue);
                 SetSliderValue(bgm, se);
 
                 _subject.OnNext(Unit.Default);

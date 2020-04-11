@@ -27,4 +27,9 @@ public sealed class UnityAudioSeController : BaseAudioSource, ISeController
 
         audioSource.PlayOneShot(_seList[seType]);
     }
+
+    private void OnApplicationQuit()
+    {
+        ES3.Save<float>(ConstantList.seVolumeKey, GetVolume());
+    }
 }
