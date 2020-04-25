@@ -24,7 +24,4 @@ public sealed class ConstantList
     public static string GetKeyName(int stageIndex) => $"stage{stageIndex}";
     
     public const int maxStageCount = 30;
-
-    public const string seVolumeKey = "SeVolume";
-    public const string bgmVolumeKey = "BgmVolume";
 }

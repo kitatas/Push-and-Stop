@@ -37,9 +37,4 @@ public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
     {
         audioSource.Stop();
     }
-
-    private void OnApplicationQuit()
-    {
-        ES3.Save<float>(ConstantList.bgmVolumeKey, GetVolume());
-    }
 }
