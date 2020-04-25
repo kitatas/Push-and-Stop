@@ -9,10 +9,7 @@ public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
     [Inject]
     private void Construct(UnityAudioBgmTable unityAudioBgmTable)
     {
-        _bgmList = new Dictionary<BgmType, AudioClip>
-        {
-            {BgmType.Main, unityAudioBgmTable.main},
-        };
+        _bgmList = unityAudioBgmTable.bgmTable;
     }
 
     private void Awake()

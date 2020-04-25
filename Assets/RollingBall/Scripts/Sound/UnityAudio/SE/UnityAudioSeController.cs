@@ -9,13 +9,7 @@ public sealed class UnityAudioSeController : BaseAudioSource, ISeController
     [Inject]
     private void Construct(UnityAudioSeTable unityAudioSeTable)
     {
-        _seList = new Dictionary<SeType, AudioClip>
-        {
-            {SeType.DecisionButton, unityAudioSeTable.decisionButton},
-            {SeType.CancelButton,   unityAudioSeTable.cancelButton},
-            {SeType.Hit,            unityAudioSeTable.hit},
-            {SeType.Clear,          unityAudioSeTable.clear},
-        };
+        _seList = unityAudioSeTable.seTable;
     }
 
     public void PlaySe(SeType seType)

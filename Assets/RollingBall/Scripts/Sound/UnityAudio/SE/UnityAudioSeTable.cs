@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
 public sealed class UnityAudioSeTable : ScriptableObject
@@ -8,8 +9,11 @@ public sealed class UnityAudioSeTable : ScriptableObject
     [SerializeField] private AudioClip hitClip = null;
     [SerializeField] private AudioClip clearClip = null;
 
-    public AudioClip decisionButton => decisionButtonClip;
-    public AudioClip cancelButton => cancelButtonClip;
-    public AudioClip hit => hitClip;
-    public AudioClip clear => clearClip;
+    public Dictionary<SeType, AudioClip> seTable => new Dictionary<SeType, AudioClip>
+    {
+        {SeType.DecisionButton, decisionButtonClip},
+        {SeType.CancelButton,   cancelButtonClip},
+        {SeType.Hit,            hitClip},
+        {SeType.Clear,          clearClip},
+    };
 }
