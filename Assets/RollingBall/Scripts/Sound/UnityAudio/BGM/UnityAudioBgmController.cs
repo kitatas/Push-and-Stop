@@ -2,6 +2,9 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// BGMを管理
+/// </summary>
 public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
 {
     private Dictionary<BgmType, AudioClip> _bgmList;

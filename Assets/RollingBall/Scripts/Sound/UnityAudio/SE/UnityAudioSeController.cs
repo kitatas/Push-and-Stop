@@ -2,6 +2,9 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// SEを管理
+/// </summary>
 public sealed class UnityAudioSeController : BaseAudioSource, ISeController
 {
     private Dictionary<SeType, AudioClip> _seList;

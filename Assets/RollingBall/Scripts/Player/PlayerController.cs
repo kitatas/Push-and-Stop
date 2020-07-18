@@ -4,6 +4,9 @@ using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// プレイヤーの管理
+/// </summary>
 public sealed class PlayerController : MonoBehaviour, IMoveObject
 {
     [SerializeField] private MoveButton[] moveButtons = null;
@@ -21,6 +24,7 @@ public sealed class PlayerController : MonoBehaviour, IMoveObject
 
     private void Start()
     {
+        // 全移動ボタンのSubscribe
         foreach (var moveButton in moveButtons)
         {
             moveButton.OnPushed()

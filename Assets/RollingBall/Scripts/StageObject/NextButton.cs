@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 次ステージをロードするボタンのアニメーション
+/// </summary>
 public sealed class NextButton : MonoBehaviour
 {
     [SerializeField] private Button nextButton = null;

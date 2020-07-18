@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// SEの音量を調整するSlider
+/// </summary>
 public sealed class SeSlider : Slider
 {
     private ISeController _seController;

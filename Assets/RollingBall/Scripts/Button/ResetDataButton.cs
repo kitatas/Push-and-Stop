@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// セーブデータを削除するボタン
+/// </summary>
 public sealed class ResetDataButton : BaseButton
 {
     [SerializeField] private RankLoader[] rankLoaders = null;

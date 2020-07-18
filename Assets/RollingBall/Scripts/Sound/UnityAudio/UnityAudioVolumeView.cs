@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// 音量の調整
+/// </summary>
 public sealed class UnityAudioVolumeView : MonoBehaviour
 {
     [SerializeField] private Slider bgmSlider = null;

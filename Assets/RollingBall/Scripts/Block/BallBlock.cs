@@ -1,18 +1,26 @@
-﻿using DG.Tweening;
+﻿using System.Threading;
+using DG.Tweening;
 using UniRx;
 using UniRx.Async;
+using UniRx.Async.Triggers;
 using UniRx.Triggers;
 using UnityEngine;
 
+/// <summary>
+/// 何かにぶつかるまで直進するブロック
+/// </summary>
 public sealed class BallBlock : BaseBlock, IMoveObject
 {
     private Vector3 _moveDirection;
+    private CancellationToken _cancellationToken;
+
     private const float _moveSpeed = 0.15f;
 
     private void Start()
     {
         isMove = false;
         _moveDirection = Vector3.zero;
+        _cancellationToken = this.GetCancellationTokenOnDestroy();
 
         this.OnCollisionEnter2DAsObservable()
             .Select(other => other.gameObject.GetComponent<IHittable>())
@@ -42,7 +50,7 @@ public sealed class BallBlock : BaseBlock, IMoveObject
             transform.position += _moveSpeed * _moveDirection;
 
             return isMove;
-        });
+        }, cancellationToken: _cancellationToken);
     }
 
     private void CorrectPosition()

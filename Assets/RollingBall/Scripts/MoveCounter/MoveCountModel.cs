@@ -1,5 +1,8 @@
 ﻿using UniRx;
 
+/// <summary>
+/// 移動回数を扱うModel
+/// </summary>
 public sealed class MoveCountModel : IMoveCountModel, IMoveCountUpdatable, IMoveCount
 {
     private readonly ReactiveProperty<int> _moveCount;

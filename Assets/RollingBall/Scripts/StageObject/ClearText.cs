@@ -3,6 +3,9 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// クリア時のテキストアニメーション
+/// </summary>
 public sealed class ClearText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI clearText = null;

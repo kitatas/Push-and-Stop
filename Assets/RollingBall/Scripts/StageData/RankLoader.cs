@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// セーブデータの読み込み
+/// </summary>
 public sealed class RankLoader : MonoBehaviour
 {
     private Button _button;

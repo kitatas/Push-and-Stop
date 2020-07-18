@@ -1,5 +1,8 @@
 ﻿using Zenject;
 
+/// <summary>
+/// 一手前に戻るボタン
+/// </summary>
 public sealed class UndoButton : BaseButton
 {
     private IMoveCountUpdatable _moveCountUpdatable;
@@ -18,10 +21,13 @@ public sealed class UndoButton : BaseButton
     {
         base.OnPush(ButtonType.Cancel);
 
+        // 移動回数の更新
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Decrease);
 
+        // 保存した位置情報を削除
         _caretaker.PopMementoStack();
 
+        // 保存した位置情報がない場合、ボタン無効化
         if (_caretaker.IsMementoStackEmpty())
         {
             InteractButton(false);

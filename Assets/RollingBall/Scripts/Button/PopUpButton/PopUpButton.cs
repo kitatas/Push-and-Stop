@@ -1,6 +1,9 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// メニューのポップアップを行うボタン
+/// </summary>
 public sealed class PopUpButton : BaseButton
 {
     [SerializeField] private CanvasGroup canvasGroup = null;

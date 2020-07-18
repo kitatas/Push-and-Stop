@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// ステージ内の１つのオブジェクトの位置を保持
+/// </summary>
 public sealed class Memento
 {
     private readonly Vector3 _position;

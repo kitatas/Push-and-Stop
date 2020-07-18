@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// シーン遷移時のマスクのサイズを計算
+/// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
 public sealed class TransitionMaskSize : MonoBehaviour
 {

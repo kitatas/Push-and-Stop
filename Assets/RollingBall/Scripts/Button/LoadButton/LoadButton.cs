@@ -2,6 +2,9 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// シーン遷移を行うボタン
+/// </summary>
 public sealed class LoadButton : BaseButton
 {
     [SerializeField, SceneName] private string sceneName = null;

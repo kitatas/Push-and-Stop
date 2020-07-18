@@ -2,6 +2,9 @@
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// 定数管理
+/// </summary>
 public sealed class ConstantList
 {
     public const float uiAnimationTime = 0.5f;

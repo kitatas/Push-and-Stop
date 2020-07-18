@@ -3,6 +3,9 @@ using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// ステージの読み込み
+/// </summary>
 public sealed class StageLoader
 {
     private enum SquareType

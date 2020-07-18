@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 移動しないブロック
+/// </summary>
 public sealed class NormalBlock : BaseBlock, IStageObject
 {
     private void Start()

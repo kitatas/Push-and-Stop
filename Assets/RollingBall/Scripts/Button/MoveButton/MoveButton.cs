@@ -3,6 +3,9 @@ using UniRx;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// プレイヤーの移動を行うボタン
+/// </summary>
 public sealed class MoveButton : BaseButton
 {
     private readonly Subject<Vector3> _subject = new Subject<Vector3>();
@@ -24,8 +27,10 @@ public sealed class MoveButton : BaseButton
     {
         base.OnPush(ButtonType.Decision);
 
+        // 移動回数の更新
         _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
 
+        // 移動前の位置を保存
         _caretaker.PushMementoStack();
 
         _subject.OnNext(ConstantList.moveDirection[moveDirection]);

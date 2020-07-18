@@ -4,6 +4,9 @@ using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// シーン遷移を行う
+/// </summary>
 public sealed class SceneLoader
 {
     private const float alphaCutOffMax = 0.7f;
@@ -39,6 +42,7 @@ public sealed class SceneLoader
         FadeAsync(sceneName).Forget();
     }
 
+    // TODO : キャンセル処理の追加
     private async UniTaskVoid FadeAsync(string sceneName)
     {
         var beforeSceneButtons = Object.FindObjectsOfType<BaseButton>();
@@ -53,7 +57,7 @@ public sealed class SceneLoader
             return IsFadeComplete();
         });
 
-        LoadScene(sceneName);
+        await _zenjectSceneLoader.LoadSceneAsync(sceneName);
         await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
 
         var afterSceneButtons = Object.FindObjectsOfType<BaseButton>();

@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// 移動回数からクリアランクを保存
+/// </summary>
 public sealed class ClearRank : MonoBehaviour
 {
     [SerializeField] private Image rankBackGround = null;

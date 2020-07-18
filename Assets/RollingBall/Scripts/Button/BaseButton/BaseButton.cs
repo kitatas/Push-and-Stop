@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// ボタン系の抽象クラス
+/// </summary>
 public abstract class BaseButton : MonoBehaviour
 {
     private Button _button;

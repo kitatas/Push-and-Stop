@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// シーン遷移のマスク管理
+/// </summary>
 public sealed class TransitionSpriteMask
 {
     private readonly SpriteMask _spriteMask;

@@ -1,4 +1,7 @@
-﻿public sealed class TweetButton : BaseButton
+﻿/// <summary>
+/// ツイートを行うボタン
+/// </summary>
+public sealed class TweetButton : BaseButton
 {
     private readonly string _gameId = "nanka_title_v2";
     private readonly string _hashTag = "unityroom";
@@ -13,6 +16,10 @@
         UnityRoomTweet.Tweet(_gameId, tweetText);
     }
 
+    /// <summary>
+    /// セーブデータからクリア状況を取得
+    /// </summary>
+    /// <returns></returns>
     private static (int, int) GetClearInfo()
     {
         var clearStageIndex = 0;

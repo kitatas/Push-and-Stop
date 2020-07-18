@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// ブロック系の抽象クラス
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseBlock : MonoBehaviour, IHittable
 {

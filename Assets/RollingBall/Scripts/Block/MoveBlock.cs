@@ -5,6 +5,9 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
+/// <summary>
+/// １マス分移動するブロック
+/// </summary>
 public sealed class MoveBlock : BaseBlock, IMoveObject
 {
     private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;

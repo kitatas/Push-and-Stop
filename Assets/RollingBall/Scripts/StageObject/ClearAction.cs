@@ -1,5 +1,8 @@
 ﻿using Zenject;
 
+/// <summary>
+/// ステージクリア時の演出
+/// </summary>
 public sealed class ClearAction
 {
     private ISeController _seController;

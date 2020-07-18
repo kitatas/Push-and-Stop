@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// プレイヤーの移動を管理
+/// </summary>
 public sealed class PlayerMover
 {
     private readonly Rigidbody2D _rigidbody;

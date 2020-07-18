@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// クリアの判定
+/// </summary>
 public sealed class Goal : MonoBehaviour, IStageObject, IGoal
 {
     private ClearAction _clearAction;
