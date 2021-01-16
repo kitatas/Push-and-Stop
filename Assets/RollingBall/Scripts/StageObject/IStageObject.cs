@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IStageObject
+namespace RollingBall.StageObject
 {
-    void SetPosition(Vector2 setPosition);
+    public interface IStageObject
+    {
+        void SetPosition(Vector2 setPosition);
+    }
 }

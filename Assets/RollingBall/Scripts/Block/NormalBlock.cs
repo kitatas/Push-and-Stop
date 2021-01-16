@@ -1,17 +1,21 @@
-﻿using UnityEngine;
+﻿using RollingBall.StageObject;
+using UnityEngine;
 
-/// <summary>
-/// 移動しないブロック
-/// </summary>
-public sealed class NormalBlock : BaseBlock, IStageObject
+namespace RollingBall.Block
 {
-    private void Start()
+    /// <summary>
+    /// 移動しないブロック
+    /// </summary>
+    public sealed class NormalBlock : BaseBlock, IStageObject
     {
-        isMove = false;
-    }
+        private void Start()
+        {
+            isMove = false;
+        }
 
-    public void SetPosition(Vector2 setPosition)
-    {
-        transform.position = setPosition;
+        public void SetPosition(Vector2 setPosition)
+        {
+            transform.position = setPosition;
+        }
     }
 }

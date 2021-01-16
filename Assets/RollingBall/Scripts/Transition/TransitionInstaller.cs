@@ -1,15 +1,18 @@
 using Zenject;
 
-public sealed class TransitionInstaller : MonoInstaller
+namespace RollingBall.Transition
 {
-    public override void InstallBindings()
+    public sealed class TransitionInstaller : MonoInstaller
     {
-        Container
-            .Bind<TransitionSpriteMask>()
-            .AsCached();
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<TransitionSpriteMask>()
+                .AsCached();
 
-        Container
-            .Bind<SceneLoader>()
-            .AsCached();
+            Container
+                .Bind<SceneLoader>()
+                .AsCached();
+        }
     }
 }

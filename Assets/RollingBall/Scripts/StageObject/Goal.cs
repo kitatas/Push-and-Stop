@@ -1,35 +1,38 @@
 ﻿using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// クリアの判定
-/// </summary>
-public sealed class Goal : MonoBehaviour, IStageObject, IGoal
+namespace RollingBall.StageObject
 {
-    private ClearAction _clearAction;
-
-    [Inject]
-    private void Construct(ClearAction clearAction)
+    /// <summary>
+    /// クリアの判定
+    /// </summary>
+    public sealed class Goal : MonoBehaviour, IStageObject, IGoal
     {
-        _clearAction = clearAction;
-    }
+        private ClearAction _clearAction;
 
-    public void SetPosition(Vector2 setPosition)
-    {
-        transform.position = setPosition;
-    }
-
-    private Vector2 GetPosition() => transform.position;
-
-    public bool IsEqualPosition(Vector2 roundPosition)
-    {
-        if (GetPosition() == roundPosition)
+        [Inject]
+        private void Construct(ClearAction clearAction)
         {
-            _clearAction.DisplayClearUi();
-
-            return true;
+            _clearAction = clearAction;
         }
 
-        return false;
+        public void SetPosition(Vector2 setPosition)
+        {
+            transform.position = setPosition;
+        }
+
+        private Vector2 GetPosition() => transform.position;
+
+        public bool IsEqualPosition(Vector2 roundPosition)
+        {
+            if (GetPosition() == roundPosition)
+            {
+                _clearAction.DisplayClearUi();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

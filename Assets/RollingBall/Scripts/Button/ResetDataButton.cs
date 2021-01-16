@@ -1,23 +1,29 @@
-﻿using UnityEngine;
+﻿using RollingBall.Button.BaseButton;
+using RollingBall.StageData;
+using RollingBall.Utility;
+using UnityEngine;
 
-/// <summary>
-/// セーブデータを削除するボタン
-/// </summary>
-public sealed class ResetDataButton : BaseButton
+namespace RollingBall.Button
 {
-    [SerializeField] private RankLoader[] rankLoaders = null;
-
-    protected override void OnPush(ButtonType buttonType)
+    /// <summary>
+    /// セーブデータを削除するボタン
+    /// </summary>
+    public sealed class ResetDataButton : BaseButton.BaseButton
     {
-        for (int i = 0; i < ConstantList.maxStageCount; i++)
-        {
-            var key = ConstantList.GetKeyName(i);
-            ES3.Save<int>(key, 0);
-        }
+        [SerializeField] private RankLoader[] rankLoaders = null;
 
-        foreach (var rankLoader in rankLoaders)
+        protected override void OnPush(ButtonType buttonType)
         {
-            rankLoader.LoadRank();
+            for (int i = 0; i < ConstantList.maxStageCount; i++)
+            {
+                var key = ConstantList.GetKeyName(i);
+                ES3.Save<int>(key, 0);
+            }
+
+            foreach (var rankLoader in rankLoaders)
+            {
+                rankLoader.LoadRank();
+            }
         }
     }
 }

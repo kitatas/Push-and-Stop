@@ -1,15 +1,18 @@
 ﻿using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// 移動回数を扱うView
-/// </summary>
-public sealed class MoveCountView : MonoBehaviour
+namespace RollingBall.MoveCounter
 {
-    [SerializeField] private TextMeshProUGUI moveCountText = null;
-
-    public void UpdateText(int moveCount)
+    /// <summary>
+    /// 移動回数を扱うView
+    /// </summary>
+    public sealed class MoveCountView : MonoBehaviour
     {
-        moveCountText.text = $"{moveCount}";
+        [SerializeField] private TextMeshProUGUI moveCountText = null;
+
+        public void UpdateText(int moveCount)
+        {
+            moveCountText.text = $"{moveCount}";
+        }
     }
 }

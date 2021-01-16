@@ -2,39 +2,42 @@
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// BGMを管理
-/// </summary>
-public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
+namespace RollingBall.Sound.UnityAudio.BGM
 {
-    private Dictionary<BgmType, AudioClip> _bgmList;
-
-    [Inject]
-    private void Construct(UnityAudioBgmTable unityAudioBgmTable)
+    /// <summary>
+    /// BGMを管理
+    /// </summary>
+    public sealed class UnityAudioBgmController : BaseAudioSource, IBgmController
     {
-        _bgmList = unityAudioBgmTable.bgmTable;
-    }
+        private Dictionary<BgmType, AudioClip> _bgmList;
 
-    private void Awake()
-    {
-        audioSource.loop = true;
-
-        PlayBgm(BgmType.Main);
-    }
-
-    public void PlayBgm(BgmType bgmType)
-    {
-        if (_bgmList.ContainsKey(bgmType) == false)
+        [Inject]
+        private void Construct(UnityAudioBgmTable unityAudioBgmTable)
         {
-            return;
+            _bgmList = unityAudioBgmTable.bgmTable;
         }
 
-        audioSource.clip = _bgmList[bgmType];
-        audioSource.Play();
-    }
+        private void Awake()
+        {
+            audioSource.loop = true;
 
-    public void StopBgm()
-    {
-        audioSource.Stop();
+            PlayBgm(BgmType.Main);
+        }
+
+        public void PlayBgm(BgmType bgmType)
+        {
+            if (_bgmList.ContainsKey(bgmType) == false)
+            {
+                return;
+            }
+
+            audioSource.clip = _bgmList[bgmType];
+            audioSource.Play();
+        }
+
+        public void StopBgm()
+        {
+            audioSource.Stop();
+        }
     }
 }

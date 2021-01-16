@@ -2,23 +2,26 @@
 using UnityEngine.UI;
 using Zenject;
 
-/// <summary>
-/// SEの音量を調整するSlider
-/// </summary>
-public sealed class SeSlider : Slider
+namespace RollingBall.Sound
 {
-    private ISeController _seController;
-
-    [Inject]
-    private void Construct(ISeController seController)
+    /// <summary>
+    /// SEの音量を調整するSlider
+    /// </summary>
+    public sealed class SeSlider : Slider
     {
-        _seController = seController;
-    }
+        private ISeController _seController;
 
-    public override void OnPointerUp(PointerEventData eventData)
-    {
-        base.OnPointerUp(eventData);
+        [Inject]
+        private void Construct(ISeController seController)
+        {
+            _seController = seController;
+        }
 
-        _seController.PlaySe(SeType.DecisionButton);
+        public override void OnPointerUp(PointerEventData eventData)
+        {
+            base.OnPointerUp(eventData);
+
+            _seController.PlaySe(SeType.DecisionButton);
+        }
     }
 }

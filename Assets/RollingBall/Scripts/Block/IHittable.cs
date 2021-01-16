@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IHittable
+namespace RollingBall.Block
 {
-    void Hit(Vector3 moveDirection);
-    bool isMove { get; }
+    public interface IHittable
+    {
+        void Hit(Vector3 moveDirection);
+        bool isMove { get; }
+    }
 }

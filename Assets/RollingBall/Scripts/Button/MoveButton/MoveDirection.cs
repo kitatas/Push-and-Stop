@@ -1,7 +1,10 @@
-﻿public enum MoveDirection
+﻿namespace RollingBall.Button.MoveButton
 {
-    Up,
-    Down,
-    Left,
-    Right,
+    public enum MoveDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+    }
 }

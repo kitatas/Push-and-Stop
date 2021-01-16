@@ -1,4 +1,7 @@
-﻿public interface ICaretakerInitializable
+﻿namespace RollingBall.Memento
 {
-    void Initialize();
+    public interface ICaretakerInitializable
+    {
+        void Initialize();
+    }
 }

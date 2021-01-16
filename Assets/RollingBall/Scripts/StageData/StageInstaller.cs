@@ -1,20 +1,25 @@
+using RollingBall.Memento;
+using RollingBall.StageObject;
 using Zenject;
 
-public sealed class StageInstaller : MonoInstaller
+namespace RollingBall.StageData
 {
-    public override void InstallBindings()
+    public sealed class StageInstaller : MonoInstaller
     {
-        Container
-            .BindInterfacesTo<Caretaker>()
-            .AsCached();
+        public override void InstallBindings()
+        {
+            Container
+                .BindInterfacesTo<Caretaker>()
+                .AsCached();
 
-        Container
-            .Bind<ClearAction>()
-            .AsCached();
+            Container
+                .Bind<ClearAction>()
+                .AsCached();
 
-        Container
-            .Bind<StageLoader>()
-            .AsCached()
-            .NonLazy();
+            Container
+                .Bind<StageLoader>()
+                .AsCached()
+                .NonLazy();
+        }
     }
 }

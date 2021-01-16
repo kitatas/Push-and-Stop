@@ -1,26 +1,33 @@
+using RollingBall.Sound.UnityAudio.BGM;
+using RollingBall.Sound.UnityAudio.SE;
+using RollingBall.StageData;
+using RollingBall.StageObject;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "TableInstaller", menuName = "Installers/TableInstaller")]
-public sealed class TableInstaller : ScriptableObjectInstaller<TableInstaller>
+namespace RollingBall.Utility
 {
-    [SerializeField] private StageDataTable stageDataTable = null;
-    [SerializeField] private StageObjectTable stageObjectTable = null;
-    [SerializeField] private UnityAudioBgmTable unityAudioBgmTable = null;
-    [SerializeField] private UnityAudioSeTable unityAudioSeTable = null;
-
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "TableInstaller", menuName = "Installers/TableInstaller")]
+    public sealed class TableInstaller : ScriptableObjectInstaller<TableInstaller>
     {
-        Container
-            .BindInstance(stageDataTable);
+        [SerializeField] private StageDataTable stageDataTable = null;
+        [SerializeField] private StageObjectTable stageObjectTable = null;
+        [SerializeField] private UnityAudioBgmTable unityAudioBgmTable = null;
+        [SerializeField] private UnityAudioSeTable unityAudioSeTable = null;
 
-        Container
-            .BindInstance(stageObjectTable);
+        public override void InstallBindings()
+        {
+            Container
+                .BindInstance(stageDataTable);
 
-        Container
-            .BindInstance(unityAudioBgmTable);
+            Container
+                .BindInstance(stageObjectTable);
 
-        Container
-            .BindInstance(unityAudioSeTable);
+            Container
+                .BindInstance(unityAudioBgmTable);
+
+            Container
+                .BindInstance(unityAudioSeTable);
+        }
     }
 }

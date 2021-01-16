@@ -1,4 +1,7 @@
-﻿public interface ISeController
+﻿namespace RollingBall.Sound
 {
-    void PlaySe(SeType seType);
+    public interface ISeController
+    {
+        void PlaySe(SeType seType);
+    }
 }

@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
-public sealed class UnityAudioSeTable : ScriptableObject
+namespace RollingBall.Sound.UnityAudio.SE
 {
-    [SerializeField] private AudioClip decisionButtonClip = null;
-    [SerializeField] private AudioClip cancelButtonClip = null;
-    [SerializeField] private AudioClip hitClip = null;
-    [SerializeField] private AudioClip clearClip = null;
-
-    public Dictionary<SeType, AudioClip> seTable => new Dictionary<SeType, AudioClip>
+    [CreateAssetMenu(menuName = "DataTable/SeTable", fileName = "SeTable")]
+    public sealed class UnityAudioSeTable : ScriptableObject
     {
-        {SeType.DecisionButton, decisionButtonClip},
-        {SeType.CancelButton,   cancelButtonClip},
-        {SeType.Hit,            hitClip},
-        {SeType.Clear,          clearClip},
-    };
+        [SerializeField] private AudioClip decisionButtonClip = null;
+        [SerializeField] private AudioClip cancelButtonClip = null;
+        [SerializeField] private AudioClip hitClip = null;
+        [SerializeField] private AudioClip clearClip = null;
+
+        public Dictionary<SeType, AudioClip> seTable => new Dictionary<SeType, AudioClip>
+        {
+            {SeType.DecisionButton, decisionButtonClip},
+            {SeType.CancelButton,   cancelButtonClip},
+            {SeType.Hit,            hitClip},
+            {SeType.Clear,          clearClip},
+        };
+    }
 }

@@ -1,14 +1,17 @@
 ﻿using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// 目標移動回数の表示
-/// </summary>
-[RequireComponent(typeof(TextMeshProUGUI))]
-public sealed class TargetMoveCountView : MonoBehaviour
+namespace RollingBall.StageData
 {
-    public void Display(int targetCount)
+    /// <summary>
+    /// 目標移動回数の表示
+    /// </summary>
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public sealed class TargetMoveCountView : MonoBehaviour
     {
-        GetComponent<TextMeshProUGUI>().text = $"{targetCount}";
+        public void Display(int targetCount)
+        {
+            GetComponent<TextMeshProUGUI>().text = $"{targetCount}";
+        }
     }
 }

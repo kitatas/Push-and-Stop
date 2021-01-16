@@ -1,0 +1,92 @@
+﻿@startuml
+
+package Block {
+    interface IHittable
+    abstract class BaseBlock <<MonoBehaviour>>
+    class NormalBlock
+    class MoveBlock
+    class BallBlock
+}
+
+package MoveCount {
+    interface IMoveCount
+    interface IMoveCountModel
+    interface IMoveCountUpdatable
+    class MoveCountModel
+    class MoveCountPresenter
+    class MoveCountView <<MonoBehaviour>>
+}
+
+package Player {
+    class PlayerController <<MonoBehaviour>>
+    class PlayerMover
+    class MoveButton <<MonoBehaviour>>
+}
+
+package Stage {
+    class StageData
+    class StageDataTable <<ScriptableObject>>
+    class StageLoader
+}
+
+class MinMoveCountView
+
+interface IStageObject
+interface IMoveObject
+
+package Goal {
+    interface IGoal
+    class Goal <<MonoBehaviour>>
+    class ClearAction <<MonoBehaviour>>
+}
+
+package Memento {
+    class Memento
+    class Caretaker <<MonoBehaviour>>
+    class UndoButton <<MonoBehaviour>>
+}
+
+IMoveObject .up.|> IStageObject
+
+BaseBlock .up.|> IHittable
+NormalBlock .up.|> IStageObject
+MoveBlock .up.|> IMoveObject
+BallBlock .up.|> IMoveObject
+NormalBlock -up-|> BaseBlock
+MoveBlock -up-|> BaseBlock
+BallBlock -up-|> BaseBlock
+MoveBlock --> IHittable
+BallBlock --> IHittable
+
+MoveCountPresenter --> IMoveCountModel
+MoveCountPresenter --> MoveCountView
+MoveCountModel .up.|> IMoveCount
+MoveCountModel .up.|> IMoveCountModel
+MoveCountModel .up.|> IMoveCountUpdatable
+
+PlayerController .up.|> IMoveObject
+PlayerController --> PlayerMover
+PlayerController --> MoveButton
+PlayerController --> IHittable
+PlayerController --> IGoal
+PlayerController --> UndoButton
+
+MoveButton ---> IMoveCountUpdatable
+MoveButton --> Caretaker
+
+Goal .up.|> IStageObject
+Goal .left.|> IGoal
+Goal --> ClearAction
+ClearAction --> MinMoveCountView
+ClearAction -> IMoveCount
+
+StageDataTable --> StageData
+StageLoader --> StageDataTable
+StageLoader --> IStageObject
+
+Caretaker --> Memento
+Caretaker -up-> IMoveObject
+UndoButton --> Caretaker
+UndoButton --> IMoveCountUpdatable
+
+@enduml

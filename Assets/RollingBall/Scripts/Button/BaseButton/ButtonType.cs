@@ -1,5 +1,8 @@
-﻿public enum ButtonType
+﻿namespace RollingBall.Button.BaseButton
 {
-    Decision,
-    Cancel,
+    public enum ButtonType
+    {
+        Decision,
+        Cancel,
+    }
 }

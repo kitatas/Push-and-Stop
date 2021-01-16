@@ -1,5 +1,8 @@
-﻿public interface IVolumeUpdatable
+﻿namespace RollingBall.Sound
 {
-    float GetVolume();
-    void SetVolume(float value);
+    public interface IVolumeUpdatable
+    {
+        float GetVolume();
+        void SetVolume(float value);
+    }
 }

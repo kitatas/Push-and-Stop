@@ -1,5 +1,8 @@
-﻿public interface IBgmController
+﻿namespace RollingBall.Sound
 {
-    void PlayBgm(BgmType bgmType);
-    void StopBgm();
+    public interface IBgmController
+    {
+        void PlayBgm(BgmType bgmType);
+        void StopBgm();
+    }
 }

@@ -1,34 +1,38 @@
-﻿using Zenject;
+﻿using RollingBall.Sound;
+using Zenject;
 
-/// <summary>
-/// ステージクリア時の演出
-/// </summary>
-public sealed class ClearAction
+namespace RollingBall.StageObject
 {
-    private ISeController _seController;
-    private ClearText _clearText;
-    private ClearRank _clearRank;
-    private NextButton _nextButton;
-
-    [Inject]
-    private void Construct(ISeController seController, ClearText clearText, ClearRank clearRank, NextButton nextButton)
+    /// <summary>
+    /// ステージクリア時の演出
+    /// </summary>
+    public sealed class ClearAction
     {
-        _seController = seController;
-        _clearText = clearText;
-        _clearRank = clearRank;
-        _nextButton = nextButton;
+        private ISeController _seController;
+        private ClearText _clearText;
+        private ClearRank _clearRank;
+        private NextButton _nextButton;
 
-        nextButton.Initialize();
-    }
+        [Inject]
+        private void Construct(ISeController seController, ClearText clearText, ClearRank clearRank, NextButton nextButton)
+        {
+            _seController = seController;
+            _clearText = clearText;
+            _clearRank = clearRank;
+            _nextButton = nextButton;
 
-    public void DisplayClearUi()
-    {
-        _seController.PlaySe(SeType.Clear);
+            nextButton.Initialize();
+        }
 
-        _clearText.TweenClearText();
+        public void DisplayClearUi()
+        {
+            _seController.PlaySe(SeType.Clear);
 
-        _clearRank.DisplayClearRank();
+            _clearText.TweenClearText();
 
-        _nextButton.DisplayNextButton(_clearText.RectTransform());
+            _clearRank.DisplayClearRank();
+
+            _nextButton.DisplayNextButton(_clearText.RectTransform());
+        }
     }
 }

@@ -1,29 +1,33 @@
 ﻿using System.Collections.Generic;
+using RollingBall.Button.BaseButton;
 using UnityEngine;
 
-public static class ExtensionMethods
+namespace RollingBall.Utility
 {
-    public static Vector2 RoundPosition(this Transform transform)
+    public static class ExtensionMethods
     {
-        var p = transform.position;
-        var x = Mathf.RoundToInt(p.x);
-        var y = Mathf.RoundToInt(p.y);
-        return new Vector2(x, y);
-    }
-
-    public static void ActivateAllButtons(this IEnumerable<BaseButton> buttons, bool value)
-    {
-        foreach (var button in buttons)
+        public static Vector2 RoundPosition(this Transform transform)
         {
-            if (button.IsInteractable())
+            var p = transform.position;
+            var x = Mathf.RoundToInt(p.x);
+            var y = Mathf.RoundToInt(p.y);
+            return new Vector2(x, y);
+        }
+
+        public static void ActivateAllButtons(this IEnumerable<BaseButton> buttons, bool value)
+        {
+            foreach (var button in buttons)
             {
-                button.ActivateButton(value);
+                if (button.IsInteractable())
+                {
+                    button.ActivateButton(value);
+                }
             }
         }
-    }
 
-    public static RectTransform RectTransform(this CanvasGroup canvasGroup)
-    {
-        return canvasGroup.transform as RectTransform;
+        public static RectTransform RectTransform(this CanvasGroup canvasGroup)
+        {
+            return canvasGroup.transform as RectTransform;
+        }
     }
 }

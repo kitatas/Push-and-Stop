@@ -1,43 +1,50 @@
 ﻿using System;
+using RollingBall.Button.BaseButton;
+using RollingBall.Memento;
+using RollingBall.MoveCounter;
+using RollingBall.Utility;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// プレイヤーの移動を行うボタン
-/// </summary>
-public sealed class MoveButton : BaseButton
+namespace RollingBall.Button.MoveButton
 {
-    private readonly Subject<Vector3> _subject = new Subject<Vector3>();
-    public IObservable<Vector3> OnPushed() => _subject;
-
-    [SerializeField] private MoveDirection moveDirection = default;
-
-    private IMoveCountUpdatable _moveCountUpdatable;
-    private ICaretakerPushable _caretaker;
-
-    [Inject]
-    private void Construct(IMoveCountUpdatable moveCountUpdatable, ICaretakerPushable caretaker)
+    /// <summary>
+    /// プレイヤーの移動を行うボタン
+    /// </summary>
+    public sealed class MoveButton : BaseButton.BaseButton
     {
-        _moveCountUpdatable = moveCountUpdatable;
-        _caretaker = caretaker;
-    }
+        private readonly Subject<Vector3> _subject = new Subject<Vector3>();
+        public IObservable<Vector3> OnPushed() => _subject;
 
-    protected override void OnPush(ButtonType buttonType)
-    {
-        base.OnPush(ButtonType.Decision);
+        [SerializeField] private MoveDirection moveDirection = default;
 
-        // 移動回数の更新
-        _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
+        private IMoveCountUpdatable _moveCountUpdatable;
+        private ICaretakerPushable _caretaker;
 
-        // 移動前の位置を保存
-        _caretaker.PushMementoStack();
+        [Inject]
+        private void Construct(IMoveCountUpdatable moveCountUpdatable, ICaretakerPushable caretaker)
+        {
+            _moveCountUpdatable = moveCountUpdatable;
+            _caretaker = caretaker;
+        }
 
-        _subject.OnNext(ConstantList.moveDirection[moveDirection]);
-    }
+        protected override void OnPush(ButtonType buttonType)
+        {
+            base.OnPush(ButtonType.Decision);
 
-    public void InteractButton(bool value)
-    {
-        button.interactable = value;
+            // 移動回数の更新
+            _moveCountUpdatable.UpdateMoveCount(UpdateType.Increase);
+
+            // 移動前の位置を保存
+            _caretaker.PushMementoStack();
+
+            _subject.OnNext(ConstantList.moveDirection[moveDirection]);
+        }
+
+        public void InteractButton(bool value)
+        {
+            button.interactable = value;
+        }
     }
 }

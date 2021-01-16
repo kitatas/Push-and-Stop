@@ -1,46 +1,48 @@
-﻿using CharTween;
-using DG.Tweening;
+﻿using RollingBall.Utility;
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// クリア時のテキストアニメーション
-/// </summary>
-public sealed class ClearText : MonoBehaviour
+namespace RollingBall.StageObject
 {
-    [SerializeField] private TextMeshProUGUI clearText = null;
-    private const float animationTime = ConstantList.uiAnimationTime;
-
-    public void TweenClearText()
+    /// <summary>
+    /// クリア時のテキストアニメーション
+    /// </summary>
+    public sealed class ClearText : MonoBehaviour
     {
-        var tweener = clearText.GetCharTweener();
-        var characterCount = tweener.CharacterCount;
-        var sequence = DOTween.Sequence();
+        [SerializeField] private TextMeshProUGUI clearText = null;
+        private const float animationTime = ConstantList.uiAnimationTime;
 
-        for (var i = 0; i < characterCount; ++i)
+        public void TweenClearText()
         {
-            var t = i / (float) characterCount;
-            var timeOffset = Mathf.Lerp(0f, 1f, t);
-
-            var charSequence = DOTween.Sequence();
-            charSequence
-                .Append(tweener
-                    .DOLocalMoveY(i, 0.5f, animationTime)
-                    .SetEase(Ease.InOutCubic))
-                .Join(tweener
-                    .DOFade(i, 0f, animationTime)
-                    .From())
-                .Join(tweener
-                    .DOScale(i, 0f, animationTime)
-                    .From()
-                    .SetEase(Ease.OutBack, 5f))
-                .Append(tweener
-                    .DOLocalMoveY(i, 0f, animationTime)
-                    .SetEase(Ease.OutBounce));
-
-            sequence.Insert(timeOffset, charSequence);
+            // var tweener = clearText.GetCharTweener();
+            // var characterCount = tweener.CharacterCount;
+            // var sequence = DOTween.Sequence();
+            //
+            // for (var i = 0; i < characterCount; ++i)
+            // {
+            //     var t = i / (float) characterCount;
+            //     var timeOffset = Mathf.Lerp(0f, 1f, t);
+            //
+            //     var charSequence = DOTween.Sequence();
+            //     charSequence
+            //         .Append(tweener
+            //             .DOLocalMoveY(i, 0.5f, animationTime)
+            //             .SetEase(Ease.InOutCubic))
+            //         .Join(tweener
+            //             .DOFade(i, 0f, animationTime)
+            //             .From())
+            //         .Join(tweener
+            //             .DOScale(i, 0f, animationTime)
+            //             .From()
+            //             .SetEase(Ease.OutBack, 5f))
+            //         .Append(tweener
+            //             .DOLocalMoveY(i, 0f, animationTime)
+            //             .SetEase(Ease.OutBounce));
+            //
+            //     sequence.Insert(timeOffset, charSequence);
+            // }
         }
-    }
 
-    public RectTransform RectTransform() => clearText.rectTransform;
+        public RectTransform RectTransform() => clearText.rectTransform;
+    }
 }

@@ -1,4 +1,7 @@
-﻿public interface ICaretakerPushable
+﻿namespace RollingBall.Memento
 {
-    void PushMementoStack();
+    public interface ICaretakerPushable
+    {
+        void PushMementoStack();
+    }
 }

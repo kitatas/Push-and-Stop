@@ -1,31 +1,34 @@
 ﻿using DG.Tweening;
+using RollingBall.Utility;
 using UnityEngine;
-using UnityEngine.UI;
 
-/// <summary>
-/// 次ステージをロードするボタンのアニメーション
-/// </summary>
-public sealed class NextButton : MonoBehaviour
+namespace RollingBall.StageObject
 {
-    [SerializeField] private Button nextButton = null;
-    private const float animationTime = ConstantList.uiAnimationTime;
-
-    public void Initialize()
+    /// <summary>
+    /// 次ステージをロードするボタンのアニメーション
+    /// </summary>
+    public sealed class NextButton : MonoBehaviour
     {
-        nextButton.interactable = false;
-    }
+        [SerializeField] private UnityEngine.UI.Button nextButton = null;
+        private const float animationTime = ConstantList.uiAnimationTime;
 
-    public void DisplayNextButton(RectTransform clearText)
-    {
-        nextButton.enabled = false;
-        nextButton.interactable = true;
+        public void Initialize()
+        {
+            nextButton.interactable = false;
+        }
 
-        DOTween.Sequence()
-            .AppendInterval(animationTime * 2f + 0.5f)
-            .Append(clearText
-                .DOAnchorPosY(70f, animationTime))
-            .Append(nextButton.image
-                .DOFade(1f, animationTime))
-            .OnComplete(() => nextButton.enabled = true);
+        public void DisplayNextButton(RectTransform clearText)
+        {
+            nextButton.enabled = false;
+            nextButton.interactable = true;
+
+            DOTween.Sequence()
+                .AppendInterval(animationTime * 2f + 0.5f)
+                .Append(clearText
+                    .DOAnchorPosY(70f, animationTime))
+                .Append(nextButton.image
+                    .DOFade(1f, animationTime))
+                .OnComplete(() => nextButton.enabled = true);
+        }
     }
 }

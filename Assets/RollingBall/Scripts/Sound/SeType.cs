@@ -1,7 +1,10 @@
-﻿public enum SeType
+﻿namespace RollingBall.Sound
 {
-    DecisionButton,
-    CancelButton,
-    Hit,
-    Clear,
+    public enum SeType
+    {
+        DecisionButton,
+        CancelButton,
+        Hit,
+        Clear,
+    }
 }

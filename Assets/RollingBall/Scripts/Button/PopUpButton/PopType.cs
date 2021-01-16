@@ -1,5 +1,8 @@
-﻿public enum PopType
+﻿namespace RollingBall.Button.PopUpButton
 {
-    Open,
-    Close,
+    public enum PopType
+    {
+        Open,
+        Close,
+    }
 }

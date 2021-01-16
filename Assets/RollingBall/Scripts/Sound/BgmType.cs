@@ -1,4 +1,7 @@
-﻿public enum BgmType
+﻿namespace RollingBall.Sound
 {
-    Main,
+    public enum BgmType
+    {
+        Main,
+    }
 }

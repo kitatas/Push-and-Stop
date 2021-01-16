@@ -2,26 +2,29 @@
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// SEを管理
-/// </summary>
-public sealed class UnityAudioSeController : BaseAudioSource, ISeController
+namespace RollingBall.Sound.UnityAudio.SE
 {
-    private Dictionary<SeType, AudioClip> _seList;
-
-    [Inject]
-    private void Construct(UnityAudioSeTable unityAudioSeTable)
+    /// <summary>
+    /// SEを管理
+    /// </summary>
+    public sealed class UnityAudioSeController : BaseAudioSource, ISeController
     {
-        _seList = unityAudioSeTable.seTable;
-    }
+        private Dictionary<SeType, AudioClip> _seList;
 
-    public void PlaySe(SeType seType)
-    {
-        if (_seList.ContainsKey(seType) == false)
+        [Inject]
+        private void Construct(UnityAudioSeTable unityAudioSeTable)
         {
-            return;
+            _seList = unityAudioSeTable.seTable;
         }
 
-        audioSource.PlayOneShot(_seList[seType]);
+        public void PlaySe(SeType seType)
+        {
+            if (_seList.ContainsKey(seType) == false)
+            {
+                return;
+            }
+
+            audioSource.PlayOneShot(_seList[seType]);
+        }
     }
 }

@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
-public abstract class BaseAudioSource : MonoBehaviour, IVolumeUpdatable
+namespace RollingBall.Sound.UnityAudio
 {
-    private AudioSource _audioSource;
-
-    protected AudioSource audioSource
+    [RequireComponent(typeof(AudioSource))]
+    public abstract class BaseAudioSource : MonoBehaviour, IVolumeUpdatable
     {
-        get
+        private AudioSource _audioSource;
+
+        protected AudioSource audioSource
         {
-            if (_audioSource == null)
+            get
             {
-                _audioSource = GetComponent<AudioSource>();
+                if (_audioSource == null)
+                {
+                    _audioSource = GetComponent<AudioSource>();
+                }
+
+                return _audioSource;
             }
-
-            return _audioSource;
         }
+
+        public float GetVolume() => audioSource.volume;
+
+        public void SetVolume(float value) => audioSource.volume = value;
     }
-
-    public float GetVolume() => audioSource.volume;
-
-    public void SetVolume(float value) => audioSource.volume = value;
 }

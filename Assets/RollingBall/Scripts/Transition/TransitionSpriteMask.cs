@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// シーン遷移のマスク管理
-/// </summary>
-public sealed class TransitionSpriteMask
+namespace RollingBall.Transition
 {
-    private readonly SpriteMask _spriteMask;
-
-    public TransitionSpriteMask(SpriteMask spriteMask)
+    /// <summary>
+    /// シーン遷移のマスク管理
+    /// </summary>
+    public sealed class TransitionSpriteMask
     {
-        _spriteMask = spriteMask;
-    }
+        private readonly SpriteMask _spriteMask;
 
-    public void SetAlphaCutOff(float alphaCutOffValue)
-    {
-        _spriteMask.alphaCutoff = Mathf.Clamp01(alphaCutOffValue);
+        public TransitionSpriteMask(SpriteMask spriteMask)
+        {
+            _spriteMask = spriteMask;
+        }
+
+        public void SetAlphaCutOff(float alphaCutOffValue)
+        {
+            _spriteMask.alphaCutoff = Mathf.Clamp01(alphaCutOffValue);
+        }
     }
 }

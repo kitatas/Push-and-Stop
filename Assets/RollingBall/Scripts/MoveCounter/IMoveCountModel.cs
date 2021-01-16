@@ -1,6 +1,9 @@
 ﻿using UniRx;
 
-public interface IMoveCountModel
+namespace RollingBall.MoveCounter
 {
-    IReadOnlyReactiveProperty<int> MoveCount();
+    public interface IMoveCountModel
+    {
+        IReadOnlyReactiveProperty<int> MoveCount();
+    }
 }

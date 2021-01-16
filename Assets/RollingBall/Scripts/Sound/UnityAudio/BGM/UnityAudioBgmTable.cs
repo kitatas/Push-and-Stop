@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "DataTable/BgmTable", fileName = "BgmTable")]
-public sealed class UnityAudioBgmTable : ScriptableObject
+namespace RollingBall.Sound.UnityAudio.BGM
 {
-    [SerializeField] private AudioClip mainClip = null;
-
-    public Dictionary<BgmType, AudioClip> bgmTable => new Dictionary<BgmType, AudioClip>
+    [CreateAssetMenu(menuName = "DataTable/BgmTable", fileName = "BgmTable")]
+    public sealed class UnityAudioBgmTable : ScriptableObject
     {
-        {BgmType.Main, mainClip},
-    };
+        [SerializeField] private AudioClip mainClip = null;
+
+        public Dictionary<BgmType, AudioClip> bgmTable => new Dictionary<BgmType, AudioClip>
+        {
+            {BgmType.Main, mainClip},
+        };
+    }
 }

@@ -1,4 +1,7 @@
-﻿public interface IMoveCountUpdatable
+﻿namespace RollingBall.MoveCounter
 {
-    void UpdateMoveCount(UpdateType updateType);
+    public interface IMoveCountUpdatable
+    {
+        void UpdateMoveCount(UpdateType updateType);
+    }
 }

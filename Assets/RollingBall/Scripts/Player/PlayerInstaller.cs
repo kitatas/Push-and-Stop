@@ -1,11 +1,14 @@
 using Zenject;
 
-public sealed class PlayerInstaller : MonoInstaller
+namespace RollingBall.Player
 {
-    public override void InstallBindings()
+    public sealed class PlayerInstaller : MonoInstaller
     {
-        Container
-            .Bind<PlayerMover>()
-            .AsCached();
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<PlayerMover>()
+                .AsCached();
+        }
     }
 }

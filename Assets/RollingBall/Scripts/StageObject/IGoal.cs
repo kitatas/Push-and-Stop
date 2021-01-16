@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IGoal
+namespace RollingBall.StageObject
 {
-    bool IsEqualPosition(Vector2 roundPosition);
+    public interface IGoal
+    {
+        bool IsEqualPosition(Vector2 roundPosition);
+    }
 }

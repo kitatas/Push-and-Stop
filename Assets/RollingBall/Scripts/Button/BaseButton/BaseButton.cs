@@ -1,67 +1,70 @@
 ﻿using System;
+using RollingBall.Sound;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-/// <summary>
-/// ボタン系の抽象クラス
-/// </summary>
-public abstract class BaseButton : MonoBehaviour
+namespace RollingBall.Button.BaseButton
 {
-    private Button _button;
-
-    protected Button button
+    /// <summary>
+    /// ボタン系の抽象クラス
+    /// </summary>
+    public abstract class BaseButton : MonoBehaviour
     {
-        get
+        private UnityEngine.UI.Button _button;
+
+        protected UnityEngine.UI.Button button
         {
-            if (_button == null)
+            get
             {
-                _button = GetComponent<Button>();
+                if (_button == null)
+                {
+                    _button = GetComponent<UnityEngine.UI.Button>();
+                }
+
+                return _button;
             }
-
-            return _button;
         }
-    }
 
-    private ISeController _seController;
+        private ISeController _seController;
 
-    [Inject]
-    private void Construct(ISeController seController)
-    {
-        _seController = seController;
-    }
-
-    protected virtual void Awake()
-    {
-        button
-            .OnClickAsObservable()
-            .Subscribe(_ => OnPush(default))
-            .AddTo(this);
-    }
-
-    protected virtual void OnPush(ButtonType buttonType)
-    {
-        _seController.PlaySe(GetSeType(buttonType));
-    }
-
-    private SeType GetSeType(ButtonType buttonType)
-    {
-        switch (buttonType)
+        [Inject]
+        private void Construct(ISeController seController)
         {
-            case ButtonType.Decision:
-                return SeType.DecisionButton;
-            case ButtonType.Cancel:
-                return SeType.CancelButton;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null);
+            _seController = seController;
         }
-    }
 
-    public void ActivateButton(bool value)
-    {
-        button.enabled = value;
-    }
+        protected virtual void Awake()
+        {
+            button
+                .OnClickAsObservable()
+                .Subscribe(_ => OnPush(default))
+                .AddTo(this);
+        }
 
-    public bool IsInteractable() => button.interactable;
+        protected virtual void OnPush(ButtonType buttonType)
+        {
+            _seController.PlaySe(GetSeType(buttonType));
+        }
+
+        private SeType GetSeType(ButtonType buttonType)
+        {
+            switch (buttonType)
+            {
+                case ButtonType.Decision:
+                    return SeType.DecisionButton;
+                case ButtonType.Cancel:
+                    return SeType.CancelButton;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null);
+            }
+        }
+
+        public void ActivateButton(bool value)
+        {
+            button.enabled = value;
+        }
+
+        public bool IsInteractable() => button.interactable;
+    }
 }

@@ -1,5 +1,8 @@
-﻿public enum UpdateType
+﻿namespace RollingBall.MoveCounter
 {
-    Increase = 1,
-    Decrease = -1,
+    public enum UpdateType
+    {
+        Increase = 1,
+        Decrease = -1,
+    }
 }

@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// ステージ内の１つのオブジェクトの位置を保持
-/// </summary>
-public sealed class Memento
+namespace RollingBall.Memento
 {
-    private readonly Vector3 _position;
-
-    public Memento(Vector3 position)
+    /// <summary>
+    /// ステージ内の１つのオブジェクトの位置を保持
+    /// </summary>
+    public sealed class Memento
     {
-        _position = position;
-    }
+        private readonly Vector3 _position;
 
-    public Vector3 GetPosition() => _position;
+        public Memento(Vector3 position)
+        {
+            _position = position;
+        }
+
+        public Vector3 GetPosition() => _position;
+    }
 }

@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public struct PopInfo
+public readonly struct PopInfo
 {
     public readonly bool isBlocksRaycasts;
     public readonly float targetAlpha;

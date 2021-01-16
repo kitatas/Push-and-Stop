@@ -1,5 +1,8 @@
-﻿public interface ICaretakerPopable
+﻿namespace RollingBall.Memento
 {
-    void PopMementoStack();
-    bool IsMementoStackEmpty();
+    public interface ICaretakerPopable
+    {
+        void PopMementoStack();
+        bool IsMementoStackEmpty();
+    }
 }

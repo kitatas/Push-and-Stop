@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using RollingBall.Sound;
+using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// ブロック系の抽象クラス
-/// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
-public abstract class BaseBlock : MonoBehaviour, IHittable
+namespace RollingBall.Block
 {
-    private ISeController _seController;
-
-    [Inject]
-    private void Construct(ISeController seController)
+    /// <summary>
+    /// ブロック系の抽象クラス
+    /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
+    public abstract class BaseBlock : MonoBehaviour, IHittable
     {
-        _seController = seController;
-    }
+        private ISeController _seController;
 
-    private void Awake()
-    {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-    }
+        [Inject]
+        private void Construct(ISeController seController)
+        {
+            _seController = seController;
+        }
 
-    public virtual void Hit(Vector3 moveDirection)
-    {
-        _seController.PlaySe(SeType.Hit);
-    }
+        private void Awake()
+        {
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
 
-    public bool isMove { get; protected set; }
+        public virtual void Hit(Vector3 moveDirection)
+        {
+            _seController.PlaySe(SeType.Hit);
+        }
+
+        public bool isMove { get; protected set; }
+    }
 }

@@ -1,4 +1,7 @@
-﻿public interface IMoveCount
+﻿namespace RollingBall.MoveCounter
 {
-    int moveCount { get; }
+    public interface IMoveCount
+    {
+        int moveCount { get; }
+    }
 }
