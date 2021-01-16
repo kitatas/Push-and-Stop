@@ -26,10 +26,10 @@ namespace RollingBall.Block
                 .Subscribe(_ =>
                 {
                     isMove = false;
-                    _tweenCore.Kill();
+                    _tweenCore?.Kill();
                     CorrectPosition();
                 })
-                .AddTo(gameObject);
+                .AddTo(this);
         }
 
         public override void Hit(Vector3 moveDirection)
@@ -46,6 +46,7 @@ namespace RollingBall.Block
 
             _tweenCore = transform
                 .DOMove(nextPosition, ConstantList.correctTime)
+                .SetEase(Ease.Linear)
                 .OnComplete(() => isMove = false);
         }
 
@@ -54,13 +55,11 @@ namespace RollingBall.Block
             var roundPosition = transform.RoundPosition();
 
             transform
-                .DOMove(roundPosition, ConstantList.correctTime);
+                .DOMove(roundPosition, ConstantList.correctTime)
+                .SetEase(Ease.Linear);
         }
 
-        public void SetPosition(Vector2 setPosition)
-        {
-            transform.position = setPosition;
-        }
+        public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
         public Vector3 GetPosition() => transform.position;
     }

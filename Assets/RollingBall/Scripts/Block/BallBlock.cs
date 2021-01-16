@@ -15,35 +15,35 @@ namespace RollingBall.Block
     public sealed class BallBlock : BaseBlock, IMoveObject
     {
         private Vector3 _moveDirection;
-        private CancellationToken _cancellationToken;
+        private CancellationToken _token;
 
-        private const float _moveSpeed = 0.15f;
+        private readonly float _moveSpeed = 0.15f;
 
         private void Start()
         {
             isMove = false;
             _moveDirection = Vector3.zero;
-            _cancellationToken = this.GetCancellationTokenOnDestroy();
+            _token = this.GetCancellationTokenOnDestroy();
 
             this.OnCollisionEnter2DAsObservable()
                 .Select(other => other.gameObject.GetComponent<IHittable>())
                 .Where(hittable => hittable != null && hittable.isMove == false)
-                .Subscribe(_ =>
+                .Subscribe(other =>
                 {
                     isMove = false;
                     CorrectPosition();
                 })
-                .AddTo(gameObject);
+                .AddTo(this);
         }
 
         public override void Hit(Vector3 moveDirection)
         {
             base.Hit(moveDirection);
 
-            MoveAsync(moveDirection).Forget();
+            MoveAsync(moveDirection, _token).Forget();
         }
 
-        private async UniTaskVoid MoveAsync(Vector3 moveDirection)
+        private async UniTaskVoid MoveAsync(Vector3 moveDirection, CancellationToken token)
         {
             isMove = true;
             _moveDirection = moveDirection;
@@ -53,7 +53,7 @@ namespace RollingBall.Block
                 transform.position += _moveSpeed * _moveDirection;
 
                 return isMove;
-            }, cancellationToken: _cancellationToken);
+            }, cancellationToken: token);
         }
 
         private void CorrectPosition()
@@ -61,13 +61,11 @@ namespace RollingBall.Block
             var roundPosition = transform.RoundPosition();
 
             transform
-                .DOMove(roundPosition, ConstantList.correctTime);
+                .DOMove(roundPosition, ConstantList.correctTime)
+                .SetEase(Ease.Linear);
         }
 
-        public void SetPosition(Vector2 setPosition)
-        {
-            transform.position = setPosition;
-        }
+        public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
         public Vector3 GetPosition() => transform.position;
     }
