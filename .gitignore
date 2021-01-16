@@ -38,30 +38,18 @@ sysinfo.txt
 # Rider Settings
 .idea
 
-# Asset Editor
+# Asset
+Assets/ConsolePro
+Assets/ConsolePro.meta
+Assets/Doozy
+Assets/Doozy.meta
 Assets/Editor
 Assets/Editor.meta
-
-# Asset Gizmos
 Assets/Gizmos
 Assets/Gizmos.meta
-
-# Asset Plugins
+Assets/MPUIKit
+Assets/MPUIKit.meta
 Assets/Plugins
 Assets/Plugins.meta
-
-# Asset Resources
-Assets/Resources
-Assets/Resources.meta
-
-# Asset StreamingAssets
-Assets/StreamingAssets
-Assets/StreamingAssets.meta
-
-# TextMeshPro
-Assets/TextMesh Pro
-Assets/TextMesh Pro.meta
-
-# Other Materials
-Assets/MyAsset
-Assets/MyAsset.meta
+Assets/StompyRobot
+Assets/StompyRobot.meta
