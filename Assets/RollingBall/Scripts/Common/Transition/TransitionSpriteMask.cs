@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.Transition
+namespace RollingBall.Common.Transition
 {
     /// <summary>
     /// シーン遷移のマスク管理
