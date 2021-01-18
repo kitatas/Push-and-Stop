@@ -1,11 +1,9 @@
-﻿using RollingBall.Sound.UnityAudio.BGM;
-using RollingBall.Sound.UnityAudio.SE;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace RollingBall.Sound.UnityAudio
+namespace RollingBall.Common.Sound.UnityAudio
 {
     /// <summary>
     /// 音量の調整
@@ -16,18 +14,12 @@ namespace RollingBall.Sound.UnityAudio
         [SerializeField] private Slider seSlider = null;
         [SerializeField] private UnityEngine.UI.Button resetButton = null;
 
-        private readonly Subject<Unit> _subject = new Subject<Unit>();
-
         [Inject]
         private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
         {
             SetSliderValue(unityAudioBgmController, unityAudioSeController);
 
             UpdateVolumeSlider(unityAudioBgmController, unityAudioSeController);
-
-            _subject
-                .Subscribe(_ => unityAudioSeController.PlaySe(SeType.DecisionButton))
-                .AddTo(this);
 
             OnPushResetButton(unityAudioBgmController, unityAudioSeController);
         }
@@ -57,11 +49,9 @@ namespace RollingBall.Sound.UnityAudio
                 .OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    bgm.SetVolume(bgmSlider.maxValue / 2f);
-                    se.SetVolume(seSlider.maxValue / 2f);
+                    bgm.SetVolume(bgmSlider.maxValue / 2.0f);
+                    se.SetVolume(seSlider.maxValue / 2.0f);
                     SetSliderValue(bgm, se);
-
-                    _subject.OnNext(Unit.Default);
                 })
                 .AddTo(resetButton);
         }

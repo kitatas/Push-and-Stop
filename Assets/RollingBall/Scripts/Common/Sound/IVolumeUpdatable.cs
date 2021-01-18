@@ -1,4 +1,4 @@
-﻿namespace RollingBall.Sound
+﻿namespace RollingBall.Common.Sound
 {
     public interface IVolumeUpdatable
     {

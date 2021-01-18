@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.Sound.UnityAudio
+namespace RollingBall.Common.Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public abstract class BaseAudioSource : MonoBehaviour, IVolumeUpdatable

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Zenject;
 
-namespace RollingBall.Sound
+namespace RollingBall.Common.Sound.SE
 {
     /// <summary>
     /// SEの音量を調整するSlider
@@ -21,7 +21,7 @@ namespace RollingBall.Sound
         {
             base.OnPointerUp(eventData);
 
-            _seController.PlaySe(SeType.DecisionButton);
+            _seController.PlaySe(SeType.Decision);
         }
     }
 }
