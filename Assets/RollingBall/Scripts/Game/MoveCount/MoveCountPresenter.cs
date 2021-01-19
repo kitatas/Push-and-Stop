@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-namespace RollingBall.MoveCounter
+namespace RollingBall.Game.MoveCount
 {
     /// <summary>
     /// 移動回数を扱うPresenter
@@ -9,7 +9,7 @@ namespace RollingBall.MoveCounter
     {
         public MoveCountPresenter(IMoveCountModel moveCountModel, MoveCountView moveCountView)
         {
-            moveCountModel.MoveCount()
+            moveCountModel.moveCount
                 .Subscribe(moveCountView.UpdateText)
                 .AddTo(moveCountView);
         }

@@ -1,14 +1,14 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace RollingBall.MoveCounter
+namespace RollingBall.Game.MoveCount
 {
     /// <summary>
     /// 移動回数を扱うView
     /// </summary>
     public sealed class MoveCountView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI moveCountText = null;
+        [SerializeField] private TextMeshProUGUI moveCountText = default;
 
         public void UpdateText(int moveCount)
         {
