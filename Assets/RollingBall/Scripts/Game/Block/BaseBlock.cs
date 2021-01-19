@@ -1,8 +1,8 @@
-﻿using RollingBall.Sound;
+﻿using RollingBall.Common.Sound.SE;
 using UnityEngine;
 using Zenject;
 
-namespace RollingBall.Block
+namespace RollingBall.Game.Block
 {
     /// <summary>
     /// ブロック系の抽象クラス

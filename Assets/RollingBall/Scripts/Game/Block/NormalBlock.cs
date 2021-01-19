@@ -1,7 +1,7 @@
-﻿using RollingBall.StageObject;
+﻿using RollingBall.Game.StageObject;
 using UnityEngine;
 
-namespace RollingBall.Block
+namespace RollingBall.Game.Block
 {
     /// <summary>
     /// 移動しないブロック

@@ -1,13 +1,14 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using RollingBall.StageObject;
-using RollingBall.Utility;
+using RollingBall.Common;
+using RollingBall.Common.Utility;
+using RollingBall.Game.StageObject;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace RollingBall.Block
+namespace RollingBall.Game.Block
 {
     /// <summary>
     /// 何かにぶつかるまで直進するブロック
@@ -61,7 +62,7 @@ namespace RollingBall.Block
             var roundPosition = transform.RoundPosition();
 
             transform
-                .DOMove(roundPosition, ConstantList.correctTime)
+                .DOMove(roundPosition, Const.CORRECT_TIME)
                 .SetEase(Ease.Linear);
         }
 

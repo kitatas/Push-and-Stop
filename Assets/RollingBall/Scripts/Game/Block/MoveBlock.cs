@@ -1,13 +1,14 @@
 ﻿using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using RollingBall.StageObject;
-using RollingBall.Utility;
+using RollingBall.Common;
+using RollingBall.Common.Utility;
+using RollingBall.Game.StageObject;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace RollingBall.Block
+namespace RollingBall.Game.Block
 {
     /// <summary>
     /// １マス分移動するブロック
@@ -45,7 +46,7 @@ namespace RollingBall.Block
             var nextPosition = transform.position + moveDirection;
 
             _tweenCore = transform
-                .DOMove(nextPosition, ConstantList.correctTime)
+                .DOMove(nextPosition, Const.CORRECT_TIME)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => isMove = false);
         }
@@ -55,7 +56,7 @@ namespace RollingBall.Block
             var roundPosition = transform.RoundPosition();
 
             transform
-                .DOMove(roundPosition, ConstantList.correctTime)
+                .DOMove(roundPosition, Const.CORRECT_TIME)
                 .SetEase(Ease.Linear);
         }
 

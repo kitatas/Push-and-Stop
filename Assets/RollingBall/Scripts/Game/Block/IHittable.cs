@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.Block
+namespace RollingBall.Game.Block
 {
     public interface IHittable
     {
