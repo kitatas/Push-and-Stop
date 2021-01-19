@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.Memento
+namespace RollingBall.Game.Memento
 {
     /// <summary>
     /// ステージ内の１つのオブジェクトの位置を保持

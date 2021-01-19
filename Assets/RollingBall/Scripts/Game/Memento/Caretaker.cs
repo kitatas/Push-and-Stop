@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using RollingBall.StageObject;
+using RollingBall.Game.StageObject;
 using UnityEngine;
 
-namespace RollingBall.Memento
+namespace RollingBall.Game.Memento
 {
     /// <summary>
     /// ステージ内で移動するオブジェクトの位置を保持
     /// </summary>
-    public sealed class Caretaker : ICaretakerInitializable, ICaretakerPushable, ICaretakerPopable
+    public sealed class Caretaker
     {
-        private Stack<global::RollingBall.Memento.Memento[]> _mementoStack;
+        private Stack<Memento[]> _mementoStack;
         private List<IMoveObject> _moveObjects;
 
         public void Initialize()
         {
-            _mementoStack = new Stack<global::RollingBall.Memento.Memento[]>();
+            _mementoStack = new Stack<Memento[]>();
 
             _moveObjects = new List<IMoveObject>();
             foreach (var component in Object.FindObjectsOfType<Component>())
@@ -31,10 +31,10 @@ namespace RollingBall.Memento
         /// </summary>
         public void PushMementoStack()
         {
-            var mementoArray = new global::RollingBall.Memento.Memento[_moveObjects.Count];
+            var mementoArray = new Memento[_moveObjects.Count];
             for (int i = 0; i < _moveObjects.Count; i++)
             {
-                mementoArray[i] = new global::RollingBall.Memento.Memento(_moveObjects[i].GetPosition());
+                mementoArray[i] = new Memento(_moveObjects[i].GetPosition());
             }
 
             _mementoStack.Push(mementoArray);
