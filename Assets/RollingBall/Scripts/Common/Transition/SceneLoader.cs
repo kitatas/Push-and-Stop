@@ -22,25 +22,21 @@ namespace RollingBall.Common.Transition
         private float _transitionProgress;
         private float _transitionDuration;
 
-        private ZenjectSceneLoader _zenjectSceneLoader;
-        private TransitionSpriteMask _transitionSpriteMask;
-        private CancellationToken _token;
+        private readonly CancellationTokenSource _tokenSource;
+        private readonly ZenjectSceneLoader _zenjectSceneLoader;
+        private readonly TransitionSpriteMask _transitionSpriteMask;
 
-        public SceneLoader()
+        public SceneLoader(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask)
         {
-
+            _tokenSource = new CancellationTokenSource();
+            _zenjectSceneLoader = zenjectSceneLoader;
+            _transitionSpriteMask = transitionSpriteMask;
         }
 
         ~SceneLoader()
         {
-
-        }
-
-        [Inject]
-        private void Construct(ZenjectSceneLoader zenjectSceneLoader, TransitionSpriteMask transitionSpriteMask)
-        {
-            _zenjectSceneLoader = zenjectSceneLoader;
-            _transitionSpriteMask = transitionSpriteMask;
+            _tokenSource?.Cancel();
+            _tokenSource?.Dispose();
         }
 
         public void LoadScene(SceneName sceneName, int level)
@@ -54,7 +50,7 @@ namespace RollingBall.Common.Transition
         public void FadeLoadScene(SceneName sceneName, int level, float fadeTime)
         {
             _transitionDuration = fadeTime;
-            FadeLoadAsync(sceneName.ToString(), level, _token).Forget();
+            FadeLoadAsync(sceneName.ToString(), level, _tokenSource.Token).Forget();
         }
 
         private async UniTaskVoid FadeLoadAsync(string sceneName, int level, CancellationToken token)
