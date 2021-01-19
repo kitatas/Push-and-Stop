@@ -1,4 +1,4 @@
-﻿namespace RollingBall.Button.MoveButton
+﻿namespace RollingBall.Game.Player
 {
     public enum MoveDirection
     {
