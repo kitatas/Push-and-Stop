@@ -60,7 +60,7 @@ namespace RollingBall.Common.Transition
         private async UniTaskVoid FadeLoadAsync(string sceneName, int level, CancellationToken token)
         {
             var beforeSceneButtons = Object.FindObjectsOfType<ButtonActivator>();
-            beforeSceneButtons.ActivateAllButtons(false);
+            beforeSceneButtons.ActivateButtons(false);
             SetUpFade(_alphaCutOffMax);
             await UniTask.WaitUntil(() =>
             {
@@ -79,7 +79,7 @@ namespace RollingBall.Common.Transition
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
 
             var afterSceneButtons = Object.FindObjectsOfType<ButtonActivator>();
-            afterSceneButtons.ActivateAllButtons(false);
+            afterSceneButtons.ActivateButtons(false);
             SetUpFade(_alphaCutOffMin);
             await UniTask.WaitUntil(() =>
             {
@@ -90,7 +90,7 @@ namespace RollingBall.Common.Transition
                 return IsFadeComplete();
             }, cancellationToken: token);
 
-            afterSceneButtons.ActivateAllButtons(true);
+            afterSceneButtons.ActivateButtons(true);
         }
 
         private void SetUpFade(float alphaCutOffValue)
