@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RollingBall.Utility
+namespace RollingBall.Common.Utility
 {
     public static class TransformExtension
     {
