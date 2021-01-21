@@ -9,7 +9,7 @@ namespace RollingBall.Title
 
         private void Start()
         {
-            var clearData = ES3.Load(Const.CLEAR_RANK_KEY, GetDefaultClearData());
+            var clearData = GetClearRankData();
             for (int i = 0; i < rankButtons.Length; i++)
             {
                 if (i > 0)
@@ -22,6 +22,11 @@ namespace RollingBall.Title
 
                 rankButtons[i].ShowRank(clearData[i]);
             }
+        }
+
+        public static int[] GetClearRankData()
+        {
+            return ES3.Load(Const.CLEAR_RANK_KEY, GetDefaultClearData());
         }
 
         public void ResetClearRank()
@@ -45,6 +50,21 @@ namespace RollingBall.Title
             }
 
             return clearData;
+        }
+
+        private static int GetClearRank(float clearRate)
+        {
+            if (clearRate <= 1.0f)
+            {
+                return 3;
+            }
+
+            if (clearRate <= 1.5f)
+            {
+                return 2;
+            }
+
+            return 1;
         }
     }
 }
