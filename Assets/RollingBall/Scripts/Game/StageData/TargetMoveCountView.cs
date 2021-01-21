@@ -1,7 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
+using Zenject;
 
-namespace RollingBall.StageData
+namespace RollingBall.Game.StageData
 {
     /// <summary>
     /// 目標移動回数の表示
@@ -9,9 +10,10 @@ namespace RollingBall.StageData
     [RequireComponent(typeof(TextMeshProUGUI))]
     public sealed class TargetMoveCountView : MonoBehaviour
     {
-        public void Display(int targetCount)
+        [Inject]
+        private void Construct(StageLevelLoader stageLevelLoader)
         {
-            GetComponent<TextMeshProUGUI>().text = $"{targetCount}";
+            GetComponent<TextMeshProUGUI>().text = $"{stageLevelLoader.GetStageData().targetCount}";
         }
     }
 }

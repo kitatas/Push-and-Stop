@@ -1,12 +1,11 @@
 ﻿using System;
-using RollingBall.Memento;
-using RollingBall.Player;
-using RollingBall.StageObject;
+using RollingBall.Game.Memento;
+using RollingBall.Game.Player;
+using RollingBall.Game.StageObject;
 using UnityEngine;
-using Zenject;
 using Object = UnityEngine.Object;
 
-namespace RollingBall.StageData
+namespace RollingBall.Game.StageData
 {
     /// <summary>
     /// ステージの読み込み
@@ -23,20 +22,18 @@ namespace RollingBall.StageData
             BallBlock = 5,
         }
 
-        private StageObjectTable _stageObjectTable;
-        private IStageObject _player;
-        private IStageObject _goal;
+        private readonly StageObjectTable _stageObjectTable;
+        private readonly IStageObject _player;
+        private readonly IStageObject _goal;
 
-        [Inject]
-        private void Construct(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
-            StageDataTable stageDataTable, ICaretakerInitializable caretaker)
+        public StageLoader(StageObjectTable stageObjectTable, PlayerController playerController, Goal goal,
+            StageLevelLoader stageLevelLoader, Caretaker caretaker)
         {
             _stageObjectTable = stageObjectTable;
             _player = playerController;
             _goal = goal;
 
-            LoadStageData(stageDataTable.StageDataInfo().stageFile);
-
+            LoadStageData(stageLevelLoader.GetStageData().stageFile);
             caretaker.Initialize();
         }
 

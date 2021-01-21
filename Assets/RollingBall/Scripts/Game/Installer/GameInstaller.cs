@@ -1,5 +1,6 @@
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.Player;
+using RollingBall.Game.StageData;
 using UnityEngine;
 using Zenject;
 
@@ -45,6 +46,19 @@ namespace RollingBall.Game.Installer
                 .Bind<Rigidbody2D>()
                 .FromInstance(rigidbody2d)
                 .AsCached();
+
+            #endregion
+
+            #region StageData
+
+            Container
+                .Bind<StageLevelLoader>()
+                .AsCached();
+
+            Container
+                .Bind<StageLoader>()
+                .AsCached()
+                .NonLazy();
 
             #endregion
         }
