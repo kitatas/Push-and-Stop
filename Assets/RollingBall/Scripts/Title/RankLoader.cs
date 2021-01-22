@@ -52,6 +52,19 @@ namespace RollingBall.Title
             return clearData;
         }
 
+        public static int SaveClearData(int level, float clearRate)
+        {
+            var clearData = ES3.Load(Const.CLEAR_RANK_KEY, GetDefaultClearData());
+            var clearRank = GetClearRank(clearRate);
+            if (clearRank > clearData[level])
+            {
+                clearData[level] = clearRank;
+                ES3.Save(Const.CLEAR_RANK_KEY, clearData);
+            }
+
+            return clearRank;
+        }
+
         private static int GetClearRank(float clearRate)
         {
             if (clearRate <= 1.0f)
