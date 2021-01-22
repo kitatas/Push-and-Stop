@@ -1,3 +1,4 @@
+using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.Player;
 using RollingBall.Game.StageData;
@@ -14,6 +15,14 @@ namespace RollingBall.Game.Installer
 
         public override void InstallBindings()
         {
+            #region Memento
+
+            Container
+                .Bind<Caretaker>()
+                .AsCached();
+
+            #endregion
+
             #region MoveCount
 
             Container
@@ -21,7 +30,8 @@ namespace RollingBall.Game.Installer
                 .AsCached();
 
             Container
-                .BindInstance(moveCountView)
+                .Bind<MoveCountView>()
+                .FromInstance(moveCountView)
                 .AsCached();
 
             Container

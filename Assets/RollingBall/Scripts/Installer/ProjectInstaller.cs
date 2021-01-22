@@ -14,7 +14,13 @@ namespace RollingBall.Installer
         public override void InstallBindings()
         {
             Container
-                .BindInstance(spriteMask)
+                .Bind<int>()
+                .AsCached()
+                .IfNotBound();
+
+            Container
+                .Bind<SpriteMask>()
+                .FromInstance(spriteMask)
                 .AsCached();
 
             Container
