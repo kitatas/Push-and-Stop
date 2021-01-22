@@ -18,7 +18,7 @@ namespace RollingBall.Game.Block
         private Vector3 _moveDirection;
         private CancellationToken _token;
 
-        private readonly float _moveSpeed = 0.15f;
+        private readonly float _moveSpeed = 7.5f;
 
         private void Start()
         {
@@ -51,7 +51,7 @@ namespace RollingBall.Game.Block
 
             await UniTask.WaitWhile(() =>
             {
-                transform.position += _moveSpeed * _moveDirection;
+                transform.position += _moveSpeed * _moveDirection * Time.deltaTime;
 
                 return isMove;
             }, cancellationToken: token);

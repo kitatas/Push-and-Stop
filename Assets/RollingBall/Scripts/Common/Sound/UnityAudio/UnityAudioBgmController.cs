@@ -16,7 +16,10 @@ namespace RollingBall.Common.Sound.UnityAudio
         private void Construct(UnityAudioBgmTable unityAudioBgmTable)
         {
             _bgmList = unityAudioBgmTable.GetBgmList();
+        }
 
+        private void Start()
+        {
             PlayBgm(BgmType.Main);
         }
 
