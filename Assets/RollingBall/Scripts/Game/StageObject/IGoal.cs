@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.StageObject
+namespace RollingBall.Game.StageObject
 {
-    public interface IGoal
+    public interface IGoal : IStageObject
     {
         bool IsEqualPosition(Vector2 roundPosition);
     }

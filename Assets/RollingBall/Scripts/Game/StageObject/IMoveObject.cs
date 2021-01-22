@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RollingBall.StageObject
+namespace RollingBall.Game.StageObject
 {
     public interface IMoveObject : IStageObject
     {
