@@ -2,6 +2,7 @@
 using RollingBall.Common;
 using RollingBall.Common.Utility;
 using RollingBall.Game.Block;
+using RollingBall.Game.Clear;
 using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.StageObject;
@@ -19,6 +20,7 @@ namespace RollingBall.Game.Player
     {
         [SerializeField] private MoveButton[] moveButtons = default;
         [SerializeField] private UndoButton undoButton = default;
+        [SerializeField] private ClearView clearView = default;
 
         private PlayerMover _playerMover;
         private Caretaker _caretaker;
@@ -86,6 +88,7 @@ namespace RollingBall.Game.Player
                     {
                         InteractMoveButton(false);
                         undoButton.buttonActivator.SetInteractable(false);
+                        clearView.Show(_moveCountUseCase.currentCount);
                     }
                     else
                     {
