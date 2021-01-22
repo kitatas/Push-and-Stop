@@ -18,11 +18,13 @@ namespace RollingBall.Common.Transition
         [HideInInspector] public int stageNumber;
 
         private SceneLoader _sceneLoader;
+        private int _level;
 
         [Inject]
-        private void Construct(SceneLoader sceneLoader)
+        private void Construct(SceneLoader sceneLoader, int level)
         {
             _sceneLoader = sceneLoader;
+            _level = level;
         }
 
         private void Start()
@@ -43,7 +45,7 @@ namespace RollingBall.Common.Transition
                     _sceneLoader.FadeLoadScene(SceneName.Main, stageNumber, Const.FADE_TIME);
                     break;
                 case LoadType.Reload:
-                    _sceneLoader.LoadScene(SceneName.Main, stageNumber);
+                    _sceneLoader.LoadScene(SceneName.Main, _level);
                     break;
                 case LoadType.Next:
                     LoadNext();
@@ -58,18 +60,18 @@ namespace RollingBall.Common.Transition
 
         private void LoadNext()
         {
-            // if (_stageDataTable.IsNextStage())
+            var nextLevel = _level + 1;
+            if (nextLevel < Const.MAX_STAGE_COUNT)
             {
-                _sceneLoader.FadeLoadScene(SceneName.Main, stageNumber + 1, Const.FADE_TIME);
+                _sceneLoader.FadeLoadScene(SceneName.Main, nextLevel, Const.FADE_TIME);
                 return;
             }
 
-            // LoadTitle();
+            LoadTitle();
         }
 
         private void LoadTitle()
         {
-            // _stageDataTable.ResetStageIndex();
             _sceneLoader.FadeLoadScene(SceneName.Title, 0, Const.FADE_TIME);
         }
     }
