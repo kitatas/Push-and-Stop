@@ -1,4 +1,5 @@
 ﻿using RollingBall.Common.Button;
+using RollingBall.Common.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace RollingBall.Title
     [RequireComponent(typeof(ButtonActivator))]
     public sealed class RankButton : MonoBehaviour
     {
+        [SerializeField] private Image lockImage = default;
         [SerializeField] private Image[] rankImages = default;
         private ButtonActivator _buttonActivator;
 
@@ -24,12 +26,28 @@ namespace RollingBall.Title
         public void ShowRank(int clearRank)
         {
             var isActive = clearRank > -1;
-            _buttonActivator.SetInteractable(isActive);
+            ActivateButton(isActive);
 
             for (int i = 0; i < rankImages.Length; i++)
             {
                 var color = i <= clearRank - 1 ? _fillColor : _emptyColor;
                 rankImages[i].color = color;
+            }
+        }
+
+        private void ActivateButton(bool value)
+        {
+            if (value)
+            {
+                _buttonActivator.SetInteractable(true);
+                lockImage.gameObject.SetActive(false);
+                rankImages.SetActiveAll(true);
+            }
+            else
+            {
+                _buttonActivator.SetInteractable(false);
+                lockImage.gameObject.SetActive(true);
+                rankImages.SetActiveAll(false);
             }
         }
     }
