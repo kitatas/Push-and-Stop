@@ -51,7 +51,7 @@ namespace RollingBall.Game.Clear
             await UniTask.Delay(TimeSpan.FromSeconds(Const.UI_ANIMATION_TIME * 2.0f + 0.5f), cancellationToken: token);
 
             await clearText.rectTransform
-                .DOAnchorPosY(70.0f, Const.UI_ANIMATION_TIME)
+                .DOAnchorPosY(200.0f, Const.UI_ANIMATION_TIME)
                 .WithCancellation(token);
 
             await buttonFader.ShowAsync(token);

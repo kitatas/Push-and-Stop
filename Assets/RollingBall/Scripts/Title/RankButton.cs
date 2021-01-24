@@ -16,7 +16,7 @@ namespace RollingBall.Title
         private ButtonActivator _buttonActivator;
 
         private readonly Color _fillColor = new Color(255f / 255f, 180f / 255f, 0f / 255f);
-        private readonly Color _emptyColor = new Color(71f / 255f, 71f / 255f, 68f / 255f);
+        private readonly Color _emptyColor = new Color(112f / 255f, 101f / 255f, 90f / 255f);
 
         private void Awake()
         {
