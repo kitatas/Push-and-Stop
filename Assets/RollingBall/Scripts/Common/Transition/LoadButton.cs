@@ -15,7 +15,7 @@ namespace RollingBall.Common.Transition
     public sealed class LoadButton : MonoBehaviour
     {
         [SerializeField] private LoadType loadType = default;
-        [HideInInspector] public int stageNumber;
+        [SerializeField] private int stageNumber = default;
 
         private SceneLoader _sceneLoader;
         private int _level;
@@ -34,8 +34,6 @@ namespace RollingBall.Common.Transition
                 .Subscribe(_ => LoadScene())
                 .AddTo(this);
         }
-
-        public LoadType GetLoadType() => loadType;
 
         private void LoadScene()
         {
