@@ -1,4 +1,6 @@
-﻿using UniRx;
+﻿using RollingBall.Common.Sound.SE;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,6 +19,11 @@ namespace RollingBall.Common.Sound.UnityAudio
         [Inject]
         private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
         {
+            seSlider
+                .OnPointerUpAsObservable()
+                .Subscribe(_ => unityAudioSeController.PlaySe(SeType.Decision))
+                .AddTo(seSlider);
+
             SetSliderValue(unityAudioBgmController, unityAudioSeController);
 
             UpdateVolumeSlider(unityAudioBgmController, unityAudioSeController);
