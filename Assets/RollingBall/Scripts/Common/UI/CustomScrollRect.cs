@@ -9,9 +9,10 @@ using UnityEngine.UI;
 namespace RollingBall.Common.UI
 {
     [RequireComponent(typeof(ScrollRect))]
-    public sealed class FadeScrollRect : MonoBehaviour
+    public sealed class CustomScrollRect : MonoBehaviour
     {
         private ScrollRect _scrollRect;
+        [SerializeField] private UnityEngine.UI.Button resetButton = default;
 
         private void Awake()
         {
@@ -19,6 +20,13 @@ namespace RollingBall.Common.UI
         }
 
         private void Start()
+        {
+            TweenScrollbar();
+
+            ResetValue();
+        }
+
+        private void TweenScrollbar()
         {
             TweenerCore<Color, Color, ColorOptions> fadeTween = null;
 
@@ -61,6 +69,14 @@ namespace RollingBall.Common.UI
             this.OnDisableAsObservable()
                 .Subscribe(_ => fadeTween?.Kill())
                 .AddTo(this);
+        }
+
+        private void ResetValue()
+        {
+            resetButton
+                .OnClickAsObservable()
+                .Subscribe(_ => _scrollRect.verticalNormalizedPosition = 1.0f)
+                .AddTo(_scrollRect);
         }
     }
 }
