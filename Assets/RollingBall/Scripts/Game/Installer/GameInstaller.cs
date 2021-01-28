@@ -2,6 +2,7 @@ using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.Player;
 using RollingBall.Game.StageData;
+using RollingBall.Game.StageObject;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace RollingBall.Game.Installer
         [SerializeField] private MoveCountView moveCountView = default;
         [SerializeField] private PlayerController playerController = default;
         [SerializeField] private Rigidbody2D rigidbody2d = default;
+        [SerializeField] private Goal goal = default;
 
         public override void InstallBindings()
         {
@@ -69,6 +71,15 @@ namespace RollingBall.Game.Installer
                 .Bind<StageLoader>()
                 .AsCached()
                 .NonLazy();
+
+            #endregion
+
+            #region StageObject
+
+            Container
+                .BindInterfacesAndSelfTo<Goal>()
+                .FromInstance(goal)
+                .AsCached();
 
             #endregion
         }
