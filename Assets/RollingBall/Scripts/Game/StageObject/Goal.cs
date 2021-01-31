@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using RollingBall.Game.Clear;
+using UniRx;
+using UnityEngine;
 
 namespace RollingBall.Game.StageObject
 {
@@ -7,10 +10,34 @@ namespace RollingBall.Game.StageObject
     /// </summary>
     public sealed class Goal : MonoBehaviour, IStageObject
     {
+        [SerializeField] private ClearView clearView = default;
+
+        private int _currentMoveCount;
+        private ReactiveProperty<bool> _isGoal;
+
+        public void Initialize(Action action)
+        {
+            _currentMoveCount = 0;
+
+            _isGoal = new ReactiveProperty<bool>(false);
+            _isGoal
+                .Where(x => x)
+                .Subscribe(_ =>
+                {
+                    clearView.Show(_currentMoveCount);
+                    action?.Invoke();
+                })
+                .AddTo(this);
+        }
+
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
         private Vector2 GetPosition() => transform.position;
 
-        public bool IsEqualPosition(Vector2 roundPosition) => GetPosition() == roundPosition;
+        public void SetPlayerPosition(Vector2 playerPosition, int moveCount)
+        {
+            _isGoal.Value = GetPosition() == playerPosition;
+            _currentMoveCount = moveCount;
+        }
     }
 }

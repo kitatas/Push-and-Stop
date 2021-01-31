@@ -2,7 +2,6 @@
 using RollingBall.Common;
 using RollingBall.Common.Utility;
 using RollingBall.Game.Block;
-using RollingBall.Game.Clear;
 using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.StageObject;
@@ -20,7 +19,6 @@ namespace RollingBall.Game.Player
     {
         [SerializeField] private MoveButton[] moveButtons = default;
         [SerializeField] private UndoButton undoButton = default;
-        [SerializeField] private ClearView clearView = default;
 
         private PlayerMover _playerMover;
         private IMoveCountUseCase _moveCountUseCase;
@@ -36,6 +34,9 @@ namespace RollingBall.Game.Player
 
         private void Start()
         {
+            _moveCountUseCase.InitializeUndoButton(() => undoButton.SetInteractable(true));
+            _goal.Initialize(() => SetInteractableButton(false));
+
             // 全移動ボタン
             foreach (var moveButton in moveButtons)
             {
@@ -61,19 +62,8 @@ namespace RollingBall.Game.Player
                 .Subscribe(hittable =>
                 {
                     _playerMover.HitBlock(hittable);
-
                     var roundPosition = transform.RoundPosition();
-
-                    if (_goal.IsEqualPosition(roundPosition))
-                    {
-                        SetInteractableButton(false);
-                        clearView.Show(_moveCountUseCase.currentCount);
-                    }
-                    else
-                    {
-                        undoButton.SetInteractable(true);
-                    }
-
+                    _goal.SetPlayerPosition(roundPosition, _moveCountUseCase.currentCount);
                     CorrectPosition(roundPosition);
                 })
                 .AddTo(this);

@@ -1,4 +1,5 @@
-﻿using RollingBall.Game.Memento;
+﻿using System;
+using RollingBall.Game.Memento;
 using UniRx;
 
 namespace RollingBall.Game.MoveCount
@@ -9,17 +10,32 @@ namespace RollingBall.Game.MoveCount
     public sealed class MoveCountModel : IMoveCountModel, IMoveCountUseCase
     {
         private readonly ReactiveProperty<int> _moveCount;
+        private readonly CompositeDisposable _compositeDisposable;
         private readonly Caretaker _caretaker;
 
         public MoveCountModel(Caretaker caretaker)
         {
             _moveCount = new ReactiveProperty<int>(0);
+            _compositeDisposable = new CompositeDisposable();
             _caretaker = caretaker;
+        }
+
+        ~MoveCountModel()
+        {
+            _compositeDisposable.Clear();
         }
 
         public IReadOnlyReactiveProperty<int> moveCount => _moveCount;
 
         public int currentCount => _moveCount.Value;
+
+        public void InitializeUndoButton(Action action)
+        {
+            moveCount
+                .Where(x => x == 1)
+                .Subscribe(_ => action?.Invoke())
+                .AddTo(_compositeDisposable);
+        }
 
         private void SetMoveCount(int value) => _moveCount.Value = value;
 
