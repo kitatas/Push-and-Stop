@@ -3,6 +3,7 @@
     public interface IMoveCountUseCase
     {
         int currentCount { get; }
-        void UpdateMoveCount(MoveCountType moveCountType);
+        bool CountUp();
+        bool CountDown();
     }
 }

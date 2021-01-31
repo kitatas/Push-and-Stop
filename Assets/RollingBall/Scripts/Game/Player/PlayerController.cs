@@ -23,16 +23,13 @@ namespace RollingBall.Game.Player
         [SerializeField] private ClearView clearView = default;
 
         private PlayerMover _playerMover;
-        private Caretaker _caretaker;
         private IMoveCountUseCase _moveCountUseCase;
         private Goal _goal;
 
         [Inject]
-        private void Construct(PlayerMover playerMover, Caretaker caretaker, IMoveCountUseCase moveCountUseCase,
-            Goal goal)
+        private void Construct(PlayerMover playerMover, IMoveCountUseCase moveCountUseCase, Goal goal)
         {
             _playerMover = playerMover;
-            _caretaker = caretaker;
             _moveCountUseCase = moveCountUseCase;
             _goal = goal;
         }
@@ -45,12 +42,7 @@ namespace RollingBall.Game.Player
                 moveButton.onPush
                     .Subscribe(moveDirection =>
                     {
-                        // 移動前の位置を保存
-                        _caretaker.PushMementoStack();
-
-                        // 移動回数の更新
-                        _moveCountUseCase.UpdateMoveCount(MoveCountType.Increase);
-
+                        _moveCountUseCase.CountUp();
                         _playerMover.Move(moveDirection);
                         SetEnableButton(false);
                     })
@@ -59,20 +51,8 @@ namespace RollingBall.Game.Player
 
             // 一手戻るボタン
             undoButton.onPush
-                .Subscribe(action =>
-                {
-                    // 移動回数の更新
-                    _moveCountUseCase.UpdateMoveCount(MoveCountType.Decrease);
-
-                    // 保存した位置情報を削除
-                    _caretaker.PopMementoStack();
-
-                    // 保存した位置情報がない場合、ボタン無効化
-                    if (_caretaker.IsMementoStackEmpty())
-                    {
-                        action?.Invoke();
-                    }
-                })
+                .Where(_ => _moveCountUseCase.CountDown())
+                .Subscribe(action => action?.Invoke())
                 .AddTo(undoButton);
 
             this.OnCollisionEnter2DAsObservable()
