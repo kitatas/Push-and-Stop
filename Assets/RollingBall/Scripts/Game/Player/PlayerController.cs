@@ -52,7 +52,7 @@ namespace RollingBall.Game.Player
                         _moveCountUseCase.UpdateMoveCount(MoveCountType.Increase);
 
                         _playerMover.Move(moveDirection);
-                        ActivateButton(false);
+                        SetEnableButton(false);
                     })
                     .AddTo(moveButton);
             }
@@ -86,13 +86,12 @@ namespace RollingBall.Game.Player
 
                     if (_goal.IsEqualPosition(roundPosition))
                     {
-                        InteractMoveButton(false);
-                        undoButton.buttonActivator.SetInteractable(false);
+                        SetInteractableButton(false);
                         clearView.Show(_moveCountUseCase.currentCount);
                     }
                     else
                     {
-                        undoButton.buttonActivator.SetInteractable(true);
+                        undoButton.SetInteractable(true);
                     }
 
                     CorrectPosition(roundPosition);
@@ -107,29 +106,25 @@ namespace RollingBall.Game.Player
                 .OnComplete(() =>
                 {
                     _playerMover.ResetVelocity();
-                    ActivateButton(true);
+                    SetEnableButton(true);
                 });
         }
 
-        private void ActivateButton(bool value)
+        private void SetEnableButton(bool value)
         {
-            ActivateMoveButton(value);
-            undoButton.buttonActivator.SetEnabled(value);
-        }
-
-        private void ActivateMoveButton(bool value)
-        {
+            undoButton.SetEnabled(value);
             foreach (var moveButton in moveButtons)
             {
-                moveButton.buttonActivator.SetEnabled(value);
+                moveButton.SetEnabled(value);
             }
         }
 
-        private void InteractMoveButton(bool value)
+        private void SetInteractableButton(bool value)
         {
+            undoButton.SetInteractable(value);
             foreach (var moveButton in moveButtons)
             {
-                moveButton.buttonActivator.SetInteractable(value);
+                moveButton.SetInteractable(value);
             }
         }
 

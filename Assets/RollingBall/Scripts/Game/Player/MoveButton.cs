@@ -2,6 +2,7 @@
 using RollingBall.Common.Button;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RollingBall.Game.Player
 {
@@ -16,19 +17,23 @@ namespace RollingBall.Game.Player
         private readonly Subject<MoveDirection> _subject = new Subject<MoveDirection>();
         public IObservable<MoveDirection> onPush => _subject;
 
-        public ButtonActivator buttonActivator { get; private set; }
+        private ButtonActivator _buttonActivator;
 
         private void Awake()
         {
-            buttonActivator = GetComponent<ButtonActivator>();
+            _buttonActivator = GetComponent<ButtonActivator>();
         }
 
         private void Start()
         {
-            GetComponent<UnityEngine.UI.Button>()
+            GetComponent<Button>()
                 .OnClickAsObservable()
                 .Subscribe(_ => _subject.OnNext(moveDirection))
                 .AddTo(this);
         }
+
+        public void SetEnabled(bool value) => _buttonActivator.SetEnabled(value);
+
+        public void SetInteractable(bool value) => _buttonActivator.SetInteractable(value);
     }
 }
