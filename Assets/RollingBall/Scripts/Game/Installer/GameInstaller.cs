@@ -77,7 +77,7 @@ namespace RollingBall.Game.Installer
             #region StageObject
 
             Container
-                .BindInterfacesAndSelfTo<Goal>()
+                .Bind<Goal>()
                 .FromInstance(goal)
                 .AsCached();
 

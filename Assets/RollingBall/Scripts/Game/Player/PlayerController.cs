@@ -25,11 +25,11 @@ namespace RollingBall.Game.Player
         private PlayerMover _playerMover;
         private Caretaker _caretaker;
         private IMoveCountUseCase _moveCountUseCase;
-        private IGoal _goal;
+        private Goal _goal;
 
         [Inject]
         private void Construct(PlayerMover playerMover, Caretaker caretaker, IMoveCountUseCase moveCountUseCase,
-            IGoal goal)
+            Goal goal)
         {
             _playerMover = playerMover;
             _caretaker = caretaker;

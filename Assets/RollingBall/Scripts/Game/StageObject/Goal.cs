@@ -5,7 +5,7 @@ namespace RollingBall.Game.StageObject
     /// <summary>
     /// クリアの判定
     /// </summary>
-    public sealed class Goal : MonoBehaviour, IGoal
+    public sealed class Goal : MonoBehaviour, IStageObject
     {
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
