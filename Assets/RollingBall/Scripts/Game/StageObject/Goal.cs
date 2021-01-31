@@ -36,8 +36,8 @@ namespace RollingBall.Game.StageObject
 
         public void SetPlayerPosition(Vector2 playerPosition, int moveCount)
         {
-            _isGoal.Value = GetPosition() == playerPosition;
             _currentMoveCount = moveCount;
+            _isGoal.Value = GetPosition() == playerPosition;
         }
     }
 }
