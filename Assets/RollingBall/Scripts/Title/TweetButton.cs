@@ -3,6 +3,7 @@ using RollingBall.Common;
 using RollingBall.Common.Button;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace RollingBall.Title
 {
@@ -13,8 +14,8 @@ namespace RollingBall.Title
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class TweetButton : MonoBehaviour
     {
-        private readonly string _gameId = "nanka_title_v2";
-        private readonly string _hashTag = "unityroom";
+        private const string GAME_ID = "nanka_title_v2";
+        private const string HASH_TAG = "unityroom";
 
         private void Start()
         {
@@ -24,22 +25,33 @@ namespace RollingBall.Title
                 .AddTo(this);
         }
 
-        private void OnPush()
+        private static void OnPush()
         {
             var tweetText = $"{GetClearText()}\n";
-            tweetText += $"#{_hashTag}\n";
-            UnityRoomTweet.Tweet(_gameId, tweetText);
+
+#if UNITY_ANDROID
+
+            var url = $"https://twitter.com/intent/tweet?text={UnityWebRequest.EscapeURL(tweetText)}";
+            url += $"&hashtags={UnityWebRequest.EscapeURL(GAME_ID)}";
+            Application.OpenURL(url);
+
+#else
+
+            tweetText += $"#{HASH_TAG}\n";
+            UnityRoomTweet.Tweet(GAME_ID, tweetText);
+
+#endif
         }
 
         private static string GetClearText()
         {
             var rankData = RankLoader.GetClearRankData();
             var clearCount = rankData.Count(x => x > 0);
-            var clearRankMaxCount = rankData.Count(x => x == 3);
-            
-            if (clearRankMaxCount == Const.MAX_STAGE_COUNT)
+            var maxRankClearCount = rankData.Count(x => x == 3);
+
+            if (maxRankClearCount == Const.MAX_STAGE_COUNT)
             {
-                return $"全てのステージを星３でクリアした！";
+                return $"全てのステージを★３でクリアした！";
             }
 
             if (clearCount == Const.MAX_STAGE_COUNT)
