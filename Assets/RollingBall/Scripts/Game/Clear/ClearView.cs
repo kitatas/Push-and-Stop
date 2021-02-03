@@ -27,13 +27,13 @@ namespace RollingBall.Game.Clear
         private static readonly Vector3 _targetRotateVector = new Vector3(0f, 0f, 360f);
 
         private ISeController _seController;
-        private StageLevelLoader _stageLevelLoader;
+        private StageRepository _stageRepository;
 
         [Inject]
-        private void Construct(ISeController seController, StageLevelLoader stageLevelLoader)
+        private void Construct(ISeController seController, StageRepository stageRepository)
         {
             _seController = seController;
-            _stageLevelLoader = stageLevelLoader;
+            _stageRepository = stageRepository;
         }
 
         public void Show(int moveCount)
@@ -60,8 +60,8 @@ namespace RollingBall.Game.Clear
         private void TweenClearRank(int moveCount)
         {
             rankBackGround.gameObject.SetActive(true);
-            var clearRate = (float) moveCount / _stageLevelLoader.GetStageData().targetCount;
-            var clearRank = RankLoader.SaveClearData(_stageLevelLoader.GetLevel(), clearRate);
+            var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
+            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel(), clearRate);
             TweenRankImages(clearRank);
         }
 

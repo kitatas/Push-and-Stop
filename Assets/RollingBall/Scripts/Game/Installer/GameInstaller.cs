@@ -64,11 +64,7 @@ namespace RollingBall.Game.Installer
             #region StageData
 
             Container
-                .Bind<StageLevelLoader>()
-                .AsCached();
-
-            Container
-                .Bind<StageLoader>()
+                .Bind<StageRepository>()
                 .AsCached()
                 .NonLazy();
 

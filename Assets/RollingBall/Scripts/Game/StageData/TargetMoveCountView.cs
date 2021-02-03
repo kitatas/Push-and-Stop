@@ -11,9 +11,9 @@ namespace RollingBall.Game.StageData
     public sealed class TargetMoveCountView : MonoBehaviour
     {
         [Inject]
-        private void Construct(StageLevelLoader stageLevelLoader)
+        private void Construct(StageRepository stageRepository)
         {
-            GetComponent<TextMeshProUGUI>().text = $"{stageLevelLoader.GetStageData().targetCount}";
+            GetComponent<TextMeshProUGUI>().text = $"{stageRepository.GetTargetMoveCount()}";
         }
     }
 }

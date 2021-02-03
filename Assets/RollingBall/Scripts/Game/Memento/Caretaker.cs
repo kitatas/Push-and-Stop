@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using RollingBall.Game.StageObject;
-using UnityEngine;
 
 namespace RollingBall.Game.Memento
 {
@@ -9,21 +8,18 @@ namespace RollingBall.Game.Memento
     /// </summary>
     public sealed class Caretaker
     {
-        private Stack<Memento[]> _mementoStack;
-        private List<IMoveObject> _moveObjects;
+        private readonly Stack<Memento[]> _mementoStack;
+        private readonly List<IMoveObject> _moveObjects;
 
-        public void Initialize()
+        public Caretaker()
         {
             _mementoStack = new Stack<Memento[]>();
-
             _moveObjects = new List<IMoveObject>();
-            foreach (var component in Object.FindObjectsOfType<Component>())
-            {
-                if (component is IMoveObject moveObject)
-                {
-                    _moveObjects.Add(moveObject);
-                }
-            }
+        }
+
+        public void AddMoveObject(IMoveObject moveObject)
+        {
+            _moveObjects.Add(moveObject);
         }
 
         /// <summary>
