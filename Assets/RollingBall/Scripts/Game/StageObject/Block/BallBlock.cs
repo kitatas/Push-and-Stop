@@ -1,33 +1,36 @@
-﻿using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using RollingBall.Common;
 using RollingBall.Common.Utility;
-using RollingBall.Game.StageObject;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace RollingBall.Game.Block
+namespace RollingBall.Game.StageObject.Block
 {
     /// <summary>
-    /// １マス分移動するブロック
+    /// 何かにぶつかるまで直進するブロック
     /// </summary>
-    public sealed class MoveBlock : BaseBlock, IMoveObject
+    public sealed class BallBlock : BaseBlock, IMoveObject
     {
-        private TweenerCore<Vector3, Vector3, VectorOptions> _tweenCore;
+        private Vector3 _moveDirection;
+        private CancellationToken _token;
+
+        private readonly float _moveSpeed = 7.5f;
 
         private void Start()
         {
             isMove = false;
+            _moveDirection = Vector3.zero;
+            _token = this.GetCancellationTokenOnDestroy();
 
             this.OnCollisionEnter2DAsObservable()
                 .Select(other => other.gameObject.GetComponent<IHittable>())
                 .Where(hittable => hittable != null && hittable.isMove == false)
-                .Subscribe(_ =>
+                .Subscribe(other =>
                 {
                     isMove = false;
-                    _tweenCore?.Kill();
                     CorrectPosition();
                 })
                 .AddTo(this);
@@ -37,18 +40,20 @@ namespace RollingBall.Game.Block
         {
             base.Hit(moveDirection);
 
-            Move(moveDirection);
+            MoveAsync(moveDirection, _token).Forget();
         }
 
-        private void Move(Vector3 moveDirection)
+        private async UniTaskVoid MoveAsync(Vector3 moveDirection, CancellationToken token)
         {
             isMove = true;
-            var nextPosition = transform.position + moveDirection;
+            _moveDirection = moveDirection;
 
-            _tweenCore = transform
-                .DOMove(nextPosition, Const.CORRECT_TIME)
-                .SetEase(Ease.Linear)
-                .OnComplete(() => isMove = false);
+            await UniTask.WaitWhile(() =>
+            {
+                transform.position += _moveSpeed * _moveDirection * Time.deltaTime;
+
+                return isMove;
+            }, cancellationToken: token);
         }
 
         private void CorrectPosition()

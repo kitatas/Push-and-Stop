@@ -1,10 +1,10 @@
 ﻿using DG.Tweening;
 using RollingBall.Common;
 using RollingBall.Common.Utility;
-using RollingBall.Game.Block;
 using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.StageObject;
+using RollingBall.Game.StageObject.Block;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace RollingBall.Game.Block
+namespace RollingBall.Game.StageObject.Block
 {
     /// <summary>
     /// ブロック系の抽象クラス
