@@ -14,15 +14,11 @@ namespace RollingBall.Game.StageObject.Block
     /// </summary>
     public sealed class BallBlock : BaseBlock, IMoveObject
     {
-        private Vector3 _moveDirection;
         private CancellationToken _token;
-
-        private readonly float _moveSpeed = 7.5f;
 
         private void Start()
         {
             isMove = false;
-            _moveDirection = Vector3.zero;
             _token = this.GetCancellationTokenOnDestroy();
 
             this.OnCollisionEnter2DAsObservable()
@@ -36,21 +32,21 @@ namespace RollingBall.Game.StageObject.Block
                 .AddTo(this);
         }
 
-        public override void Hit(Vector3 moveDirection)
+        public override void Hit(Vector2 moveDirection)
         {
             base.Hit(moveDirection);
 
             MoveAsync(moveDirection, _token).Forget();
         }
 
-        private async UniTaskVoid MoveAsync(Vector3 moveDirection, CancellationToken token)
+        private async UniTaskVoid MoveAsync(Vector2 moveDirection, CancellationToken token)
         {
             isMove = true;
-            _moveDirection = moveDirection;
+            var moveSpeed = Const.MOVE_SPEED * 0.5f;
 
             await UniTask.WaitWhile(() =>
             {
-                transform.position += _moveSpeed * _moveDirection * Time.deltaTime;
+                transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 
                 return isMove;
             }, cancellationToken: token);

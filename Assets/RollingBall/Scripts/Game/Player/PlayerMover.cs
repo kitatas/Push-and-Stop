@@ -1,4 +1,5 @@
 ﻿using System;
+using RollingBall.Common;
 using RollingBall.Game.StageObject.Block;
 using UnityEngine;
 
@@ -11,22 +12,20 @@ namespace RollingBall.Game.Player
     {
         private readonly Rigidbody2D _rigidbody;
 
-        private Vector3 _moveVector;
-        private const float _moveSpeed = 10f;
-        private readonly Vector2 _zero = Vector2.zero;
+        private Vector2 _moveVector;
 
         private PlayerMover(Rigidbody2D rigidbody)
         {
             _rigidbody = rigidbody;
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-            _moveVector = Vector3.zero;
+            _moveVector = Vector2.zero;
         }
 
         public void Move(MoveDirection moveDirection)
         {
             _moveVector = GetMoveVector(moveDirection);
-            _rigidbody.velocity = _moveSpeed * _moveVector;
+            _rigidbody.velocity = _moveVector * Const.MOVE_SPEED;
         }
 
         private static Vector2 GetMoveVector(MoveDirection moveDirection)
@@ -34,13 +33,13 @@ namespace RollingBall.Game.Player
             switch (moveDirection)
             {
                 case MoveDirection.Up:
-                    return Vector3.up;
+                    return Vector2.up;
                 case MoveDirection.Down:
-                    return Vector3.down;
+                    return Vector2.down;
                 case MoveDirection.Left:
-                    return Vector3.left;
+                    return Vector2.left;
                 case MoveDirection.Right:
-                    return Vector3.right;
+                    return Vector2.right;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(moveDirection), moveDirection, null);
             }
@@ -53,7 +52,7 @@ namespace RollingBall.Game.Player
 
         public void ResetVelocity()
         {
-            _rigidbody.velocity = _zero;
+            _rigidbody.velocity = Vector2.zero;
         }
     }
 }

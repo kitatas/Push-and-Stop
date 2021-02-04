@@ -32,7 +32,7 @@ namespace RollingBall.Game.StageObject.Block
                 .AddTo(this);
         }
 
-        public override void Hit(Vector3 moveDirection)
+        public override void Hit(Vector2 moveDirection)
         {
             base.Hit(moveDirection);
 

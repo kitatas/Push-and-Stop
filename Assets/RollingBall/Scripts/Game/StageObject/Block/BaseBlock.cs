@@ -23,7 +23,7 @@ namespace RollingBall.Game.StageObject.Block
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
-        public virtual void Hit(Vector3 moveDirection)
+        public virtual void Hit(Vector2 moveDirection)
         {
             _seController.PlaySe(SeType.Hit);
         }

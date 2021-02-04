@@ -4,7 +4,7 @@ namespace RollingBall.Game.StageObject.Block
 {
     public interface IHittable
     {
-        void Hit(Vector3 moveDirection);
+        void Hit(Vector2 moveDirection);
         bool isMove { get; }
     }
 }
