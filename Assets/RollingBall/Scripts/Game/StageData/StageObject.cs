@@ -10,6 +10,6 @@ namespace RollingBall.Game.StageData
         public int y;
         public StageObjectType type;
 
-        public Vector2 GetPosition() => new Vector2(x - 2, y - 2);
+        public Vector2 GetPosition() => new Vector2(x - 3, y - 3);
     }
 }
