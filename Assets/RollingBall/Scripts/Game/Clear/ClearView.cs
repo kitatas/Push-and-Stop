@@ -39,16 +39,20 @@ namespace RollingBall.Game.Clear
         public void Show(int moveCount)
         {
             _seController.PlaySe(SeType.Clear);
-            TweenClearRank(moveCount);
-            TweenClearText();
+
+            var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
+            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel(), clearRate);
 
             var token = this.GetCancellationTokenOnDestroy();
-            TweenClearAsync(token).Forget();
+            TweenClearAsync(token, clearRank).Forget();
         }
 
-        private async UniTaskVoid TweenClearAsync(CancellationToken token)
+        private async UniTaskVoid TweenClearAsync(CancellationToken token, int clearRank)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(Const.UI_ANIMATION_TIME * 2.0f + 0.5f), cancellationToken: token);
+            TweenClearRank(clearRank);
+            TweenClearText();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(Const.CLEAR_ANIMATION_TIME + 0.5f), cancellationToken: token);
 
             await clearText.rectTransform
                 .DOAnchorPosY(200.0f, Const.UI_ANIMATION_TIME)
@@ -57,11 +61,9 @@ namespace RollingBall.Game.Clear
             await buttonFader.ShowAsync(token);
         }
 
-        private void TweenClearRank(int moveCount)
+        private void TweenClearRank(int clearRank)
         {
             rankBackGround.gameObject.SetActive(true);
-            var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
-            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel(), clearRate);
             TweenRankImages(clearRank);
         }
 
@@ -77,13 +79,13 @@ namespace RollingBall.Game.Clear
         {
             DOTween.Sequence()
                 .Append(image
-                    .DOFade(1.0f, Const.UI_ANIMATION_TIME * 2.0f)
+                    .DOFade(1.0f, Const.CLEAR_ANIMATION_TIME)
                     .SetEase(Ease.InQuad))
                 .Join(image.rectTransform
-                    .DOScale(Vector3.one, Const.UI_ANIMATION_TIME * 2.0f)
+                    .DOScale(Vector3.one, Const.CLEAR_ANIMATION_TIME)
                     .SetEase(Ease.InOutBack))
                 .Join(image.rectTransform
-                    .DOLocalRotate(_targetRotateVector, Const.UI_ANIMATION_TIME * 2.0f, RotateMode.FastBeyond360)
+                    .DOLocalRotate(_targetRotateVector, Const.CLEAR_ANIMATION_TIME, RotateMode.FastBeyond360)
                     .SetEase(Ease.InQuad));
         }
 
@@ -101,7 +103,7 @@ namespace RollingBall.Game.Clear
                         .DOOffsetChar(i, textAnimation.GetCharOffset(i) + offset, Const.UI_ANIMATION_TIME)
                         .SetEase(Ease.OutFlash, 2))
                     .Join(textAnimation
-                        .DOFadeChar(i, 1, Const.UI_ANIMATION_TIME * 2.0f))
+                        .DOFadeChar(i, 1, Const.CLEAR_ANIMATION_TIME))
                     .SetDelay(delayTime);
             }
         }
