@@ -1,0 +1,11 @@
+{
+  "targetMoveCount":4,
+  "stageObjects":[
+    {"x":2, "y":3, "type":5},
+    {"x":2, "y":4, "type":2},
+    {"x":3, "y":2, "type":5},
+    {"x":3, "y":4, "type":5},
+    {"x":4, "y":2, "type":1},
+    {"x":4, "y":3, "type":5}
+  ]
+}
