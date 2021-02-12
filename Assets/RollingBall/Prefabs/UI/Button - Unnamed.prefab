@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 299043458529882727}
   - component: {fileID: 7608886703350488300}
   - component: {fileID: 5582794514015901793}
+  - component: {fileID: 2934382855196226628}
+  - component: {fileID: 3916686306341847665}
+  - component: {fileID: 1617179665704157472}
+  - component: {fileID: 4941334417311029021}
   m_Layer: 5
   m_Name: Button - Unnamed
   m_TagString: Untagged
@@ -91,7 +95,7 @@ MonoBehaviour:
     m_CornerRadius: {x: 0, y: 0, z: 0}
     m_UniformCornerRadius: 0
   m_Rectangle:
-    m_CornerRadius: {x: 0, y: 0, z: 0, w: 0}
+    m_CornerRadius: {x: 50, y: 50, z: 50, w: 50}
     m_UniformCornerRadius: 0
   m_Circle:
     m_Radius: 0
@@ -2487,3 +2491,56 @@ MonoBehaviour:
   TargetLabel: 0
   TextLabel: {fileID: 0}
   TextMeshProLabel: {fileID: 0}
+--- !u!114 &2934382855196226628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208a2c4dc9b14cc6becc38066dc26fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3916686306341847665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf44002c5a3a4988aefb3db25d12eab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 0
+--- !u!114 &1617179665704157472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059e91cc5f414bd194da67a3c894f869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteAtlas: {fileID: 4343727234628468602, guid: 7f3f2ff99217c446a979bab5e78434b8,
+    type: 2}
+  buttonImage: {fileID: 299043458529882727}
+--- !u!114 &4941334417311029021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e197c75da2449439f9ca9ce3990c66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageName: 
