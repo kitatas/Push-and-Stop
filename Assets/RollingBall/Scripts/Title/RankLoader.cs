@@ -12,7 +12,7 @@ namespace RollingBall.Title
             var clearData = GetClearRankData();
             for (int i = 0; i < rankButtons.Length; i++)
             {
-                if (i > 1)
+                if (i > 0)
                 {
                     if (clearData[i - 1] > 0 && clearData[i] == -1)
                     {
@@ -43,9 +43,8 @@ namespace RollingBall.Title
         private static int[] GetDefaultClearData()
         {
             var clearData = new int[Const.MAX_STAGE_COUNT];
-            clearData[0] = 3;
-            clearData[1] = 0;
-            for (int i = 2; i < clearData.Length; i++)
+            clearData[0] = 0;
+            for (int i = 1; i < clearData.Length; i++)
             {
                 clearData[i] = -1;
             }

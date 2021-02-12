@@ -14,6 +14,6 @@
 
         public const string CLEAR_RANK_KEY = "clear_rank";
 
-        public const int MAX_STAGE_COUNT = 101;
+        public const int MAX_STAGE_COUNT = 100;
     }
 }

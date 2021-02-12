@@ -41,7 +41,7 @@ namespace RollingBall.Game.Clear
             _seController.PlaySe(SeType.Clear);
 
             var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
-            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel(), clearRate);
+            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel() - 1, clearRate);
 
             var token = this.GetCancellationTokenOnDestroy();
             TweenClearAsync(token, clearRank).Forget();
