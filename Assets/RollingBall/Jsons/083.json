@@ -1,10 +1,12 @@
 {
-  "targetMoveCount":11,
+  "targetMoveCount":14,
   "stageObjects":[
-    {"x":1, "y":2, "type":3},
-    {"x":4, "y":1, "type":2},
-    {"x":2, "y":3, "type":5},
-    {"x":3, "y":3, "type":1},
-    {"x":4, "y":2, "type":4}
+    {"x":1, "y":1, "type":3},
+    {"x":2, "y":3, "type":4},
+    {"x":3, "y":3, "type":2},
+    {"x":3, "y":4, "type":3},
+    {"x":4, "y":2, "type":1},
+    {"x":4, "y":5, "type":4},
+    {"x":5, "y":1, "type":3}
   ]
 }
