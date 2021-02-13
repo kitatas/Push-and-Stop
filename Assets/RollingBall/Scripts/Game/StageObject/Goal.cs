@@ -1,5 +1,5 @@
 ﻿using System;
-using RollingBall.Game.Clear;
+using RollingBall.Game.View;
 using UniRx;
 using UnityEngine;
 

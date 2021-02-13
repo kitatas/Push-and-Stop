@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace RollingBall.Game.Clear
+namespace RollingBall.Game.View
 {
     /// <summary>
     /// ステージクリア時の演出
