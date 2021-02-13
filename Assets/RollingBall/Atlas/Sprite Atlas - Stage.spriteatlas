@@ -42,24 +42,24 @@ SpriteAtlas:
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 32a9f7394b20c4daf86ccd3bab5b4598, type: 3}
-    - {fileID: 2800000, guid: c07857806977f410d92371e79055bcee, type: 3}
-    - {fileID: 2800000, guid: 5eeda42ec31f842a7889b602d0b66ae1, type: 3}
-    - {fileID: 2800000, guid: f10d46d81e4bc46f68d55a834aec1ea3, type: 3}
-    - {fileID: 2800000, guid: 2e2d337b848fe4d8eae1987ef001717f, type: 3}
+    - {fileID: -5470436369146123406, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+    - {fileID: -3808606789012426095, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+    - {fileID: -23789120017108585, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+    - {fileID: 2056622501788987584, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+    - {fileID: -7547315767104989842, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: c07857806977f410d92371e79055bcee, type: 3}
-  - {fileID: 21300000, guid: f10d46d81e4bc46f68d55a834aec1ea3, type: 3}
-  - {fileID: 21300000, guid: 32a9f7394b20c4daf86ccd3bab5b4598, type: 3}
-  - {fileID: 21300000, guid: 2e2d337b848fe4d8eae1987ef001717f, type: 3}
-  - {fileID: 21300000, guid: 5eeda42ec31f842a7889b602d0b66ae1, type: 3}
+  - {fileID: -7547315767104989842, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+  - {fileID: -23789120017108585, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+  - {fileID: 2056622501788987584, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+  - {fileID: -5470436369146123406, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
+  - {fileID: -3808606789012426095, guid: 0a78a908834364d06b488d4d304db1ab, type: 3}
   m_PackedSpriteNamesToIndex:
-  - stage_1
-  - stage_3
-  - stage_0
   - stage_4
   - stage_2
+  - stage_3
+  - stage_0
+  - stage_1
   m_Tag: Sprite Atlas - Stage
   m_IsVariant: 0

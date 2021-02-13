@@ -42,27 +42,27 @@ SpriteAtlas:
       enableTightPacking: 0
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 5b86b4df289604852943203d4f7deade, type: 3}
-    - {fileID: 2800000, guid: a56a1d1743d294ab5b9cc7fbe1a313a2, type: 3}
-    - {fileID: 2800000, guid: f5bed409ea53542a48dc9dff9308067c, type: 3}
-    - {fileID: 2800000, guid: f2a723b15a8654ae2be94331b5aa525a, type: 3}
-    - {fileID: 2800000, guid: 78b107d94586d4ecabca8020b62194af, type: 3}
-    - {fileID: 2800000, guid: 102c2a02615014fb3883b35dfa4d48bc, type: 3}
+    - {fileID: 9137885949163444458, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+    - {fileID: 6089278662048686424, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+    - {fileID: 1370875908977729210, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+    - {fileID: 1488796169233571701, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+    - {fileID: -3206649839362260016, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+    - {fileID: -4739412847751887214, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: f2a723b15a8654ae2be94331b5aa525a, type: 3}
-  - {fileID: 21300000, guid: 102c2a02615014fb3883b35dfa4d48bc, type: 3}
-  - {fileID: 21300000, guid: a56a1d1743d294ab5b9cc7fbe1a313a2, type: 3}
-  - {fileID: 21300000, guid: f5bed409ea53542a48dc9dff9308067c, type: 3}
-  - {fileID: 21300000, guid: 78b107d94586d4ecabca8020b62194af, type: 3}
-  - {fileID: 21300000, guid: 5b86b4df289604852943203d4f7deade, type: 3}
+  - {fileID: 1488796169233571701, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+  - {fileID: 9137885949163444458, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+  - {fileID: -4739412847751887214, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+  - {fileID: -3206649839362260016, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+  - {fileID: 1370875908977729210, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
+  - {fileID: 6089278662048686424, guid: 08c2b49e9139e40c78de5592f0acd3d0, type: 3}
   m_PackedSpriteNamesToIndex:
   - common_hint
-  - common_twitter
-  - common_close
-  - common_config
-  - common_info
   - common_achieve
+  - common_twitter
+  - common_info
+  - common_config
+  - common_close
   m_Tag: Sprite Atlas - Common
   m_IsVariant: 0
