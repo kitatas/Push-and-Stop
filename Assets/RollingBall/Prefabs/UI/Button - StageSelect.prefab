@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 299043458529882727}
   - component: {fileID: 7608886703350488300}
   - component: {fileID: 1729244707582480666}
+  - component: {fileID: 3286713717580802607}
   - component: {fileID: 3622696299096156201}
   - component: {fileID: 5654809837538294338}
   - component: {fileID: 9204496629979679558}
@@ -211,6 +212,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208a2c4dc9b14cc6becc38066dc26fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3286713717580802607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83589eeb30be43188ccfd36e389a72c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3622696299096156201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,8 +308,19 @@ PrefabInstance:
     - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
         type: 3}
       propertyPath: m_lineSpacing
-      value: 10
+      value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 258
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6251349538925219830, guid: 744902564816445b79b7677570f30690,
+        type: 2}
     - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
         type: 3}
       propertyPath: m_fontColor32.rgba
@@ -316,6 +340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3987413090117588253, guid: b1bfd09e725504727866268ccc70f3e8,
         type: 3}
@@ -375,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 7097544875897650136, guid: b1bfd09e725504727866268ccc70f3e8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 7097544875897650136, guid: b1bfd09e725504727866268ccc70f3e8,
         type: 3}

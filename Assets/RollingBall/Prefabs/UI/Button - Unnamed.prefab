@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3916686306341847665}
   - component: {fileID: 1617179665704157472}
   - component: {fileID: 4941334417311029021}
+  - component: {fileID: 697374814782798474}
   m_Layer: 5
   m_Name: Button - Unnamed
   m_TagString: Untagged
@@ -646,10 +647,10 @@ MonoBehaviour:
     m_behaviorType: 4
   OnPointerDown:
     Animators: []
-    ButtonAnimationType: 0
+    ButtonAnimationType: 1
     DeselectButton: 0
     DisableInterval: 0
-    Enabled: 0
+    Enabled: 1
     LoadSelectedPresetAtRuntime: 0
     OnTrigger:
       AnimatorEvents: []
@@ -722,13 +723,13 @@ MonoBehaviour:
         Duration: 1
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 0.85, y: 0.85, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 0
+        Elasticity: 0
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -740,7 +741,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 4
         Enabled: 0
@@ -811,10 +812,10 @@ MonoBehaviour:
         Duration: 1
       Scale:
         AnimationType: 5
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.15, y: -0.15, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
         Elasticity: 1
@@ -829,7 +830,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 5
         Enabled: 0
@@ -853,10 +854,10 @@ MonoBehaviour:
     m_behaviorType: 5
   OnPointerUp:
     Animators: []
-    ButtonAnimationType: 0
+    ButtonAnimationType: 1
     DeselectButton: 0
     DisableInterval: 0
-    Enabled: 0
+    Enabled: 1
     LoadSelectedPresetAtRuntime: 0
     OnTrigger:
       AnimatorEvents: []
@@ -929,13 +930,13 @@ MonoBehaviour:
         Duration: 1
       Scale:
         AnimationType: 4
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 1, y: 1, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
-        Elasticity: 1
+        Vibrato: 0
+        Elasticity: 0
         NumberOfLoops: -1
         LoopType: 1
         EaseType: 0
@@ -947,7 +948,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 4
         Enabled: 0
@@ -1018,7 +1019,7 @@ MonoBehaviour:
         Duration: 1
       Scale:
         AnimationType: 5
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
         By: {x: 0, y: 0, z: 0}
@@ -1036,7 +1037,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 5
         Enabled: 0
@@ -1139,9 +1140,9 @@ MonoBehaviour:
         Enabled: 0
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: -0.15, y: -0.15, z: 0}
         UseCustomFromAndTo: 0
-        Vibrato: 10
+        Vibrato: 1
         Elasticity: 1
         NumberOfLoops: -1
         LoopType: 1
@@ -1154,7 +1155,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 4
         Enabled: 0
@@ -1225,10 +1226,10 @@ MonoBehaviour:
         Duration: 1
       Scale:
         AnimationType: 5
-        Enabled: 0
+        Enabled: 1
         From: {x: 0, y: 0, z: 0}
         To: {x: 0, y: 0, z: 0}
-        By: {x: 0, y: 0, z: 0}
+        By: {x: 1, y: 1, z: 0}
         UseCustomFromAndTo: 0
         Vibrato: 10
         Elasticity: 1
@@ -1243,7 +1244,7 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         StartDelay: 0
-        Duration: 1
+        Duration: 0.1
       Fade:
         AnimationType: 5
         Enabled: 0
@@ -2544,3 +2545,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageName: 
+--- !u!225 &697374814782798474
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
