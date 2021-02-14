@@ -12,7 +12,7 @@ namespace RollingBall.Game.MoveCount
 
         public void UpdateText(int moveCount)
         {
-            moveCountText.text = $"{moveCount}";
+            moveCountText.text = moveCount > 10000 ? $"{moveCount}" : $"{moveCount:0000}";
         }
     }
 }

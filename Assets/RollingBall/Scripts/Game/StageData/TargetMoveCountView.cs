@@ -13,7 +13,7 @@ namespace RollingBall.Game.StageData
         [Inject]
         private void Construct(StageRepository stageRepository)
         {
-            GetComponent<TextMeshProUGUI>().text = $"{stageRepository.GetTargetMoveCount()}";
+            GetComponent<TextMeshProUGUI>().text = $"{stageRepository.GetTargetMoveCount():00}";
         }
     }
 }
