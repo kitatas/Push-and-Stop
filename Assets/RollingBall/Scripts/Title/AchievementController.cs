@@ -18,5 +18,11 @@ namespace RollingBall.Title
             allClear.gameObject.SetActive(clearCount == Const.MAX_STAGE_COUNT);
             allRank.gameObject.SetActive(maxRankClearCount == Const.MAX_STAGE_COUNT);
         }
+
+        public void ActivateAllAchievement(bool value)
+        {
+            allClear.gameObject.SetActive(value);
+            allRank.gameObject.SetActive(value);
+        }
     }
 }
