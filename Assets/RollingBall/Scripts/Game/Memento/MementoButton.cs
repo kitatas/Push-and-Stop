@@ -6,14 +6,11 @@ using UnityEngine.UI;
 
 namespace RollingBall.Game.Memento
 {
-    /// <summary>
-    /// 一手前に戻るボタン
-    /// </summary>
     [RequireComponent(typeof(ButtonActivator))]
-    public sealed class UndoButton : MonoBehaviour
+    public sealed class MementoButton : MonoBehaviour
     {
-        private readonly Subject<Action> _subject = new Subject<Action>();
-        public IObservable<Action> onPush => _subject;
+        private readonly Subject<Unit> _subject = new Subject<Unit>();
+        public IObservable<Unit> onPush => _subject;
 
         private ButtonActivator _buttonActivator;
 
@@ -24,11 +21,9 @@ namespace RollingBall.Game.Memento
 
         private void Start()
         {
-            SetInteractable(false);
-
             GetComponent<Button>()
                 .OnClickAsObservable()
-                .Subscribe(_ => _subject.OnNext(() => SetInteractable(false)))
+                .Subscribe(_ => _subject.OnNext(Unit.Default))
                 .AddTo(this);
         }
 

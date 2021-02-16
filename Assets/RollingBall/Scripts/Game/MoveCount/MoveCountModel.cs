@@ -10,32 +10,19 @@ namespace RollingBall.Game.MoveCount
     public sealed class MoveCountModel : IMoveCountModel, IMoveCountUseCase
     {
         private readonly ReactiveProperty<int> _moveCount;
-        private readonly CompositeDisposable _compositeDisposable;
         private readonly Caretaker _caretaker;
 
         public MoveCountModel(Caretaker caretaker)
         {
             _moveCount = new ReactiveProperty<int>(0);
-            _compositeDisposable = new CompositeDisposable();
             _caretaker = caretaker;
-        }
-
-        ~MoveCountModel()
-        {
-            _compositeDisposable.Clear();
         }
 
         public IReadOnlyReactiveProperty<int> moveCount => _moveCount;
 
         public int currentCount => _moveCount.Value;
 
-        public void InitializeUndoButton(Action action)
-        {
-            moveCount
-                .Where(x => x == 1)
-                .Subscribe(_ => action?.Invoke())
-                .AddTo(_compositeDisposable);
-        }
+        public IObservable<int> WhereMoveCount(int count) => moveCount.Where(x => x == count);
 
         private void SetMoveCount(int value) => _moveCount.Value = value;
 
@@ -60,6 +47,17 @@ namespace RollingBall.Game.MoveCount
 
             // 保存した位置情報の有無
             return _caretaker.IsMementoStackEmpty();
+        }
+
+        public void ResetCount()
+        {
+            while (true)
+            {
+                if (CountDown())
+                {
+                    break;
+                }
+            }
         }
     }
 }

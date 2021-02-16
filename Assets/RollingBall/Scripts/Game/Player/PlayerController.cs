@@ -18,7 +18,8 @@ namespace RollingBall.Game.Player
     public sealed class PlayerController : MonoBehaviour, IMoveObject
     {
         [SerializeField] private MoveButton[] moveButtons = default;
-        [SerializeField] private UndoButton undoButton = default;
+        [SerializeField] private MementoButton undoButton = default;
+        [SerializeField] private MementoButton resetButton = default;
 
         private PlayerMover _playerMover;
         private IMoveCountUseCase _moveCountUseCase;
@@ -34,7 +35,16 @@ namespace RollingBall.Game.Player
 
         private void Start()
         {
-            _moveCountUseCase.InitializeUndoButton(() => undoButton.SetInteractable(true));
+            _moveCountUseCase
+                .WhereMoveCount(0)
+                .Subscribe(_ => SetInteractableMementoButton(false))
+                .AddTo(this);
+
+            _moveCountUseCase
+                .WhereMoveCount(1)
+                .Subscribe(_ => SetInteractableMementoButton(true))
+                .AddTo(this);
+
             _goal.Initialize(() => SetInteractableButton(false));
 
             // 全移動ボタン
@@ -52,9 +62,13 @@ namespace RollingBall.Game.Player
 
             // 一手戻るボタン
             undoButton.onPush
-                .Where(_ => _moveCountUseCase.CountDown())
-                .Subscribe(action => action?.Invoke())
+                .Subscribe(_ => _moveCountUseCase.CountDown())
                 .AddTo(undoButton);
+
+            // 移動リセットボタン
+            resetButton.onPush
+                .Subscribe(_ => _moveCountUseCase.ResetCount())
+                .AddTo(resetButton);
 
             this.OnCollisionEnter2DAsObservable()
                 .Select(other => other.gameObject.GetComponent<IHittable>())
@@ -80,9 +94,16 @@ namespace RollingBall.Game.Player
                 });
         }
 
+        private void SetInteractableMementoButton(bool value)
+        {
+            undoButton.SetInteractable(value);
+            resetButton.SetInteractable(value);
+        }
+
         private void SetEnableButton(bool value)
         {
             undoButton.SetEnabled(value);
+            resetButton.SetEnabled(value);
             foreach (var moveButton in moveButtons)
             {
                 moveButton.SetEnabled(value);
@@ -91,7 +112,7 @@ namespace RollingBall.Game.Player
 
         private void SetInteractableButton(bool value)
         {
-            undoButton.SetInteractable(value);
+            SetInteractableMementoButton(value);
             foreach (var moveButton in moveButtons)
             {
                 moveButton.SetInteractable(value);
