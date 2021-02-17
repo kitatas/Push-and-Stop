@@ -22,7 +22,9 @@ namespace RollingBall.Game.View
         [SerializeField] private Image rankBackGround = default;
         [SerializeField] private Image[] rankImages = default;
         [SerializeField] private TextMeshProUGUI clearText = default;
-        [SerializeField] private ButtonFader buttonFader = default;
+        [SerializeField] private ButtonFader nextButton = default;
+        [SerializeField] private ButtonFader reloadButton = default;
+        [SerializeField] private ButtonFader homeButton = default;
 
         private static readonly Vector3 _targetRotateVector = new Vector3(0f, 0f, 360f);
 
@@ -58,7 +60,11 @@ namespace RollingBall.Game.View
                 .DOAnchorPosY(200.0f, Const.UI_ANIMATION_TIME)
                 .WithCancellation(token);
 
-            await buttonFader.ShowAsync(token);
+            await UniTask.WhenAll(
+                nextButton.ShowAsync(token),
+                reloadButton.ShowAsync(token),
+                homeButton.ShowAsync(token)
+            );
         }
 
         private void TweenClearRank(int clearRank)

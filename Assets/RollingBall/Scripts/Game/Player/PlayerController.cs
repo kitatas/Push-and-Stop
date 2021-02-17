@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using RollingBall.Common;
+using RollingBall.Common.Button;
 using RollingBall.Common.Utility;
 using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
@@ -20,6 +21,7 @@ namespace RollingBall.Game.Player
         [SerializeField] private MoveButton[] moveButtons = default;
         [SerializeField] private MementoButton undoButton = default;
         [SerializeField] private MementoButton resetButton = default;
+        [SerializeField] private ButtonActivator homeButton = default;
 
         private PlayerMover _playerMover;
         private IMoveCountUseCase _moveCountUseCase;
@@ -113,6 +115,7 @@ namespace RollingBall.Game.Player
         private void SetInteractableButton(bool value)
         {
             SetInteractableMementoButton(value);
+            homeButton.SetInteractable(value);
             foreach (var moveButton in moveButtons)
             {
                 moveButton.SetInteractable(value);
