@@ -43,7 +43,7 @@ namespace RollingBall.Common.Transition
                     _sceneLoader.FadeLoadScene(SceneName.Main, stageNumber, Const.FADE_TIME);
                     break;
                 case LoadType.Reload:
-                    _sceneLoader.LoadScene(SceneName.Main, _level);
+                    _sceneLoader.FadeLoadScene(SceneName.Main, _level, Const.FADE_TIME);
                     break;
                 case LoadType.Next:
                     LoadNext();
