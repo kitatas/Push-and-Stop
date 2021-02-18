@@ -19,11 +19,6 @@ namespace RollingBall.Common.Button
             _buttonActivator = GetComponent<ButtonActivator>();
         }
 
-        private void Start()
-        {
-            _buttonActivator.SetInteractable(false);
-        }
-
         public async UniTask ShowAsync(CancellationToken token)
         {
             _buttonActivator.SetEnabled(false);
@@ -34,6 +29,15 @@ namespace RollingBall.Common.Button
                 .WithCancellation(token);
 
             _buttonActivator.SetEnabled(true);
+        }
+
+        public async UniTask HideAsync(CancellationToken token)
+        {
+            _buttonActivator.SetEnabled(false);
+
+            await _image
+                .DOFade(0.0f, Const.UI_ANIMATION_TIME)
+                .WithCancellation(token);
         }
     }
 }

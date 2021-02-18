@@ -1,11 +1,12 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using RollingBall.Common;
-using RollingBall.Common.Button;
 using RollingBall.Common.Utility;
 using RollingBall.Game.Memento;
 using RollingBall.Game.MoveCount;
 using RollingBall.Game.StageObject;
 using RollingBall.Game.StageObject.Block;
+using RollingBall.Game.View;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace RollingBall.Game.Player
         [SerializeField] private MoveButton[] moveButtons = default;
         [SerializeField] private MementoButton undoButton = default;
         [SerializeField] private MementoButton resetButton = default;
-        [SerializeField] private ButtonActivator homeButton = default;
+        [SerializeField] private HomeButton homeButton = default;
 
         private PlayerMover _playerMover;
         private IMoveCountUseCase _moveCountUseCase;
@@ -47,7 +48,17 @@ namespace RollingBall.Game.Player
                 .Subscribe(_ => SetInteractableMementoButton(true))
                 .AddTo(this);
 
-            _goal.Initialize(() => SetInteractableButton(false));
+            var token = this.GetCancellationTokenOnDestroy();
+            _goal.Initialize(() =>
+            {
+                undoButton.Hide(token);
+                resetButton.Hide(token);
+                homeButton.Hide(token);
+                foreach (var moveButton in moveButtons)
+                {
+                    moveButton.Hide(token);
+                }
+            });
 
             // 全移動ボタン
             foreach (var moveButton in moveButtons)
@@ -106,19 +117,10 @@ namespace RollingBall.Game.Player
         {
             undoButton.SetEnabled(value);
             resetButton.SetEnabled(value);
+            homeButton.SetEnabled(value);
             foreach (var moveButton in moveButtons)
             {
                 moveButton.SetEnabled(value);
-            }
-        }
-
-        private void SetInteractableButton(bool value)
-        {
-            SetInteractableMementoButton(value);
-            homeButton.SetInteractable(value);
-            foreach (var moveButton in moveButtons)
-            {
-                moveButton.SetInteractable(value);
             }
         }
 
