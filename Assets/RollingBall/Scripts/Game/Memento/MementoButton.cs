@@ -36,6 +36,11 @@ namespace RollingBall.Game.Memento
 
         public void SetInteractable(bool value) => _buttonActivator.SetInteractable(value);
 
-        public void Hide(CancellationToken token) => _buttonFader.HideAsync(token).Forget();
+        public async UniTask HideAsync(CancellationToken token)
+        {
+            SetInteractable(false);
+
+            await _buttonFader.HideAsync(token);
+        }
     }
 }

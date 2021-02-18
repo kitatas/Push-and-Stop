@@ -51,12 +51,12 @@ namespace RollingBall.Game.Player
             var token = this.GetCancellationTokenOnDestroy();
             _goal.Initialize(() =>
             {
-                undoButton.Hide(token);
-                resetButton.Hide(token);
-                homeButton.Hide(token);
+                undoButton.HideAsync(token).Forget();
+                resetButton.HideAsync(token).Forget();
+                homeButton.HideAsync(token).Forget();
                 foreach (var moveButton in moveButtons)
                 {
-                    moveButton.Hide(token);
+                    moveButton.HideAsync(token).Forget();
                 }
             });
 

@@ -3,8 +3,8 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using RollingBall.Common;
-using RollingBall.Common.Button;
 using RollingBall.Common.Sound.SE;
+using RollingBall.Common.Transition;
 using RollingBall.Game.StageData;
 using RollingBall.Title;
 using TMPro;
@@ -22,9 +22,9 @@ namespace RollingBall.Game.View
         [SerializeField] private Image rankBackGround = default;
         [SerializeField] private Image[] rankImages = default;
         [SerializeField] private TextMeshProUGUI clearText = default;
-        [SerializeField] private ButtonFader nextButton = default;
-        [SerializeField] private ButtonFader reloadButton = default;
-        [SerializeField] private ButtonFader homeButton = default;
+        [SerializeField] private LoadButton nextButton = default;
+        [SerializeField] private LoadButton reloadButton = default;
+        [SerializeField] private LoadButton homeButton = default;
 
         private static readonly Vector3 _targetRotateVector = new Vector3(0f, 0f, 360f);
 

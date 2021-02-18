@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using RollingBall.Common.Button;
 using UniRx;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace RollingBall.Common.Transition
     /// シーン遷移を行うボタン
     /// </summary>
     [RequireComponent(typeof(ButtonActivator))]
+    [RequireComponent(typeof(ButtonFader))]
     [RequireComponent(typeof(ButtonSpeaker))]
     [RequireComponent(typeof(UnityEngine.UI.Button))]
     public sealed class LoadButton : MonoBehaviour
@@ -17,12 +20,16 @@ namespace RollingBall.Common.Transition
         [SerializeField] private LoadType loadType = default;
         [SerializeField] private int stageNumber = default;
 
+        private ButtonActivator _buttonActivator;
+        private ButtonFader _buttonFader;
         private SceneLoader _sceneLoader;
         private int _level;
 
         [Inject]
         private void Construct(SceneLoader sceneLoader, int level)
         {
+            _buttonActivator = GetComponent<ButtonActivator>();
+            _buttonFader = GetComponent<ButtonFader>();
             _sceneLoader = sceneLoader;
             _level = level;
         }
@@ -71,6 +78,16 @@ namespace RollingBall.Common.Transition
         private void LoadTitle()
         {
             _sceneLoader.FadeLoadScene(SceneName.Title, 0, Const.FADE_TIME);
+        }
+
+        public async UniTask ShowAsync(CancellationToken token)
+        {
+            _buttonActivator.SetEnabled(false);
+            _buttonActivator.SetInteractable(true);
+
+            await _buttonFader.ShowAsync(token);
+
+            _buttonActivator.SetEnabled(true);
         }
     }
 }
