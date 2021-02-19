@@ -3,7 +3,6 @@ using DG.Tweening;
 using RollingBall.Common;
 using RollingBall.Common.Utility;
 using RollingBall.Game.Memento;
-using RollingBall.Game.MoveCount;
 using RollingBall.Game.StageObject;
 using RollingBall.Game.StageObject.Block;
 using RollingBall.Game.View;
@@ -25,25 +24,25 @@ namespace RollingBall.Game.Player
         [SerializeField] private HomeButton homeButton = default;
 
         private PlayerMover _playerMover;
-        private IMoveCountUseCase _moveCountUseCase;
+        private MoveUseCase _moveUseCase;
         private Goal _goal;
 
         [Inject]
-        private void Construct(PlayerMover playerMover, IMoveCountUseCase moveCountUseCase, Goal goal)
+        private void Construct(PlayerMover playerMover, MoveUseCase moveUseCase, Goal goal)
         {
             _playerMover = playerMover;
-            _moveCountUseCase = moveCountUseCase;
+            _moveUseCase = moveUseCase;
             _goal = goal;
         }
 
         private void Start()
         {
-            _moveCountUseCase
+            _moveUseCase
                 .WhereMoveCount(0)
                 .Subscribe(_ => SetInteractableMementoButton(false))
                 .AddTo(this);
 
-            _moveCountUseCase
+            _moveUseCase
                 .WhereMoveCount(1)
                 .Subscribe(_ => SetInteractableMementoButton(true))
                 .AddTo(this);
@@ -66,7 +65,7 @@ namespace RollingBall.Game.Player
                 moveButton.onPush
                     .Subscribe(moveDirection =>
                     {
-                        _moveCountUseCase.CountUp();
+                        _moveUseCase.CountUp();
                         _playerMover.Move(moveDirection);
                         SetEnableButton(false);
                     })
@@ -75,12 +74,12 @@ namespace RollingBall.Game.Player
 
             // 一手戻るボタン
             undoButton.onPush
-                .Subscribe(_ => _moveCountUseCase.CountDown())
+                .Subscribe(_ => _moveUseCase.CountDown())
                 .AddTo(undoButton);
 
             // 移動リセットボタン
             resetButton.onPush
-                .Subscribe(_ => _moveCountUseCase.ResetCount())
+                .Subscribe(_ => _moveUseCase.ResetCount())
                 .AddTo(resetButton);
 
             this.OnCollisionEnter2DAsObservable()
@@ -90,7 +89,7 @@ namespace RollingBall.Game.Player
                 {
                     _playerMover.HitBlock(hittable);
                     var roundPosition = transform.RoundPosition();
-                    _goal.SetPlayerPosition(roundPosition, _moveCountUseCase.currentCount);
+                    _goal.SetPlayerPosition(roundPosition, _moveUseCase.currentCount);
                     CorrectPosition(roundPosition);
                 })
                 .AddTo(this);

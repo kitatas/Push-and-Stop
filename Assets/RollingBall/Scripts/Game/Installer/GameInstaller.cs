@@ -28,7 +28,7 @@ namespace RollingBall.Game.Installer
             #region MoveCount
 
             Container
-                .BindInterfacesTo<MoveCountModel>()
+                .BindInterfacesAndSelfTo<MoveCountModel>()
                 .AsCached();
 
             Container
@@ -52,6 +52,10 @@ namespace RollingBall.Game.Installer
 
             Container
                 .Bind<PlayerMover>()
+                .AsCached();
+
+            Container
+                .Bind<MoveUseCase>()
                 .AsCached();
 
             Container
