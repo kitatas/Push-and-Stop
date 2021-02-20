@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -29,6 +30,7 @@ namespace RollingBall.Common.UI
         private void TweenScrollbar()
         {
             TweenerCore<Color, Color, ColorOptions> fadeTween = null;
+            var isScroll = false;
 
             void FadeScrollbar(float value = 0.0f)
             {
@@ -37,31 +39,24 @@ namespace RollingBall.Common.UI
                     .DOFade(value, Const.UI_ANIMATION_TIME);
             }
 
-            var isDrag = false;
-            var isScroll = false;
             FadeScrollbar();
 
-            _scrollRect
-                .OnBeginDragAsObservable()
+            this.UpdateAsObservable()
+                .Where(_ => isScroll == false)
+                .Where(_ => _scrollRect.velocity.y >= 3.0f || _scrollRect.velocity.y <= -3.0f)
                 .Subscribe(_ =>
                 {
-                    isDrag = true;
                     isScroll = true;
                     FadeScrollbar(0.75f);
                 })
                 .AddTo(this);
 
-            _scrollRect
-                .OnEndDragAsObservable()
-                .Subscribe(_ => isDrag = false)
-                .AddTo(this);
-
             this.UpdateAsObservable()
-                .Where(_ => _scrollRect.velocity.y < 5.0f)
-                .Where(_ => isDrag == false && isScroll)
+                .Where(_ => isScroll)
+                .Where(_ => _scrollRect.velocity.y < 3.0f && _scrollRect.velocity.y > -3.0f)
                 .Subscribe(_ =>
                 {
-                    isScroll = true;
+                    isScroll = false;
                     FadeScrollbar();
                 })
                 .AddTo(this);
@@ -75,6 +70,7 @@ namespace RollingBall.Common.UI
         {
             resetButton
                 .OnClickAsObservable()
+                .Delay(TimeSpan.FromSeconds(Const.UI_ANIMATION_TIME))
                 .Subscribe(_ => _scrollRect.verticalNormalizedPosition = 1.0f)
                 .AddTo(_scrollRect);
         }
