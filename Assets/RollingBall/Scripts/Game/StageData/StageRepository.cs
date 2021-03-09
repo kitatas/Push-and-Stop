@@ -31,18 +31,23 @@ namespace RollingBall.Game.StageData
                         stageObject = goal;
                         break;
                     case StageObjectType.Block:
-                        stageObject = Object.Instantiate(stageObjectTable.normalBlock);
+                    {
+                        var data = stageObjectTable.stageObjectDataList
+                            .Find(x => x.type == stageObjectData.type);
+                        var block = Object.Instantiate(data.block);
+                        stageObject = block as IStageObject;
                         break;
+                    }
                     case StageObjectType.MoveBlock:
-                        var moveBlock = Object.Instantiate(stageObjectTable.moveBlock);
-                        stageObject = moveBlock;
-                        caretaker.AddMoveObject(moveBlock);
-                        break;
                     case StageObjectType.BallBlock:
-                        var ballBlock = Object.Instantiate(stageObjectTable.ballBlock);
-                        stageObject = ballBlock;
-                        caretaker.AddMoveObject(ballBlock);
+                    {
+                        var data = stageObjectTable.stageObjectDataList
+                            .Find(x => x.type == stageObjectData.type);
+                        var block = Object.Instantiate(data.block);
+                        stageObject = block as IStageObject;
+                        caretaker.AddMoveObject(block as IMoveObject);
                         break;
+                    }
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
