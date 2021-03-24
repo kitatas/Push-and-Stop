@@ -1,4 +1,7 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using RollingBall.Common;
 using RollingBall.Game.View;
 using UniRx;
 using UnityEngine;
@@ -24,10 +27,29 @@ namespace RollingBall.Game.StageObject
                 .Where(x => x)
                 .Subscribe(_ =>
                 {
-                    clearView.Show(_currentMoveCount);
                     action?.Invoke();
+                    TweenClearAsync().Forget();
                 })
                 .AddTo(this);
+        }
+
+        private async UniTaskVoid TweenClearAsync()
+        {
+            await TweenGoalAsync();
+
+            clearView.Show(_currentMoveCount);
+        }
+
+        private async UniTask TweenGoalAsync()
+        {
+            await DOTween.Sequence()
+                .Append(transform
+                    .DOScale(new Vector3(75.0f, 75.0f, 1.0f), Const.UI_ANIMATION_TIME)
+                    .SetEase(Ease.Linear))
+                .Join(transform
+                    .DOLocalRotate(new Vector3(0.0f, 0.0f, -180f), Const.UI_ANIMATION_TIME)
+                    .SetOptions(false)
+                    .SetEase(Ease.Linear));
         }
 
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;

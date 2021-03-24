@@ -9,7 +9,6 @@ using RollingBall.Game.StageData;
 using RollingBall.Title;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace RollingBall.Game.View
@@ -19,14 +18,11 @@ namespace RollingBall.Game.View
     /// </summary>
     public sealed class ClearView : MonoBehaviour
     {
-        [SerializeField] private Image rankBackGround = default;
-        [SerializeField] private Image[] rankImages = default;
+        [SerializeField] private RankView[] rankViews = default;
         [SerializeField] private TextMeshProUGUI clearText = default;
         [SerializeField] private LoadButton nextButton = default;
         [SerializeField] private LoadButton reloadButton = default;
         [SerializeField] private LoadButton homeButton = default;
-
-        private static readonly Vector3 _targetRotateVector = new Vector3(0f, 0f, 360f);
 
         private ISeController _seController;
         private StageRepository _stageRepository;
@@ -51,14 +47,9 @@ namespace RollingBall.Game.View
 
         private async UniTaskVoid TweenClearAsync(CancellationToken token, int clearRank)
         {
-            TweenClearRank(clearRank);
-            TweenClearText();
+            await TweenClearTextAsync(token);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(Const.CLEAR_ANIMATION_TIME + 0.5f), cancellationToken: token);
-
-            await clearText.rectTransform
-                .DOAnchorPosY(200.0f, Const.UI_ANIMATION_TIME)
-                .WithCancellation(token);
+            await TweenRankImagesAsync(clearRank, token);
 
             await UniTask.WhenAll(
                 nextButton.ShowAsync(token),
@@ -67,51 +58,48 @@ namespace RollingBall.Game.View
             );
         }
 
-        private void TweenClearRank(int clearRank)
-        {
-            rankBackGround.gameObject.SetActive(true);
-            TweenRankImages(clearRank);
-        }
-
-        private void TweenRankImages(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                TweenRankImage(rankImages[i]);
-            }
-        }
-
-        private static void TweenRankImage(Image image)
-        {
-            DOTween.Sequence()
-                .Append(image
-                    .DOFade(1.0f, Const.CLEAR_ANIMATION_TIME)
-                    .SetEase(Ease.InQuad))
-                .Join(image.rectTransform
-                    .DOScale(Vector3.one, Const.CLEAR_ANIMATION_TIME)
-                    .SetEase(Ease.InOutBack))
-                .Join(image.rectTransform
-                    .DOLocalRotate(_targetRotateVector, Const.CLEAR_ANIMATION_TIME, RotateMode.FastBeyond360)
-                    .SetEase(Ease.InQuad));
-        }
-
-        private void TweenClearText()
+        private async UniTask TweenClearTextAsync(CancellationToken token)
         {
             var textAnimation = new DOTweenTMPAnimator(clearText);
-            var offset = Vector3.up * 30.0f;
-            for (int i = 0; i < textAnimation.textInfo.characterCount; i++)
+            var offset = Vector3.up * 40.0f;
+            var charCount = textAnimation.textInfo.characterCount;
+            for (int i = 0; i < charCount; i++)
             {
-                var delayRate = i / (float) textAnimation.textInfo.characterCount;
-                var delayTime = Mathf.Lerp(0.0f, 1.0f, delayRate) + (0.0002f * i);
-
                 DOTween.Sequence()
                     .Append(textAnimation
-                        .DOOffsetChar(i, textAnimation.GetCharOffset(i) + offset, Const.UI_ANIMATION_TIME)
+                        .DOOffsetChar(i, textAnimation.GetCharOffset(i) + offset, Const.CLEAR_TEXT_ANIMATION_TIME)
                         .SetEase(Ease.OutFlash, 2))
                     .Join(textAnimation
-                        .DOFadeChar(i, 1, Const.CLEAR_ANIMATION_TIME))
-                    .SetDelay(delayTime);
+                        .DOFadeChar(i, 1, Const.CLEAR_TEXT_ANIMATION_TIME))
+                    .SetDelay(i * 0.05f);
             }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(Const.CLEAR_TEXT_ANIMATION_TIME + charCount * 0.1f), cancellationToken: token);
+        }
+
+        private async UniTask TweenRankImagesAsync(int clearRank, CancellationToken token)
+        {
+            if (clearRank == 1)
+            {
+                await rankViews[0].TweenStarAsync(Side.Center, token);
+            }
+            else if (clearRank == 2)
+            {
+                await (
+                    rankViews[0].TweenStarAsync(Side.Left2, token),
+                    rankViews[1].TweenStarAsync(Side.Right2, token)
+                );
+            }
+            else if (clearRank == 3)
+            {
+                await (
+                    rankViews[0].TweenStarAsync(Side.Left3, token),
+                    rankViews[1].TweenStarAsync(Side.Center, token),
+                    rankViews[2].TweenStarAsync(Side.Right3, token)
+                );
+            }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
         }
     }
 }
