@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7608886703350488300}
   - component: {fileID: 1729244707582480666}
   - component: {fileID: 3286713717580802607}
+  - component: {fileID: 1566791848307934763}
   - component: {fileID: 3622696299096156201}
   - component: {fileID: 5654809837538294338}
   - component: {fileID: 9204496629979679558}
@@ -224,6 +225,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83589eeb30be43188ccfd36e389a72c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1566791848307934763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223193620290020229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ff80a4dd5b9477b9fb394086d87cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3622696299096156201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059e91cc5f414bd194da67a3c894f869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteAtlas: {fileID: 4343727234628468602, guid: 16a21f38cc46544e9b74fc8b545a3d11,
+  spriteAtlas: {fileID: 4343727234628468602, guid: be9b1c87013a4474d923186b1e0b9784,
     type: 2}
   buttonImage: {fileID: 299043458529882727}
 --- !u!114 &9204496629979679558
