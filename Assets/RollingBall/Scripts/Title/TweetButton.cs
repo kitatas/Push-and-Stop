@@ -15,6 +15,7 @@ namespace RollingBall.Title
     public sealed class TweetButton : MonoBehaviour
     {
         private const string GAME_ID = "nanka_title_v2";
+        private const string GAME_NAME = "Push_and_Stop";
         private const string HASH_TAG = "unityroom";
 
         private void Start()
@@ -32,12 +33,12 @@ namespace RollingBall.Title
 #if UNITY_ANDROID
 
             var url = $"https://twitter.com/intent/tweet?text={UnityWebRequest.EscapeURL(tweetText)}";
-            url += $"&hashtags={UnityWebRequest.EscapeURL(GAME_ID)}";
+            url += $"&hashtags={UnityWebRequest.EscapeURL(GAME_NAME)}";
             Application.OpenURL(url);
 
 #else
 
-            tweetText += $"#{HASH_TAG}\n";
+            tweetText += $"#{HASH_TAG} #{GAME_NAME}\n";
             UnityRoomTweet.Tweet(GAME_ID, tweetText);
 
 #endif
@@ -47,24 +48,18 @@ namespace RollingBall.Title
         {
             var rankData = RankLoader.GetClearRankData();
             var clearCount = rankData.Count(x => x > 0);
-            var maxRankClearCount = rankData.Count(x => x == 3);
 
-            if (maxRankClearCount == Const.MAX_STAGE_COUNT)
+            switch (clearCount)
             {
-                return $"全てのステージを★３でクリアした！";
+                case Const.MAX_STAGE_COUNT:
+                    var maxRankClearCount = rankData.Count(x => x == 3);
+                    var clearStatus = maxRankClearCount == Const.MAX_STAGE_COUNT ? "★３で" : "";
+                    return $"全てのステージを{clearStatus}クリアした！";
+                case 0:
+                    return $"１つもクリアできてない...";
+                default:
+                    return $"ステージ{clearCount}までクリアした！";
             }
-
-            if (clearCount == Const.MAX_STAGE_COUNT)
-            {
-                return $"全てのステージをクリアした！";
-            }
-
-            if (clearCount == 0)
-            {
-                return $"１つもクリアできてない...";
-            }
-
-            return $"ステージ{clearCount}までクリアした！";
         }
     }
 }
