@@ -63,6 +63,7 @@ namespace RollingBall.Game.StageObject.Block
 
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
+        public bool isStop => isMove == false;
         public Vector3 GetPosition() => transform.position;
     }
 }

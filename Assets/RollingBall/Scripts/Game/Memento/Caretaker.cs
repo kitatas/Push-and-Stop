@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RollingBall.Game.StageObject;
 
 namespace RollingBall.Game.Memento
@@ -51,5 +52,7 @@ namespace RollingBall.Game.Memento
         }
 
         public bool IsMementoStackEmpty() => _mementoStack.Count == 0;
+
+        public bool IsMove() => _moveObjects.All(moveObject => moveObject.isStop);
     }
 }

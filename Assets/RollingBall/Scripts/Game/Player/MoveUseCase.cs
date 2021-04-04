@@ -51,5 +51,7 @@ namespace RollingBall.Game.Player
                 }
             }
         }
+
+        public bool IsMove() => _caretaker.IsMove();
     }
 }

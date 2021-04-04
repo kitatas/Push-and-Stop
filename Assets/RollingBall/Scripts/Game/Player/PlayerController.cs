@@ -60,11 +60,14 @@ namespace RollingBall.Game.Player
             });
 
             // 全移動ボタン
+            isStop = true;
             foreach (var moveButton in moveButtons)
             {
                 moveButton.onPush
+                    .Where(_ => _moveUseCase.IsMove())
                     .Subscribe(moveDirection =>
                     {
+                        isStop = false;
                         _moveUseCase.CountUp();
                         _playerMover.Move(moveDirection);
                         SetEnableButton(false);
@@ -74,11 +77,13 @@ namespace RollingBall.Game.Player
 
             // 一手戻るボタン
             undoButton.onPush
+                .Where(_ => _moveUseCase.IsMove())
                 .Subscribe(_ => _moveUseCase.CountDown())
                 .AddTo(undoButton);
 
             // 移動リセットボタン
             resetButton.onPush
+                .Where(_ => _moveUseCase.IsMove())
                 .Subscribe(_ => _moveUseCase.ResetCount())
                 .AddTo(resetButton);
 
@@ -101,6 +106,7 @@ namespace RollingBall.Game.Player
                 .DOMove(roundPosition, Const.CORRECT_TIME)
                 .OnComplete(() =>
                 {
+                    isStop = true;
                     _playerMover.ResetVelocity();
                     SetEnableButton(true);
                 });
@@ -125,6 +131,7 @@ namespace RollingBall.Game.Player
 
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
+        public bool isStop { get; private set; }
         public Vector3 GetPosition() => transform.position;
     }
 }
