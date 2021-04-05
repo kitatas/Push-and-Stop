@@ -66,7 +66,7 @@ namespace RollingBall.Common.Transition
         private void LoadNext()
         {
             var nextLevel = _level + 1;
-            if (nextLevel < Const.MAX_STAGE_COUNT)
+            if (nextLevel <= Const.MAX_STAGE_COUNT)
             {
                 _sceneLoader.FadeLoadScene(SceneName.Main, nextLevel, Const.FADE_TIME);
                 return;

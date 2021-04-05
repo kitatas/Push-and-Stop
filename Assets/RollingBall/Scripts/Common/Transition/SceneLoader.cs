@@ -21,6 +21,7 @@ namespace RollingBall.Common.Transition
 
         private float _transitionProgress;
         private float _transitionDuration;
+        private bool _isTransition;
 
         private readonly CancellationTokenSource _tokenSource;
         private readonly ZenjectSceneLoader _zenjectSceneLoader;
@@ -49,12 +50,19 @@ namespace RollingBall.Common.Transition
 
         public void FadeLoadScene(SceneName sceneName, int level, float fadeTime)
         {
+            if (_isTransition)
+            {
+                return;
+            }
+
             _transitionDuration = fadeTime;
             FadeLoadAsync(sceneName.ToString(), level, _tokenSource.Token).Forget();
         }
 
         private async UniTaskVoid FadeLoadAsync(string sceneName, int level, CancellationToken token)
         {
+            _isTransition = true;
+
             var beforeSceneButtons = Object.FindObjectsOfType<ButtonActivator>();
             beforeSceneButtons.ActivateButtons(false);
             SetUpFade(_alphaCutOffMax);
@@ -87,6 +95,8 @@ namespace RollingBall.Common.Transition
             }, cancellationToken: token);
 
             afterSceneButtons.ActivateButtons(true);
+
+            _isTransition = false;
         }
 
         private void SetUpFade(float alphaCutOffValue)
