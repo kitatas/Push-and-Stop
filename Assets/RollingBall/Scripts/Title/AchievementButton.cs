@@ -1,9 +1,11 @@
 using DG.Tweening;
 using RollingBall.Common;
+using RollingBall.Common.Sound.SE;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace RollingBall.Title
 {
@@ -17,6 +19,14 @@ namespace RollingBall.Title
         private readonly Vector2 _showSize = new Vector2(350.0f, 100.0f);
         private readonly Vector2 _hideSize = new Vector2(100.0f, 100.0f);
 
+        private ISeController _seController;
+
+        [Inject]
+        private void Construct(ISeController seController)
+        {
+            _seController = seController;
+        }
+
         private void Start()
         {
             _isShow = false;
@@ -26,10 +36,12 @@ namespace RollingBall.Title
                 {
                     if (_isShow)
                     {
+                        _seController.PlaySe(SeType.Cancel);
                         Hide();
                     }
                     else
                     {
+                        _seController.PlaySe(SeType.Decision);
                         Show();
                     }
                 })
