@@ -14,11 +14,13 @@ namespace RollingBall.Game.StageObject.Block
     /// </summary>
     public sealed class BallBlock : BaseBlock, IMoveObject
     {
+        private bool _isStop;
         private CancellationToken _token;
 
         private void Start()
         {
             isMove = false;
+            _isStop = true;
             _token = this.GetCancellationTokenOnDestroy();
 
             this.OnCollisionEnter2DAsObservable()
@@ -42,6 +44,7 @@ namespace RollingBall.Game.StageObject.Block
         private async UniTaskVoid MoveAsync(Vector2 moveDirection, CancellationToken token)
         {
             isMove = true;
+            _isStop = false;
             var moveSpeed = Const.MOVE_SPEED * 0.5f;
 
             await UniTask.WaitWhile(() =>
@@ -58,12 +61,13 @@ namespace RollingBall.Game.StageObject.Block
 
             transform
                 .DOMove(roundPosition, Const.CORRECT_TIME)
-                .SetEase(Ease.Linear);
+                .SetEase(Ease.Linear)
+                .OnComplete(() => _isStop = true);
         }
 
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
 
-        public bool isStop => isMove == false;
+        public bool isStop => _isStop;
         public Vector3 GetPosition() => transform.position;
     }
 }
