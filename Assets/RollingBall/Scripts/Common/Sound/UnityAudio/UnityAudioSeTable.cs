@@ -10,6 +10,10 @@ namespace RollingBall.Common.Sound.UnityAudio
         [SerializeField] private AudioClip cancelClip = default;
         [SerializeField] private AudioClip hitClip = default;
         [SerializeField] private AudioClip clearClip = default;
+        [SerializeField] private AudioClip flashClip = default;
+        [SerializeField] private AudioClip starClip = default;
+        [SerializeField] private AudioClip goalClip = default;
+
 
         public AudioClip[] GetSeList()
         {
@@ -19,6 +23,9 @@ namespace RollingBall.Common.Sound.UnityAudio
             seList[(int) SeType.Cancel] = cancelClip;
             seList[(int) SeType.Hit] = hitClip;
             seList[(int) SeType.Clear] = clearClip;
+            seList[(int) SeType.Flash] = flashClip;
+            seList[(int) SeType.Star] = starClip;
+            seList[(int) SeType.Goal] = goalClip;
 
             return seList;
         }

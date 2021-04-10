@@ -39,8 +39,6 @@ namespace RollingBall.Game.View
 
         public void Show(int moveCount)
         {
-            _seController.PlaySe(SeType.Clear);
-
             var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
             var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel() - 1, clearRate);
 
@@ -75,9 +73,11 @@ namespace RollingBall.Game.View
                         .SetEase(Ease.OutFlash, 2))
                     .Join(textAnimation
                         .DOFadeChar(i, 1, Const.CLEAR_TEXT_ANIMATION_TIME))
-                    .SetDelay(i * 0.05f)
+                    .SetDelay(i * 0.04f)
                     .WithCancellation(token));
             }
+
+            _seController.PlaySe(SeType.Clear);
 
             await UniTask.WhenAll(tasks);
 
@@ -107,10 +107,14 @@ namespace RollingBall.Game.View
                 .AddTo(this);
 
             await UniTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: token);
+
+            _seController.PlaySe(SeType.Flash);
         }
 
         private async UniTask TweenRankImagesAsync(int clearRank, CancellationToken token)
         {
+            _seController.PlaySe(SeType.Star);
+
             if (clearRank == 1)
             {
                 await rankViews[0].TweenStarAsync(Side.Center, token);

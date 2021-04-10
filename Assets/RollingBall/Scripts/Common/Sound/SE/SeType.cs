@@ -6,5 +6,8 @@
           Cancel = 1,
              Hit = 2,
            Clear = 3,
+           Flash = 4,
+            Star = 5,
+            Goal = 6,
     }
 }

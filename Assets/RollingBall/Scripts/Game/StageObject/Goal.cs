@@ -2,9 +2,11 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using RollingBall.Common;
+using RollingBall.Common.Sound.SE;
 using RollingBall.Game.View;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace RollingBall.Game.StageObject
 {
@@ -17,6 +19,14 @@ namespace RollingBall.Game.StageObject
 
         private int _currentMoveCount;
         private ReactiveProperty<bool> _isGoal;
+
+        private ISeController _seController;
+
+        [Inject]
+        private void Construct(ISeController seController)
+        {
+            _seController = seController;
+        }
 
         public void Initialize(Action action)
         {
@@ -42,6 +52,8 @@ namespace RollingBall.Game.StageObject
 
         private async UniTask TweenGoalAsync()
         {
+            _seController.PlaySe(SeType.Goal);
+
             await DOTween.Sequence()
                 .Append(transform
                     .DOScale(new Vector3(75.0f, 75.0f, 1.0f), Const.UI_ANIMATION_TIME)

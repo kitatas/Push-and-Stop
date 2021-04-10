@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6141c6267afb26b4884d24bc70c7c859, type: 3}
   m_Name: SeTable
   m_EditorClassIdentifier: 
-  decisionButtonClip: {fileID: 8300000, guid: 8a4e6a6679dfd410e8ff5d4f91775d00, type: 3}
-  cancelButtonClip: {fileID: 8300000, guid: b02f560def7094dacaee2d293400e129, type: 3}
-  hitClip: {fileID: 8300000, guid: b02f560def7094dacaee2d293400e129, type: 3}
-  clearClip: {fileID: 8300000, guid: fcced94e2e54647fa867168218826698, type: 3}
+  decisionClip: {fileID: 8300000, guid: befeaaa900b7d7a438d52605f5dc6f77, type: 3}
+  cancelClip: {fileID: 8300000, guid: 4fa9869e5620f5a43baceb5d15732f24, type: 3}
+  hitClip: {fileID: 8300000, guid: 6c71d4eb4ffd743f7ad91987be029543, type: 3}
+  clearClip: {fileID: 8300000, guid: 45207d2f677d84540b817824e6dcd20a, type: 3}
+  flashClip: {fileID: 8300000, guid: afc5016e971de475e808cf5beeb47b5d, type: 3}
+  starClip: {fileID: 8300000, guid: 1ce71bc4b5a824275ad10ff5d89cdc0d, type: 3}
+  goalClip: {fileID: 8300000, guid: be4c4456ca0d84d4ca213eada30d126e, type: 3}
