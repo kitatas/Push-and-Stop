@@ -15,9 +15,9 @@ namespace RollingBall.Common.Transition
     /// </summary>
     public sealed class SceneLoader
     {
-        private readonly float _alphaCutOffMax = 0.7f;
-        private readonly float _alphaCutOffMin = 0f;
-        private readonly float _fadeSpeedRate = 1.25f;
+        private readonly float _alphaCutOffMax = 1.0f;
+        private readonly float _alphaCutOffMin = 0.0f;
+        private readonly float _fadeSpeedRate = 1.5f;
 
         private float _transitionProgress;
         private float _transitionDuration;

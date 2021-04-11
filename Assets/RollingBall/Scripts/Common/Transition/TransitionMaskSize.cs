@@ -28,7 +28,8 @@ namespace RollingBall.Common.Transition
 
             var w = worldScreenWidth / width;
             var h = worldScreenHeight / height;
-            transform.localScale = new Vector3(w, h);
+            var r = w > h ? w : h;
+            transform.localScale = new Vector3(r, r);
         }
 
         private void SetPosition(Transform cameraTransform)
