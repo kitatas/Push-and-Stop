@@ -8,16 +8,16 @@ namespace RollingBall.Common.Transition
     [RequireComponent(typeof(SpriteRenderer))]
     public sealed class TransitionMaskSize : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
-            var mainCamera = FindObjectOfType<Camera>();
+            var mainCamera = FindObjectOfType<UnityEngine.Camera>();
 
             SetScreenSize(mainCamera);
 
             SetPosition(mainCamera.transform);
         }
 
-        private void SetScreenSize(Camera mainCamera)
+        private void SetScreenSize(UnityEngine.Camera mainCamera)
         {
             var sprite = GetComponent<SpriteRenderer>().sprite;
             var width = sprite.bounds.size.x;
