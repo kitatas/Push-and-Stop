@@ -1,4 +1,6 @@
-# Push-Stop
+# Push-and-Stop
+
+https://play.google.com/store/apps/details?id=com.KitaLab.PushStop
 
 ## Usages Unity version
 
@@ -13,7 +15,6 @@
 |Easy Save - The Complete Save & Load Asset|3.3.2f1|
 |Extenject|9.2.0|
 |Modern Procedural UI Kit|0.96|
-|ncmb_unity|4.0.3|
 |SRDebugger - Console & Tools On-Device|1.10.0|
 |TextMesh Pro|2.1.1|
 |UniRx - Reactive Extensions for Unity|7.1.0|
