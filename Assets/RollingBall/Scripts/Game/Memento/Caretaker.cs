@@ -10,17 +10,12 @@ namespace RollingBall.Game.Memento
     public sealed class Caretaker
     {
         private readonly Stack<Memento[]> _mementoStack;
-        private readonly List<IMoveObject> _moveObjects;
+        private readonly MoveObjectEntity _moveObjectEntity;
 
-        public Caretaker()
+        public Caretaker(MoveObjectEntity moveObjectEntity)
         {
             _mementoStack = new Stack<Memento[]>();
-            _moveObjects = new List<IMoveObject>();
-        }
-
-        public void AddMoveObject(IMoveObject moveObject)
-        {
-            _moveObjects.Add(moveObject);
+            _moveObjectEntity = moveObjectEntity;
         }
 
         /// <summary>
@@ -28,10 +23,10 @@ namespace RollingBall.Game.Memento
         /// </summary>
         public void PushMementoStack()
         {
-            var mementoArray = new Memento[_moveObjects.Count];
-            for (int i = 0; i < _moveObjects.Count; i++)
+            var mementoArray = new Memento[_moveObjectEntity.Count()];
+            for (int i = 0; i < _moveObjectEntity.Count(); i++)
             {
-                mementoArray[i] = new Memento(_moveObjects[i].GetPosition());
+                mementoArray[i] = new Memento(_moveObjectEntity.Get(i).GetPosition());
             }
 
             _mementoStack.Push(mementoArray);
@@ -43,9 +38,9 @@ namespace RollingBall.Game.Memento
         public void PopMementoStack()
         {
             var mementoArray = _mementoStack.Peek();
-            for (int i = 0; i < _moveObjects.Count; i++)
+            for (int i = 0; i < _moveObjectEntity.Count(); i++)
             {
-                _moveObjects[i].SetPosition(mementoArray[i].GetPosition());
+                _moveObjectEntity.Get(i).SetPosition(mementoArray[i].GetPosition());
             }
 
             _mementoStack.Pop();
@@ -53,6 +48,6 @@ namespace RollingBall.Game.Memento
 
         public bool IsMementoStackEmpty() => _mementoStack.Count == 0;
 
-        public bool IsMove() => _moveObjects.All(moveObject => moveObject.isStop);
+        public bool IsMove() => _moveObjectEntity.moveObjects.All(moveObject => moveObject.isStop);
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using RollingBall.Game.Memento;
 using RollingBall.Game.Player;
 using RollingBall.Game.StageObject;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace RollingBall.Game.StageData
     public sealed class StageRepository
     {
         public StageRepository(int level, StageDataTable stageDataTable, StageObjectTable stageObjectTable,
-            PlayerController player, Goal goal, Caretaker caretaker, TargetMoveCountView targetMoveCountView)
+            PlayerController player, Goal goal, MoveObjectEntity moveObjectEntity, TargetMoveCountView targetMoveCountView)
         {
             var stageEntity = JsonUtility.FromJson<StageEntity>(stageDataTable.stageDataList[level].ToString());
             goal.SetTargetMoveCount(stageEntity.targetMoveCount);
@@ -23,7 +22,7 @@ namespace RollingBall.Game.StageData
                 {
                     case StageObjectType.Player:
                         stageObject = player;
-                        caretaker.AddMoveObject(player);
+                        moveObjectEntity.Add(player);
                         break;
                     case StageObjectType.Goal:
                         stageObject = goal;
@@ -43,7 +42,7 @@ namespace RollingBall.Game.StageData
                             .Find(x => x.type == stageObjectData.type);
                         var block = Object.Instantiate(data.block);
                         stageObject = block as IStageObject;
-                        caretaker.AddMoveObject(block as IMoveObject);
+                        moveObjectEntity.Add(block as IMoveObject);
                         break;
                     }
                     default:

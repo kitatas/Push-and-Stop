@@ -87,6 +87,10 @@ namespace RollingBall.Game.Installer
                 .FromInstance(goal)
                 .AsCached();
 
+            Container
+                .Bind<MoveObjectEntity>()
+                .AsCached();
+
             #endregion
         }
     }
