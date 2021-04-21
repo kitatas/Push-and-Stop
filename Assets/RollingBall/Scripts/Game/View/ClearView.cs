@@ -6,7 +6,6 @@ using DG.Tweening;
 using RollingBall.Common;
 using RollingBall.Common.Sound.SE;
 using RollingBall.Common.Transition;
-using RollingBall.Game.StageData;
 using RollingBall.Common.Utility;
 using RollingBall.Title;
 using TMPro;
@@ -27,19 +26,18 @@ namespace RollingBall.Game.View
         [SerializeField] private LoadButton homeButton = default;
 
         private ISeController _seController;
-        private StageRepository _stageRepository;
+        private int _level;
 
         [Inject]
-        private void Construct(ISeController seController, StageRepository stageRepository)
+        private void Construct(ISeController seController, int level)
         {
             _seController = seController;
-            _stageRepository = stageRepository;
+            _level = level;
         }
 
-        public void Show(int moveCount)
+        public void Show(float clearRate)
         {
-            var clearRate = (float) moveCount / _stageRepository.GetTargetMoveCount();
-            var clearRank = RankLoader.SaveClearData(_stageRepository.GetLevel() - 1, clearRate);
+            var clearRank = RankLoader.SaveClearData(_level - 1, clearRate);
 
             var token = this.GetCancellationTokenOnDestroy();
             TweenClearAsync(token, clearRank).Forget();

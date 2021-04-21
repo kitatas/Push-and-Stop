@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace RollingBall.Game.StageData
 {
@@ -10,10 +9,9 @@ namespace RollingBall.Game.StageData
     [RequireComponent(typeof(TextMeshProUGUI))]
     public sealed class TargetMoveCountView : MonoBehaviour
     {
-        [Inject]
-        private void Construct(StageRepository stageRepository)
+        public void Initialize(int targetMoveCount)
         {
-            GetComponent<TextMeshProUGUI>().text = $"{stageRepository.GetTargetMoveCount():00}";
+            GetComponent<TextMeshProUGUI>().text = $"{targetMoveCount:00}";
         }
     }
 }

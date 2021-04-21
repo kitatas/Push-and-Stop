@@ -9,16 +9,14 @@ namespace RollingBall.Game.StageData
 {
     public sealed class StageRepository
     {
-        private readonly int _level;
-        private readonly StageEntity _stageEntity;
-
         public StageRepository(int level, StageDataTable stageDataTable, StageObjectTable stageObjectTable,
-            PlayerController player, Goal goal, Caretaker caretaker)
+            PlayerController player, Goal goal, Caretaker caretaker, TargetMoveCountView targetMoveCountView)
         {
-            _level = level;
-            _stageEntity = JsonUtility.FromJson<StageEntity>(stageDataTable.stageDataList[level].ToString());
+            var stageEntity = JsonUtility.FromJson<StageEntity>(stageDataTable.stageDataList[level].ToString());
+            goal.SetTargetMoveCount(stageEntity.targetMoveCount);
+            targetMoveCountView.Initialize(stageEntity.targetMoveCount);
 
-            foreach (var stageObjectData in _stageEntity.stageObjects)
+            foreach (var stageObjectData in stageEntity.stageObjects)
             {
                 IStageObject stageObject;
                 switch (stageObjectData.type)
@@ -52,11 +50,8 @@ namespace RollingBall.Game.StageData
                         throw new ArgumentOutOfRangeException();
                 }
 
-                stageObject.SetPosition(stageObjectData.GetPosition());
+                stageObject?.SetPosition(stageObjectData.GetPosition());
             }
         }
-
-        public int GetLevel() => _level;
-        public int GetTargetMoveCount() => _stageEntity.targetMoveCount;
     }
 }

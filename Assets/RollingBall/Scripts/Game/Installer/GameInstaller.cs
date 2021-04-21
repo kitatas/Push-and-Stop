@@ -11,6 +11,7 @@ namespace RollingBall.Game.Installer
     public sealed class GameInstaller : MonoInstaller
     {
         [SerializeField] private MoveCountView moveCountView = default;
+        [SerializeField] private TargetMoveCountView targetMoveCountView = default;
         [SerializeField] private PlayerController playerController = default;
         [SerializeField] private Rigidbody2D rigidbody2d = default;
         [SerializeField] private Goal goal = default;
@@ -40,6 +41,11 @@ namespace RollingBall.Game.Installer
                 .Bind<MoveCountPresenter>()
                 .AsCached()
                 .NonLazy();
+
+            Container
+                .Bind<TargetMoveCountView>()
+                .FromInstance(targetMoveCountView)
+                .AsCached();
 
             #endregion
 

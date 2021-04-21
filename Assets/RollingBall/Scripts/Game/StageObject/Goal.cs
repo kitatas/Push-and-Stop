@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using RollingBall.Common;
@@ -16,6 +17,7 @@ namespace RollingBall.Game.StageObject
     public sealed class Goal : MonoBehaviour, IStageObject
     {
         [SerializeField] private ClearView clearView = default;
+        private int _targetMoveCount;
 
         private int _currentMoveCount;
         private ReactiveProperty<bool> _isGoal;
@@ -31,6 +33,7 @@ namespace RollingBall.Game.StageObject
         public void Initialize(Action action)
         {
             _currentMoveCount = 0;
+            var token = this.GetCancellationTokenOnDestroy();
 
             _isGoal = new ReactiveProperty<bool>(false);
             _isGoal
@@ -38,19 +41,25 @@ namespace RollingBall.Game.StageObject
                 .Subscribe(_ =>
                 {
                     action?.Invoke();
-                    TweenClearAsync().Forget();
+                    TweenClearAsync(token).Forget();
                 })
                 .AddTo(this);
         }
 
-        private async UniTaskVoid TweenClearAsync()
+        public void SetTargetMoveCount(int targetMoveCount)
         {
-            await TweenGoalAsync();
-
-            clearView.Show(_currentMoveCount);
+            _targetMoveCount = targetMoveCount;
         }
 
-        private async UniTask TweenGoalAsync()
+        private async UniTaskVoid TweenClearAsync(CancellationToken token)
+        {
+            await TweenGoalAsync(token);
+
+            var clearRate = (float) _currentMoveCount / _targetMoveCount;
+            clearView.Show(clearRate);
+        }
+
+        private async UniTask TweenGoalAsync(CancellationToken token)
         {
             _seController.PlaySe(SeType.Goal);
 
@@ -61,7 +70,8 @@ namespace RollingBall.Game.StageObject
                 .Join(transform
                     .DOLocalRotate(new Vector3(0.0f, 0.0f, -180f), Const.UI_ANIMATION_TIME)
                     .SetOptions(false)
-                    .SetEase(Ease.Linear));
+                    .SetEase(Ease.Linear))
+                .WithCancellation(token);
         }
 
         public void SetPosition(Vector2 setPosition) => transform.position = setPosition;
