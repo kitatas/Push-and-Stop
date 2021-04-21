@@ -1,92 +1,92 @@
-﻿@startuml
+@startuml
 
-package Block {
-    interface IHittable
-    abstract class BaseBlock <<MonoBehaviour>>
-    class NormalBlock
-    class MoveBlock
-    class BallBlock
-}
+interface IMoveCountModel
+class MoveCountModel
+class MoveCountView<<MonoBehaviour>>
+class MoveCountPresenter
+enum MoveCountType
 
-package MoveCount {
-    interface IMoveCount
-    interface IMoveCountModel
-    interface IMoveCountUpdatable
-    class MoveCountModel
-    class MoveCountPresenter
-    class MoveCountView <<MonoBehaviour>>
-}
+IMoveCountModel <|.. MoveCountModel
+IMoveCountModel <-up- MoveCountPresenter
+MoveCountView <-- MoveCountPresenter
 
-package Player {
-    class PlayerController <<MonoBehaviour>>
-    class PlayerMover
-    class MoveButton <<MonoBehaviour>>
-}
 
-package Stage {
-    class StageData
-    class StageDataTable <<ScriptableObject>>
-    class StageLoader
-}
+class PlayerController<<MonoBehaviour>>
+class PlayerMover
+class MoveUseCase
+class MoveButton<<MonoBehaviour>>
+enum MoveDirection
 
-class MinMoveCountView
+MoveButton o-up- MoveDirection
+Caretaker <-- MoveUseCase
+MoveCountModel <-- MoveUseCase
+IMoveObject <|.. PlayerController
+PlayerMover <-- PlayerController
+MoveUseCase <-- PlayerController
+MoveButton <-- PlayerController
+Goal <-- PlayerController
+
+
+class Caretaker
+class Memento
+class MementoButton<<MonoBehaviour>>
+
+MoveObjectEntity <-- Caretaker
+Memento <-- Caretaker
+IMoveObject <-- MoveObjectEntity
+MementoButton o-up- MoveCountType
+MementoButton <-- PlayerController
+
+class StageDataTable<<ScriptableObject>>
+class StageRepository
+class StageEntity
+class StageObject
+class TargetMoveCountView<<MonoBehaviour>>
+enum StageObjectType
+
+MoveObjectEntity <-- StageRepository
+PlayerController <-- StageRepository
+Goal <- StageRepository
+StageDataTable <-- StageRepository
+StageObjectTable <-- StageRepository
+StageEntity <-- StageRepository
+TargetMoveCountView <-- StageRepository
+StageObject <-- StageEntity
+StageObject o-up- StageObjectType
 
 interface IStageObject
 interface IMoveObject
+class MoveObjectEntity
+class Goal<<MonoBehaviour>>
 
-package Goal {
-    interface IGoal
-    class Goal <<MonoBehaviour>>
-    class ClearAction <<MonoBehaviour>>
-}
+IStageObject <|.. IMoveObject
+IStageObject <|.. Goal
 
-package Memento {
-    class Memento
-    class Caretaker <<MonoBehaviour>>
-    class UndoButton <<MonoBehaviour>>
-}
+interface IHittable
+abstract class BaseBlock<<MonoBehaviour>>
+class NormalBlock
+class MoveBlock
+class BallBlock
 
-IMoveObject .up.|> IStageObject
+IHittable <|.. BaseBlock
+BaseBlock <|-- NormalBlock
+BaseBlock <|-- MoveBlock
+BaseBlock <|-- BallBlock
+IStageObject <|.. NormalBlock
+IMoveObject <|.. MoveBlock
+IMoveObject <|.. BallBlock
 
-BaseBlock .up.|> IHittable
-NormalBlock .up.|> IStageObject
-MoveBlock .up.|> IMoveObject
-BallBlock .up.|> IMoveObject
-NormalBlock -up-|> BaseBlock
-MoveBlock -up-|> BaseBlock
-BallBlock -up-|> BaseBlock
-MoveBlock --> IHittable
-BallBlock --> IHittable
+class StageObjectData<<ScriptableObject>>
+class StageObjectTable<<ScriptableObject>>
 
-MoveCountPresenter --> IMoveCountModel
-MoveCountPresenter --> MoveCountView
-MoveCountModel .up.|> IMoveCount
-MoveCountModel .up.|> IMoveCountModel
-MoveCountModel .up.|> IMoveCountUpdatable
+StageObjectData <-- StageObjectTable
+StageObjectData o-up- BaseBlock
+StageObjectData o-up- StageObjectType
 
-PlayerController .up.|> IMoveObject
-PlayerController --> PlayerMover
-PlayerController --> MoveButton
-PlayerController --> IHittable
-PlayerController --> IGoal
-PlayerController --> UndoButton
+class ClearView<<MonoBehaviour>>
+class RankView<<MonoBehaviour>>
 
-MoveButton ---> IMoveCountUpdatable
-MoveButton --> Caretaker
-
-Goal .up.|> IStageObject
-Goal .left.|> IGoal
-Goal --> ClearAction
-ClearAction --> MinMoveCountView
-ClearAction -> IMoveCount
-
-StageDataTable --> StageData
-StageLoader --> StageDataTable
-StageLoader --> IStageObject
-
-Caretaker --> Memento
-Caretaker -up-> IMoveObject
-UndoButton --> Caretaker
-UndoButton --> IMoveCountUpdatable
+RankView <-- ClearView
+ClearView <-- Goal
 
 @enduml
