@@ -4,8 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using MPUIKIT;
 using RollingBall.Common;
-using UniRx;
-using UniRx.Triggers;
+using RollingBall.Common.Utility;
 using UnityEngine;
 
 namespace RollingBall.Game.View
@@ -43,18 +42,15 @@ namespace RollingBall.Game.View
 
         private void TweenStarGradient()
         {
-            var tween = DOTween.Sequence()
+            DOTween.Sequence()
                 .Append(DOTween.To(
                         () => star.material.GetFloat(_gradientRotation),
                         value => star.material.SetFloat(_gradientRotation, value),
                         -405.0f,
                         2.0f)
                     .SetEase(Ease.InOutCirc))
-                .SetLoops(-1, LoopType.Restart);
-
-            this.OnDisableAsObservable()
-                .Subscribe(_ => tween?.Kill())
-                .AddTo(this);
+                .SetLoops(-1, LoopType.Restart)
+                .DisableKill(this);
         }
 
         private static float TweenPosition(Side side)

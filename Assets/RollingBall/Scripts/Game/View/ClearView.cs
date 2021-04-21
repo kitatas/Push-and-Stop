@@ -7,10 +7,9 @@ using RollingBall.Common;
 using RollingBall.Common.Sound.SE;
 using RollingBall.Common.Transition;
 using RollingBall.Game.StageData;
+using RollingBall.Common.Utility;
 using RollingBall.Title;
 using TMPro;
-using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -81,30 +80,20 @@ namespace RollingBall.Game.View
 
             await UniTask.WhenAll(tasks);
 
-            var sequences = new Sequence[charCount];
             var highlightColor = new Color(1f, 1f, 0.8f);
             for (int i = 0; i < charCount; i++)
             {
                 var interval = i * 0.05f;
-                sequences[i] = DOTween.Sequence()
+                DOTween.Sequence()
                     .AppendInterval(0.5f)
                     .Append(textAnimation
                         .DOColorChar(i, highlightColor, 0.15f)
                         .SetLoops(2, LoopType.Yoyo)
                         .SetDelay(interval))
                     .AppendInterval(3.0f - interval)
-                    .SetLoops(-1);
+                    .SetLoops(-1)
+                    .DisableKill(this);
             }
-
-            this.OnDisableAsObservable()
-                .Subscribe(_ =>
-                {
-                    foreach (var sequence in sequences)
-                    {
-                        sequence?.Kill();
-                    }
-                })
-                .AddTo(this);
 
             await UniTask.Delay(TimeSpan.FromSeconds(0.25f), cancellationToken: token);
 
