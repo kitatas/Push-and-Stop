@@ -48,6 +48,9 @@ TagManager:
   - name: Block
     uniqueID: 3534279789
     locked: 0
+  - name: GameUI
+    uniqueID: 4142978945
+    locked: 0
   - name: Goal
     uniqueID: 4063621027
     locked: 0
