@@ -6,6 +6,13 @@
       "source": "builtin",
       "dependencies": {}
     },
+    "com.unity.device-simulator": {
+      "version": "2.2.4-preview",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 0,
@@ -19,6 +26,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.1"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "2.5.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.2.17"
       },
       "url": "https://packages.unity.com"
     },
@@ -43,8 +59,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.2.6",
-      "depth": 0,
+      "version": "1.2.17",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
