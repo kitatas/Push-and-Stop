@@ -14,7 +14,6 @@ namespace RollingBall.Common.Sound.UnityAudio
     {
         [SerializeField] private Slider bgmSlider = null;
         [SerializeField] private Slider seSlider = null;
-        [SerializeField] private UnityEngine.UI.Button resetButton = null;
 
         [Inject]
         private void Construct(UnityAudioBgmController unityAudioBgmController, UnityAudioSeController unityAudioSeController)
@@ -27,8 +26,6 @@ namespace RollingBall.Common.Sound.UnityAudio
             SetSliderValue(unityAudioBgmController, unityAudioSeController);
 
             UpdateVolumeSlider(unityAudioBgmController, unityAudioSeController);
-
-            OnPushResetButton(unityAudioBgmController, unityAudioSeController);
         }
 
         private void SetSliderValue(IVolumeUpdatable bgm, IVolumeUpdatable se)
@@ -48,19 +45,6 @@ namespace RollingBall.Common.Sound.UnityAudio
                 .OnValueChangedAsObservable()
                 .Subscribe(se.SetVolume)
                 .AddTo(this);
-        }
-
-        private void OnPushResetButton(IVolumeUpdatable bgm, IVolumeUpdatable se)
-        {
-            resetButton
-                .OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    bgm.SetVolume(bgmSlider.maxValue / 2.0f);
-                    se.SetVolume(seSlider.maxValue / 2.0f);
-                    SetSliderValue(bgm, se);
-                })
-                .AddTo(resetButton);
         }
     }
 }

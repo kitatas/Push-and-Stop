@@ -30,18 +30,10 @@ namespace RollingBall.Title
         {
             var tweetText = $"{GetClearText()}\n";
 
-#if UNITY_ANDROID
-
+            tweetText += $"#{GAME_NAME}\n";
+            tweetText += $"https://play.google.com/store/apps/details?id=com.KitaLab.PushStop";
             var url = $"https://twitter.com/intent/tweet?text={UnityWebRequest.EscapeURL(tweetText)}";
-            url += $"&hashtags={UnityWebRequest.EscapeURL(GAME_NAME)}";
             Application.OpenURL(url);
-
-#else
-
-            tweetText += $"#{HASH_TAG} #{GAME_NAME}\n";
-            UnityRoomTweet.Tweet(GAME_ID, tweetText);
-
-#endif
         }
 
         private static string GetClearText()
