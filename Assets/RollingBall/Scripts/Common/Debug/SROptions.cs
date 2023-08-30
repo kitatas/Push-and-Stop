@@ -20,7 +20,7 @@ public partial class SROptions
     public void ExecClear()
     {
         var clearData = RankLoader.GetClearRankData();
-        for (int i = 1; i < Const.MAX_STAGE_COUNT; i++)
+        for (int i = 0; i < Const.MAX_STAGE_COUNT; i++)
         {
             if (i < stageLevel)
             {
