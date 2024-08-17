@@ -29,7 +29,7 @@ namespace RollingBall.Title
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
             };
 
-            var url = $"https://kitatas.github.io/Push-and-Stop/{external}";
+            var url = $"https://kitatas.github.io/games/push_and_stop/{external}";
 
             GetComponent<UnityEngine.UI.Button>()
                 .OnClickAsObservable()
