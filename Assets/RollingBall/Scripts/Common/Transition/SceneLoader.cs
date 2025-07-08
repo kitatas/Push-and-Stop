@@ -63,7 +63,7 @@ namespace RollingBall.Common.Transition
         {
             _isTransition = true;
 
-            var beforeSceneButtons = Object.FindObjectsOfType<ButtonActivator>();
+            var beforeSceneButtons = Object.FindObjectsByType<ButtonActivator>(FindObjectsSortMode.None);
             beforeSceneButtons.ActivateButtons(false);
             SetUpFade(_alphaCutOffMax);
             await UniTask.WaitUntil(() =>
@@ -82,7 +82,7 @@ namespace RollingBall.Common.Transition
 
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
 
-            var afterSceneButtons = Object.FindObjectsOfType<ButtonActivator>();
+            var afterSceneButtons = Object.FindObjectsByType<ButtonActivator>(FindObjectsSortMode.None);
             afterSceneButtons.ActivateButtons(false);
             SetUpFade(_alphaCutOffMin);
             await UniTask.WaitUntil(() =>

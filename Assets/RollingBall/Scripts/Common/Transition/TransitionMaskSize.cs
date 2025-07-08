@@ -10,7 +10,7 @@ namespace RollingBall.Common.Transition
     {
         private void Start()
         {
-            var mainCamera = FindObjectOfType<UnityEngine.Camera>();
+            var mainCamera = FindFirstObjectByType<UnityEngine.Camera>();
 
             SetScreenSize(mainCamera);
 
