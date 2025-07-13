@@ -6,7 +6,7 @@
     public sealed class Const
     {
         public const int MAJOR_VERSION = 1;
-        public const int MINOR_VERSION = 3;
+        public const int MINOR_VERSION = 4;
 
         public const float FADE_TIME = 0.7f;
         public const float UI_ANIMATION_TIME = 0.5f;
