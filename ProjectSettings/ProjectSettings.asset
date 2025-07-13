@@ -3,7 +3,7 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 27
+  serializedVersion: 28
   productGUID: fc504ec6e71ae402aa1dbd10fc851889
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -51,6 +51,7 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   unsupportedMSAAFallback: 0
+  m_SpriteBatchMaxVertexCount: 65535
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 0
@@ -72,18 +73,18 @@ PlayerSettings:
   androidRenderOutsideSafeArea: 1
   androidUseSwappy: 0
   androidBlitType: 0
-  androidResizableWindow: 0
+  androidResizeableActivity: 0
   androidDefaultWindowWidth: 1920
   androidDefaultWindowHeight: 1080
   androidMinimumWindowWidth: 400
   androidMinimumWindowHeight: 300
   androidFullscreenMode: 1
   androidAutoRotationBehavior: 1
+  androidPredictiveBackSupport: 0
   androidApplicationEntry: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
   runInBackground: 1
-  captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
@@ -139,7 +140,9 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 1.3
+  visionOSBundleVersion: 1.0
+  tvOSBundleVersion: 1.0
+  bundleVersion: 1.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -171,9 +174,9 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 19
+  AndroidBundleVersionCode: 20
   AndroidMinSdkVersion: 23
-  AndroidTargetSdkVersion: 34
+  AndroidTargetSdkVersion: 35
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -188,12 +191,14 @@ PlayerSettings:
   strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
+  iOSSimulatorArchitecture: 0
   iOSTargetOSVersionString: 13.0
   tvOSSdkVersion: 0
+  tvOSSimulatorArchitecture: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 13.0
-  bratwurstSdkVersion: 0
-  bratwurstTargetOSVersionString: 13.0
+  VisionOSSdkVersion: 0
+  VisionOSTargetOSVersionString: 1.0
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -218,7 +223,6 @@ PlayerSettings:
     rgba: 0
   iOSLaunchScreenFillPct: 100
   iOSLaunchScreenSize: 100
-  iOSLaunchScreenCustomXibPath: 
   iOSLaunchScreeniPadType: 0
   iOSLaunchScreeniPadImage: {fileID: 0}
   iOSLaunchScreeniPadBackgroundColor:
@@ -226,7 +230,6 @@ PlayerSettings:
     rgba: 0
   iOSLaunchScreeniPadFillPct: 100
   iOSLaunchScreeniPadSize: 100
-  iOSLaunchScreeniPadCustomXibPath: 
   iOSLaunchScreenCustomStoryboardPath: 
   iOSLaunchScreeniPadCustomStoryboardPath: 
   iOSDeviceRequirements: []
@@ -236,15 +239,16 @@ PlayerSettings:
   iOSMetalForceHardShadows: 0
   metalEditorSupport: 1
   metalAPIValidation: 1
+  metalCompileShaderBinary: 0
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
   appleDeveloperTeamID: 
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
-  bratwurstManualSigningProvisioningProfileID: 
+  VisionOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
   tvOSManualSigningProvisioningProfileType: 0
-  bratwurstManualSigningProvisioningProfileType: 0
+  VisionOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 0
   iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
@@ -262,7 +266,6 @@ PlayerSettings:
   useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
-  AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: '{inproject}: user.keystore'
@@ -281,12 +284,12 @@ PlayerSettings:
     height: 180
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
-  chromeosInputEmulation: 1
   AndroidMinifyRelease: 0
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
   AndroidReportGooglePlayAppDependencies: 1
+  androidSymbolsSizeThreshold: 800
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
@@ -597,14 +600,17 @@ PlayerSettings:
     iPhone: 1
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality: []
-  m_BuildTargetGroupHDRCubemapEncodingQuality: []
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding: []
-  m_BuildTargetDefaultTextureCompressionFormat: []
+  m_BuildTargetDefaultTextureCompressionFormat:
+  - serializedVersion: 3
+    m_BuildTarget: Android
+    m_Formats: 01000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
+  editorGfxJobOverride: 1
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
@@ -612,7 +618,7 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
-  macOSTargetOSVersion: 10.13.0
+  macOSTargetOSVersion: 11.0
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -757,6 +763,7 @@ PlayerSettings:
   switchEnableRamDiskSupport: 0
   switchMicroSleepForYieldTime: 25
   switchRamDiskSpaceSize: 12
+  switchUpgradedPlayerSettingsToNMETA: 0
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -864,26 +871,29 @@ PlayerSettings:
   webGLWebAssemblyTable: 0
   webGLWebAssemblyBigInt: 0
   webGLCloseOnQuit: 0
+  webWasm2023: 0
   scriptingDefineSymbols:
-    Android: dUI_MANAGER;ODIN_VALIDATOR;ODIN_INSPECTOR;ODIN_INSPECTOR_3;UNITASK_DOTWEEN_SUPPORT;ODIN_INSPECTOR_3_1
+    Android: dUI_MANAGER;ODIN_VALIDATOR;ODIN_INSPECTOR;ODIN_INSPECTOR_3;UNITASK_DOTWEEN_SUPPORT;ODIN_INSPECTOR_3_1;DOTWEEN;ES3_TMPRO;ES3_UGUI
     Bratwurst: dUI_MANAGER
-    EmbeddedLinux: dUI_MANAGER
-    GameCoreScarlett: dUI_MANAGER
-    GameCoreXboxOne: dUI_MANAGER
-    LinuxHeadlessSimulation: dUI_MANAGER
+    EmbeddedLinux: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    GameCoreScarlett: dUI_MANAGER;DOTWEEN
+    GameCoreXboxOne: dUI_MANAGER;DOTWEEN
+    LinuxHeadlessSimulation: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
     Lumin: dUI_MANAGER
-    Nintendo Switch: dUI_MANAGER
-    PS4: dUI_MANAGER
-    PS5: dUI_MANAGER
-    QNX: dUI_MANAGER
+    Nintendo Switch: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS4: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS5: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    QNX: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    ReservedCFE: DOTWEEN;dUI_MANAGER
+    Server: ES3_TMPRO;ES3_UGUI
     Stadia: dUI_MANAGER
-    Standalone: ODIN_INSPECTOR;ODIN_VALIDATOR;ODIN_INSPECTOR_3;dUI_MANAGER;ODIN_INSPECTOR_3_1
-    VisionOS: dUI_MANAGER
-    WebGL: ODIN_INSPECTOR;dUI_MANAGER
-    Windows Store Apps: dUI_MANAGER
-    XboxOne: dUI_MANAGER
-    iPhone: ODIN_INSPECTOR;dUI_MANAGER
-    tvOS: dUI_MANAGER
+    Standalone: ODIN_INSPECTOR;ODIN_VALIDATOR;ODIN_INSPECTOR_3;dUI_MANAGER;ODIN_INSPECTOR_3_1;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    VisionOS: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    WebGL: ODIN_INSPECTOR;dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Windows Store Apps: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    XboxOne: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    iPhone: ODIN_INSPECTOR;dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
+    tvOS: dUI_MANAGER;DOTWEEN;ES3_TMPRO;ES3_UGUI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -1010,3 +1020,5 @@ PlayerSettings:
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
   insecureHttpOption: 0
+  androidVulkanDenyFilterList: []
+  androidVulkanAllowFilterList: []
